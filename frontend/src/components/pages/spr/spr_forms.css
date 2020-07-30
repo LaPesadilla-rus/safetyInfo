@@ -1,0 +1,26 @@
+.spr_forms {
+    background-color: rgba(216, 216, 216, 0.719);
+    float: left;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+    display: flex;
+    flex-direction: row;
+    align-items: baseline ;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    
+}
+
+.spr_forms_pos {
+    width: 100%;
+
+    min-width: 200px;
+    min-height: 250px;
+
+    margin-top: 10px;
+}
+
+
+
