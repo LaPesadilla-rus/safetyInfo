@@ -11,16 +11,17 @@ const skladController = require('./controllers/sklad.js');
 const sprController = require('./controllers/spr.js');
 const authController = require('./controllers/auth.js');
 
+const mainController = require('./controllers/main');
+
 
 app.use(express.json());
-
+//-----------------------------------------------------------
+/*
 //Промежуточный обработчик для авторизации. Проверка наличия токена в заголовках и сверяет его в базе
 app.use( async function (req, res, next) {
     var sql = '';
     var data = [];
-    //console.log()
     sql = `SELECT * FROM users WHERE us_id = `+req.headers.us_id+` and us_rt = '`+req.headers.rt+`'`;
-    //console.log(sql)
     await pool.query(sql).then (
         (res) => {
             data = res.rows;
@@ -36,7 +37,7 @@ app.use( async function (req, res, next) {
         res.sendStatus(403)
     }
   });
-
+*/
 //---------------------------------------- AUTH
 
 app.post('/auth/login', authController.login);
@@ -44,6 +45,11 @@ app.post('/auth/logCheck', authController.logCheck);
 app.get('/auth/access', authController.access);
 
 app.get('/auth/out', authController.authOut);
+
+//---------------------------------------- MAIN FORM
+
+app.get('/main/all', mainController.all);
+
 
 //----------------------------------------
 app.get('/sklad/all', skladController.all);
@@ -93,5 +99,5 @@ app.get('/user/list', sprController.userList);
 app.delete('/spr/delete', sprController.spr_delete);
 
 app.listen(4001, function() {
-    console.log('SKLAD SERVER IS RUNNING');
+    console.log('SAFETY_INFO SERVER IS RUNNING');
 });
