@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './routs.css';
 import Header from '../modules/header/headerContainer'
-import SkladMain from '../pages/sklad_main/sklad_main';
+import Table_block from '../modules/spr/table_block'
+import Main_page from '../modules/sklad_main/main_page'
+import Table_find from '../modules/spr/table_find'
 import SprForms from '../pages/spr/spr_forms.js';
 import Auth from '../pages/auth/authContainer';
 import {Route, Redirect} from 'react-router-dom';
@@ -15,7 +17,10 @@ export default class Routs extends Component {
             <div className="body body_pos">
                 <ThemeContext.Provider value='test'>
                     <Header />
-                    {<Route path='/sklad' render = { props => this.props.isAuthorize ? <SkladMain {...this.props} /> : <Redirect to='/auth'/>} />}
+                    <Table_block />
+                    <Table_find />
+                    <Main_page />
+                    
 
                     <Route path='/auth' component={Auth}/>
 

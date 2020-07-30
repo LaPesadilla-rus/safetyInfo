@@ -1,0 +1,13 @@
+
+.Table_pol{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.Table_head{
+    color:black;
+    background-color: burlywood;
+}
+.Table_text{
+    color:rgb(59, 27, 1);
+}
