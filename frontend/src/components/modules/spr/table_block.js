@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './spr_block.css';
+import './table_block.css';
 
 
 export default class Table_block extends Component {
@@ -11,8 +11,8 @@ export default class Table_block extends Component {
         
         return(
            <div>
-           <button>Перенести в архив</button>
-           <button>Добавить</button>  
+           <button className='Button' >Перенести в архив</button>
+           <button className='Button'>Добавить</button>  
            </div>
         )
     }

@@ -2,7 +2,10 @@
 .Table_pol{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 98%;
+    margin-right: 10px;
+    margin-left:25px;
+    margin-top: 20px;
 }
 .Table_head{
     color:black;

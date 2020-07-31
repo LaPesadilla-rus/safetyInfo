@@ -1,0 +1,40 @@
+.Blocks{
+    border-style: solid;
+    border-color: chartreuse;
+    width: 500px;
+    display: grid;
+    grid-template-rows: 1fr ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+                       "lab_one  lab_sec"
+                       "txt  chk";
+    background-color: rgb(52, 97, 8);
+    margin-left:200px;
+    margin-top: 15px;
+}
+.lab_one{
+    grid-area: lab_one;
+    text-align: center;
+    
+}
+
+.lab_sec{
+    grid-area: lab_sec;
+    text-align: center;
+}
+.txt{
+    grid-area: txt;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    resize: none;
+    text-align: left;
+
+}
+
+.chk{
+    grid-area: chk;
+    display: flex;
+    flex-direction: column;
+}

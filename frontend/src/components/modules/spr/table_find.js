@@ -1,24 +1,34 @@
 import React, {Component} from 'react';
-import './spr_block.css';
+import './table_find.css';
 
 
 export default class Table_find extends Component {
     
     
-
-
     render(){
         
         return(
-           <div>
-           <label>Поиск по таблице</label>
-           <label>Скрыть столбцы</label>
-           <div>
-           <textarea>ФИО</textarea> 
-           <textarea>Система</textarea> 
-           <textarea>ПК</textarea> 
+           <div className='Blocks'>
+           <label className='lab_one'>Поиск по таблице</label>
+           <label className='lab_sec'>Скрыть столбцы</label>
+           <div>      
+           ФИО:<textarea  className='txt'></textarea> 
+           Система:<textarea className='txt'></textarea>  
+           ПК:<textarea className='txt'></textarea> 
            </div>
+           <div>
+           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'></input>
+           </div>
+          
            </div>
         )
     }
 }
+
+//
