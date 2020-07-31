@@ -48,11 +48,13 @@ app.get('/auth/out', authController.authOut);
 
 //---------------------------------------- MAIN FORM
 
-app.get('/main/all', mainController.all);
+app.get('/main/all', mainController.all); // главная таблицы
+app.get('/main/data', mainController.data); // данные для ввода в главную таблицу
 
 
-//----------------------------------------
-app.get('/sklad/all', skladController.all);
+app.post('/main/insert', mainController.insert);
+//---------------------------------------- SPR
+/*app.get('/sklad/all', skladController.all);
 app.get('/sklad/new/type', skladController.type);
 app.get('/sklad/new/provider', skladController.provider);
 app.get('/sklad/new/marka', skladController.marka);
@@ -71,12 +73,11 @@ app.post('/sklad/new/update', skladController.sklad_update);
 app.post('/sklad/new/type', skladController.type_post);
 app.post('/sklad/out', skladController.sklad_out);
 app.post('/sklad/out_file', skladController.out_file);
-//------------------------------
-app.post('/equip/save', skladController.equip_save);
+app.post('/equip/save', skladController.equip_save);*/
 //--------------------------------
 //------------------------------
 // SPR
-app.get('/spr/all', sprController.all);
+/*app.get('/spr/all', sprController.all);
 app.get('/spr/kat', sprController.kat);
 app.get('/spr/type', skladController.type_a);
 app.get('/spr/equip_name', sprController.equip_name);
@@ -90,13 +91,13 @@ app.post('/spr/update', sprController.spr_update);
 app.post('/equip/update', sprController.equip_update);
 
 app.post('/spr/relation/add', sprController.relation_add);
-app.post('/spr/relation/watch', sprController.watch);
+app.post('/spr/relation/watch', sprController.watch);*/
 
 app.post('/users/new', sprController.newUser);
 app.post('/users/upd', sprController.updUser);
 app.get('/user/list', sprController.userList);
 
-app.delete('/spr/delete', sprController.spr_delete);
+//app.delete('/spr/delete', sprController.spr_delete);
 
 app.listen(4001, function() {
     console.log('SAFETY_INFO SERVER IS RUNNING');
