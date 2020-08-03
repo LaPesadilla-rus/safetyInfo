@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main_page_cont_arch from './main_page_cont';
+import Main_page_cont_arch from './main_page_cont_arch';
 import './main_page.css'
 
 

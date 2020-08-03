@@ -1,0 +1,77 @@
+.modal{
+    position:fixed;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 80px;
+    bottom: 550px;
+    left:800px;
+    right: 800px;
+    background-color: rgb(207, 207, 207);
+    border-radius: 10px;
+    color: black;
+    border: 1px solid #707270;
+    box-shadow: 0 0 10px rgb(80, 80, 80);
+    padding: 10px;
+    
+}
+.modal_pos {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal_arch{
+    position:fixed;
+    text-align: center;
+    top: 200px;
+    bottom: 400px;
+    left:750px;
+    right: 750px;
+    background-color: rgb(207, 207, 207);
+    border-radius: 10px;
+    color: black;
+    border: 1px solid #707270;
+    box-shadow: 0 0 10px rgb(80, 80, 80);
+    padding: 10px;
+    
+}
+.modal_pos_arch{
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.label_txt{
+    text-align: center;
+    margin-top: 25px;
+    
+}
+.modal_add{
+    width: 300px;
+    height: 450px;
+    border: 1px solid #707270;
+    box-shadow: 0 0 10px rgb(80, 80, 80);
+    background-color: rgb(207, 207, 207);
+}
+.modal_pos_add{
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 10pt;
+} 
+.ButChoose{
+    display:block;
+    flex-direction: column;
+    justify-content: center;
+    width: 100px;
+    height: 31px;
+    margin-top: 10px;
+    margin-left: 10px;
+    align-items: center;
+    text-align: center;
+    font-size: 10pt;
+}

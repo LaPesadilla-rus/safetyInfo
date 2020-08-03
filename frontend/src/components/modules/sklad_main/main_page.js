@@ -1,9 +1,28 @@
 import React, {Component} from 'react';
 import Main_page_cont from './main_page_cont';
 import './main_page.css'
+import axio from 'axios';
+import Form_arch from './form_arch';
 
 
 export default class Main_page extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            arr:[],
+
+        }
+    }
+
+    componentDidMount (){
+        axio.get('/main/all').then(res=>{
+          console.log(res.data)
+            this.setState({
+                arr: res.data
+            });
+        });
+    }
     
     render(){
         return (
@@ -25,12 +44,14 @@ export default class Main_page extends Component {
                             <th>Организация</th>
                             <th>Система</th>
                             <th>Контракт</th>
+                            <th>Дата создания</th>
                             <th>Примечание</th>
                             <th>Примечание 2</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <Main_page_cont/>
+                     {this.state.arr.map(id => <Main_page_cont key={id.io_id} row={id}/>)}
                     </tbody>
                 </table>
                 </div>

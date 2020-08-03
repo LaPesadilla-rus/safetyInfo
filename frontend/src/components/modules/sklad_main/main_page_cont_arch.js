@@ -8,13 +8,13 @@ export default class Main_page_cont_arch extends Component {
         return (
             <tr width='100%' className='Table_text' > 
             <td>1</td>
-            <td>wewe</td>
+            <td>rte</td>
             <td>weweew</td>
-            <td>rerer</td>
+            <td>gfdgd</td>
             <td>ererer</td>
             <td>ererer</td>
             <td>ererre</td>
-            <td>ererre</td>
+            <td>oooo</td>
             <td>ererer</td>
             <td>ererer</td>
             <td>ererer</td>

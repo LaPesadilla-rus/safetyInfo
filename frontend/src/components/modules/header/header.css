@@ -11,8 +11,8 @@
 }
 
 .header_pos {
-    min-width: calc(100% + 20px);
-    height: 50px;
+    width: 1745px;
+    height: 75px;
     float: left;
     
 }
@@ -26,4 +26,15 @@
     float: left;
     position: absolute;
     right: 10px;
+}
+
+.Link{
+    text-decoration: none;
+    color: rgb(24, 20, 20);
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    font-size: 14pt;
+
 }

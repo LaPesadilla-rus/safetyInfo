@@ -17,7 +17,7 @@ export default class Table_find extends Component {
            ПК:<textarea className='txt'></textarea> 
            </div>
            <div>
-           <input className='chk' type='checkbox'></input>
+           <input className='chk' type='checkbox'/>
            <input className='chk' type='checkbox'></input>
            <input className='chk' type='checkbox'></input>
            <input className='chk' type='checkbox'></input>

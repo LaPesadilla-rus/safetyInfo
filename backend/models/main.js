@@ -6,8 +6,8 @@ const pool_bahos = new Pool (conn.conn_bahos);
 exports.all =  async (cb) => {
     await pool.query(`SELECT ss.ss_name as skzi_name, ins.ins_name as inf_name, 
                         sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, 
-                        kt.kt_name as ktr_name, kg.kg_dgvr, kg.kg_kol, 
-                        kg.kg_arch , pc.pc_name, og.og_name as org_name, 
+                        kt.kt_name as ktr_name, kg.kg_dgvr, kg.kg_kol, sk.sk_srok,
+                        kg.kg_arch , pc.pc_name,pc.pc_inv_num, og.og_name as org_name, to_char(io.io_date1, 'YYYY-MM-DD') as io,
                         io.*
                         
                         FROM info_safe io
