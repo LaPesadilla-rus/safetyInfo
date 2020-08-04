@@ -3,6 +3,7 @@ import Main_page_cont from './main_page_cont';
 import './main_page.css'
 import axio from 'axios';
 import Form_arch from './form_arch';
+import Table_find from '../spr/table_find'
 
 
 export default class Main_page extends Component {
@@ -27,6 +28,7 @@ export default class Main_page extends Component {
     render(){
         return (
         <div className='Table_pol'>
+            <Table_find/>
                 <div>
                 <table className='Table' border='1' >
                     <thead> 

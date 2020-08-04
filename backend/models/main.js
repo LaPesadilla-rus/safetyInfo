@@ -32,6 +32,8 @@ exports.all =  async (cb) => {
                         
                         inner join spr_inf_sys ins
                         on ins.ins_id = sk_inf_id 
+                        
+                        Order by io_id
         `).then( res => {
             return cb('',res);
         }).catch( err => {
@@ -54,7 +56,9 @@ exports.persFromId =  async (data,cb) => {
 };
 
 exports.kontragents =  async (cb) => {
-    await pool.query(`SELECT kg.*,sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, ss_name as skzi_name, ins.ins_name
+    await pool.query(`SELECT kg.*,sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, ss_name as skzi_name, ins.ins_name, kt.kt_name, sk.sk_id,
+                        kt.kt_id
+
                         FROM kontragents kg
 
                         inner join spr_ktr kt
@@ -73,6 +77,30 @@ exports.kontragents =  async (cb) => {
             return cb(err,'')
         })
 };
+
+exports.spr_inf_sys = async(cb)=>{
+    await pool.query(`SELECT * FROM spr_inf_sys`).then( res => {
+        return cb('',res);
+    }).catch( err => {
+        return cb(err,'')
+    })
+}
+
+exports.spr_skzi = async(cb)=>{
+    await pool.query(`SELECT * FROM spr_skzi`).then( res => {
+        return cb('',res);
+    }).catch( err => {
+        return cb(err,'')
+    })
+}
+
+exports.skzi = async(cb)=>{
+    await pool.query(`SELECT * FROM skzi`).then( res => {
+        return cb('',res);
+    }).catch( err => {
+        return cb(err,'')
+    })
+}
 
 exports.spr_org =  async (cb) => {
     await pool.query(`SELECT * FROM spr_org`).then( res => {
@@ -117,3 +145,20 @@ exports.insert = function(req,cb) {
     }); 
 }
 
+exports.Prim1Up =function (data, cb) {
+    var sql = `UPDATE info_safe SET io_prim1 = '`+data.txt+`' WHERE io_id = `+data.io_id+` `;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+
+exports.Prim2Up =function (data, cb) {
+    var sql = `UPDATE info_safe SET io_prim2 = '`+data.text+`' WHERE io_id = `+data.io_id+` `;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};

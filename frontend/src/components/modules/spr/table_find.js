@@ -11,24 +11,68 @@ export default class Table_find extends Component {
            <div className='Blocks'>
            <label className='lab_one'>Поиск по таблице</label>
            <label className='lab_sec'>Скрыть столбцы</label>
-           <div>      
-           ФИО:<textarea  className='txt'></textarea> 
-           Система:<textarea className='txt'></textarea>  
-           ПК:<textarea className='txt'></textarea> 
-           </div>
            <div>
-           <input className='chk' type='checkbox'/>
-           <input className='chk' type='checkbox'></input>
-           <input className='chk' type='checkbox'></input>
-           <input className='chk' type='checkbox'></input>
-           <input className='chk' type='checkbox'></input>
-           <input className='chk' type='checkbox'></input>
-           <input className='chk' type='checkbox'></input>
+               <table>
+                   <thead></thead>
+                   <tbody>
+                <tr>
+                    <td>ФИО:</td>
+                    <td><textarea  className='txt'></textarea> </td>
+                </tr>
+                <tr>
+                    <td> Система:</td>
+                    <td><textarea className='txt'></textarea> </td>
+                </tr>  
+                <tr>
+                    <td> ПК:</td>
+                    <td><textarea className='txt'></textarea> </td>
+                </tr>
+                </tbody>     
+           </table>   
+           </div><div>
+               <table>
+               <thead></thead>
+                   <tbody>
+                <tr>
+                <td><input className='chk' type='checkbox'></input></td>
+                <td>От кого получено</td>
+                </tr>
+                <tr>
+                <td><input className='chk' type='checkbox'/></td>
+                <td>Срок лицензии</td>
+                </tr>
+                <tr>
+                <td><input className='chk' type='checkbox'/></td>
+                <td>Организация</td>
+                </tr> 
+                <tr>
+                <td><input className='chk' type='checkbox'/></td>
+                <td>Система</td>
+                </tr> 
+                <tr>
+                <td><input className='chk' type='checkbox'/></td>
+                <td>Контракт</td>
+                </tr>
+                <tr>
+                <td><input className='chk' type='checkbox'/></td>
+                <td>Примечание1</td>
+                </tr>
+                <tr>
+                <td><input className='chk' type='checkbox'/></td>
+                <td>Примечание2</td>
+                </tr>
+                </tbody>   
+           </table>
            </div>
-          
            </div>
         )
     }
 }
 
 //
+
+/*
+<tr>
+<td></td>
+<td></td>
+</tr>   */

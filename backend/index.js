@@ -52,7 +52,10 @@ app.get('/main/all', mainController.all); // главная таблицы
 app.get('/main/data', mainController.data); // данные для ввода в главную таблицу
 
 
+
 app.post('/main/insert', mainController.insert);
+app.post('/main/Prim1Up',mainController.Prim1Up) // изменение примечания 1
+app.post('/main/Prim2Up',mainController.Prim2Up)
 //---------------------------------------- SPR
 /*app.get('/sklad/all', skladController.all);
 app.get('/sklad/new/type', skladController.type);

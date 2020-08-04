@@ -18,8 +18,8 @@ export default class Form_arch extends Component{
                 <div>Перенос данных в архив<div>
                 <label className='label_txt'>Перенести данную запись в архив?</label>
                 <div>
-               <button>Перенести</button>
-               <button onClick={this.props.transfer}>Отмена</button>
+               <button className='ButtonCh'>Перенести</button>
+               <button className='ButtonCh' onClick={this.props.transfer}>Отмена</button>
                  </div>
                 </div></div>
         </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Main_page_cont_arch from './main_page_cont_arch';
 import './main_page.css'
+import Table_find from '../spr/table_find'
 
 
 export default class Main_page_arch extends Component {
@@ -8,6 +9,7 @@ export default class Main_page_arch extends Component {
     render(){
         return (
         <div className='Table_pol'>
+            <Table_find/>
                 <div>
                 <table className='Table' border='1' >
                     <thead> 
