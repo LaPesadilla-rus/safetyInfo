@@ -3,7 +3,7 @@ import './form_work.css'
 import Form_arch from './form_arch';
 import Form_add from './form_add';
 import Form_change from './form_change'
-
+import axio from 'axios';
 
 
 export default class Form_work extends Component {
@@ -13,9 +13,20 @@ export default class Form_work extends Component {
             transfer:false,
             addRow:false,
             changeRow:false,
+            chrow:[]
             
         }
     }
+
+    componentDidMount (){
+        axio.get('/main/all').then(res=>{
+          console.log(res.data)
+            this.setState({
+                arr: res.data
+            });
+        });
+    }
+   
 
     TransferData =()=>{
         this.setState({transfer: !this.state.transfer})
@@ -23,13 +34,14 @@ export default class Form_work extends Component {
     AddRows=()=>{
         this.setState({addRow: !this.state.addRow})
     }
-    ChangeRows=()=>{
-        this.setState({changeRow: !this.state.changeRow })
+    ChangeRows=(e)=>{
+        this.setState({changeRow: !this.state.changeRow,chrow:e })
     }
     
     
     render(){
         return (
+            <div className='FonMod'>
         <div className='modal'>
             <div className="modal_pos">
                 <div>
@@ -40,11 +52,12 @@ export default class Form_work extends Component {
                <button className='ButChoose' onClick={this.TransferData}>Перенести в архив</button>
                <button className='ButChoose' onClick={this.props.newRow}>Отмена</button>
                  </div>
-                 {this.state.transfer && <Form_arch  transfer={this.TransferData}/>}
-                 {this.state.addRow && <Form_add  addRow={this.AddRows}/>}
-                 {this.state.changeRow &&<Form_change changeRow={this.ChangeRows}/>}
+                 {this.state.transfer && this.state.arr.map(id=><Form_arch key={id.io_id} row={id}  transfer={this.TransferData}/>)}
+                 {this.state.addRow && <Form_add   addRow={this.AddRows}/>}
+                 {this.state.changeRow && <Form_change  changeRow={this.ChangeRows}/>}
                 </div>
                
+        </div>
         </div>
         </div>
     );

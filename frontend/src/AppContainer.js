@@ -33,7 +33,7 @@ class AppContainer extends React.Component {
                     this.props.setUserRole(localStorage.getItem('role'))
                 }else{
                     this.props.setAuthorize(false);
-                    //window.location.href = 'http://localhost:3000/auth'
+                    window.location.href = 'http://localhost:3000/auth'
                 }
             });
             

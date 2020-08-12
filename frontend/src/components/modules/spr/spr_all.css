@@ -1,12 +1,67 @@
 .BlockARch{
-background-color: rgb(233, 165, 83);
-width: 600px; 
-height: 50px;
-align-items: center;
+background-color: rgb(142, 152, 153);
+position: relative;
+width: 100%; 
+height: 150px;
+margin-top: 10px;
+border-radius: 15px;
 
 }
-.ButArch{
-width: 100px;
-height: 100px;
+.ButArch{  
 border-radius: 15px;
+height: 90px;
+position: relative;
+left: 25%;
+
+}
+.Ps_st{
+    margin-top: 10px;
+    align-items: center;
+    position: relative;
+    background-color: rgb(136, 110, 90);
+    border-radius: 15px;
+    width: 26%;
+    min-width: 100px;
+    min-height: 100px;
+    left: 47%;
+    border-style: solid;
+    border-color:rgb(110, 88, 71); ;
+}
+.Ps_from{
+    position: absolute;
+    background-color: rgba(56, 107, 131, 0.596);
+    width: 100%;
+    height: 100%;
+    z-index:10000;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0 ;
+}
+.label_posit{
+    text-align: center;
+    padding-top: 5px;
+    color: rgb(36, 3, 3);
+    font-weight: 550;
+}
+.But{
+    position: relative;
+    left:35%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+.txt{
+    color: black;
+    position: relative;
+    text-align: left;
+    margin-left: 10px;
+    
+
+
+}
+.CloseBut{
+    margin-left: 15px;
+}
+.TheHead{
+    font-size: 10pt;
 }

@@ -5,7 +5,7 @@ const app = express();
 const {Pool} = require('pg');
 
 const conn = require('./db_con.js');
-const pool = new Pool (conn.conn_str);
+const pool = new Pool (conn.conn_bahos);
 
 const skladController = require('./controllers/sklad.js');
 const sprController = require('./controllers/spr.js');
@@ -16,12 +16,12 @@ const mainController = require('./controllers/main');
 
 app.use(express.json());
 //-----------------------------------------------------------
-/*
+
 //Промежуточный обработчик для авторизации. Проверка наличия токена в заголовках и сверяет его в базе
 app.use( async function (req, res, next) {
     var sql = '';
     var data = [];
-    sql = `SELECT * FROM users WHERE us_id = `+req.headers.us_id+` and us_rt = '`+req.headers.rt+`'`;
+    sql = `SELECT * FROM users WHERE us_id = `+req.headers.us_id+` and us_rt = '`+req.headers.rt+`' and us_progr='SAFETYINFO'`;
     await pool.query(sql).then (
         (res) => {
             data = res.rows;
@@ -33,11 +33,11 @@ app.use( async function (req, res, next) {
     }else{
         let date = '';
         date = new Date().getTime();
-        console.log('ALERT user_id:' + req.headers.us_id+ ' URL:' + req.originalUrl + ' TIME:' + date);
+        console.log('ALERT us_id:' + req.headers.us_id+ ' URL:' + req.originalUrl + ' TIME:' + date);
         res.sendStatus(403)
     }
   });
-*/
+
 //---------------------------------------- AUTH
 
 app.post('/auth/login', authController.login);
@@ -50,12 +50,37 @@ app.get('/auth/out', authController.authOut);
 
 app.get('/main/all', mainController.all); // главная таблицы
 app.get('/main/data', mainController.data); // данные для ввода в главную таблицу
+app.get('/main/ArchAll',mainController.ArchAll)//архивная таблица
+app.get('/main/kontragents',mainController.kontragents)//Справочник контрагентов
+app.get('/main/spr_skzi',mainController.spr_skzi)// Справочник наименования скзи
+app.get('/main/spr_pc',mainController.spr_pc)//Справочник компов
+app.get('/main/spr_inf_sys',mainController.spr_inf_sys)//Справочник систем
+app.get('/main/spr_org',mainController.spr_org)//Справочник организаций
+app.get('/main/spr_otdel',mainController.spr_otdel)//Справочник организаций
 
 
+app.post('/main/filterAll', skladController.filterAll);
+app.post('/main/insertNaim', mainController.insertNaim);
+app.post('/main/insertPC', mainController.insertPC);
+app.post('/main/insertFrom', mainController.insertFrom);
+app.post('/main/insertSyst', mainController.insertSyst);
+app.post('/main/insertOtd', mainController.insertOtd);
+//app.post('/main/kontr', mainController.kontr);
+
+app.post('/main/DeleteNaim',mainController.DeleteNaim)
+app.post('/main/DeleteOrg',mainController.DeleteOrg)
+app.post('/main/DeletePC',mainController.DeletePC)
+app.post('/main/DeleteSys',mainController.DeleteSys)
+app.post('/main/DeleteKontr',mainController.DeleteKontr)
+app.post('/main/DeleteOtd',mainController.DeleteOtd)
 
 app.post('/main/insert', mainController.insert);
+app.post('/main/InsertArch', mainController.InsertArch);// Перенос в архив
+app.post('/main/DeleteMain_tab', mainController.DeleteMain_tab);// Удаление строки из общей таблицы для переноса в архив
+app.post('/main/InsertFrArcToMain', mainController.InsertFrArcToMain);// Перенос в основную таблицу
+app.post('/main/DeleteArch_tbl', mainController.DeleteArch_tbl);// Удаление строки из архивной таблицы для переноса в основную
 app.post('/main/Prim1Up',mainController.Prim1Up) // изменение примечания 1
-app.post('/main/Prim2Up',mainController.Prim2Up)
+app.post('/main/Prim2Up',mainController.Prim2Up) // изменение примечания 2  
 //---------------------------------------- SPR
 /*app.get('/sklad/all', skladController.all);
 app.get('/sklad/new/type', skladController.type);

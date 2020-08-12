@@ -1,0 +1,70 @@
+.BlockARch{
+    background-color: rgb(142, 152, 153);
+    position: relative;
+    width: 100%; 
+    height: 150px;
+    margin-top: 10px;
+    border-radius: 15px;
+    
+    }
+    .ButArch{  
+    border-radius: 15px;
+    height: 90px;
+    position: relative;
+    left: 37%;
+    
+    }
+    .Ps_sts{
+        margin-top: 100px;
+        align-items: center;
+        position: fixed;
+        background-color: rgb(136, 110, 90);
+        border-radius: 15px;
+        width: 15%;
+        min-height: 130px;
+        left: 50%;
+        border-style: solid;
+        border-color:rgb(110, 88, 71); ;
+        align-items: center;
+    }
+    .Ps_froms{
+        position: fixed;
+        background-color: rgba(56, 107, 131, 0.596);
+        width: 100%;
+        height: 100%;
+        z-index:10000;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0 ;
+    }
+    .label_posits{
+        padding-top: 5px;
+        color: rgb(36, 3, 3);
+        font-weight: 650;
+        position: relative;
+        margin-left:15px;
+    }
+    .Buts{
+        position: relative;
+        left:35%;
+        border-radius: 15px;
+        margin-bottom: 10px;
+    }
+    .txt{
+        color: black;
+        position: relative;
+        text-align: left;
+        margin-left: 10px;
+    }
+    .CloseBut{
+        margin-left: 15px;
+    }
+    .TheHead{
+        font-size: 10pt;
+    }
+    .txtar{
+        position: relative;
+        left:20%
+
+    }

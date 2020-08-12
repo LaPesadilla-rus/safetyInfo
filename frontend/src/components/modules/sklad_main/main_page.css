@@ -20,8 +20,98 @@
 }
 .ButAdd{
     width: 35px;
-    height: 15px;
+    height: 20px;
     color: white;
     background-color: rgb(5, 168, 5);
     border-color: darkgreen;
+}
+.hide{
+    display:none
+}
+.Blocks{
+    border-style: solid;
+    border-color: rgb(34, 65, 2);
+    width: 500px;
+    display: grid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 650px;
+    margin-right: 200px;
+    align-items: center;
+    grid-template-rows: 1fr ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+                       "lab_one  lab_sec"
+                       "txt  chk";
+    background-color: rgb(52, 97, 8);
+    border-radius: 15px;
+    color: rgb(41, 1, 1);
+    font-weight: 600;
+   
+}
+.lab_one{
+    grid-area: lab_one;
+    text-align: center;
+    
+}
+
+.lab_sec{
+    grid-area: lab_sec;
+    text-align: center;
+}
+.txt{
+    grid-area: txt;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    resize: none;
+    text-align: left;
+
+}
+
+.chk{
+    grid-area: chk;
+    display: flex;
+    flex-direction: block;
+    align-items: center;
+    margin-right: 5px;
+}
+.TxtSett{
+    display: table-row;
+    font-size: 10pt;
+    text-align: center;
+}
+.FindAndReset{
+    width: 150px;
+    height: 25px;
+    margin-left: 60px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+.ChTxT{
+    position: relative;
+}
+.ButSet{
+    position: relative;
+    left:40%;
+    width: 30px;
+    height: 15px;
+   
+}
+.Changer{
+    width: 35px;
+    height: 20px;
+    color: white;
+    background-color: rgb(95, 4, 16);
+    border-color: rgb(100, 1, 17);
+}
+
+
+.textar{
+    position: relative;
+    left:30%;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }

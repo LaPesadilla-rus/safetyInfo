@@ -2,11 +2,11 @@ const {Pool/*, Client*/} = require('pg');
 
 const conn = require('../db_con.js');
 
-const pool = new Pool (conn.conn_str);
+const pool = new Pool (conn.conn_bahos);
 
 exports.login = async(data,cb) => {
     var sql = '';
-    sql = `SELECT * FROM users WHERE us_login LIKE '`+data.login+`' AND us_pas LIKE '`+data.password+`'`;
+    sql = `SELECT * FROM users WHERE us_login LIKE '`+data.login+`' AND us_pas LIKE '`+data.password+`' and us_progr='SAFETYINFO'`;
     //console.log(sql)
     await pool.query(sql).then (
         (res) => {
@@ -21,7 +21,7 @@ exports.login = async(data,cb) => {
 
 exports.loginRT = async(rt, id, cb) => {
     var sql = '';
-    sql = `UPDATE users SET us_rt = '`+rt+`' WHERE us_id = `+id+``;
+    sql = `UPDATE users SET us_rt = '`+rt+`' WHERE us_id = `+id+` and us_progr='SAFETYINFO'`;
     //console.log(sql)
     await pool.query(sql).then (
         (res) => {
@@ -34,7 +34,7 @@ exports.loginRT = async(rt, id, cb) => {
 
 exports.checkRt = async(id,cb) => {
     var sql = '';
-    sql = `SELECT * FROM users WHERE us_id = `+id+``;
+    sql = `SELECT * FROM users WHERE us_id = `+id+` and us_progr='SAFETYINFO'`;
     //console.log(sql)
     await pool.query(sql).then (
         (res) => {
@@ -47,7 +47,7 @@ exports.checkRt = async(id,cb) => {
 
 exports.logCheck = async(data, cb) => {
     var sql = '';
-    sql = `SELECT * FROM users WHERE us_id = `+data.us_id+``;
+    sql = `SELECT * FROM users WHERE us_id = `+data.us_id+` and us_progr='SAFETYINFO'`;
     await pool.query(sql).then (
         (res) => {
             cb('',res);
@@ -59,7 +59,7 @@ exports.logCheck = async(data, cb) => {
 
 exports.access = async(id,cb) => {
     var sql = '';
-    sql = `SELECT * FROM users WHERE us_id = `+id+``;
+    sql = `SELECT * FROM users WHERE us_id = `+id+` and us_progr='SAFETYINFO'`;
     //console.log(sql)
     await pool.query(sql).then (
         (res) => {

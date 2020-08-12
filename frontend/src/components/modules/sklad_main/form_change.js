@@ -1,7 +1,25 @@
 import React, {Component} from 'react';
 import './form_work.css'
-
+import axio from 'axios';
 export default class Form_change extends Component {
+
+    constructor() {
+        super();
+        this.state ={
+            arr:[],
+            new_arr:[]
+            
+
+        } }
+
+    componentDidMount (){
+        axio.get('/main/all').then(res=>{
+        this.setState({
+            arr: res.data,
+        });
+        });
+        
+    }
 
     render(){
         return (

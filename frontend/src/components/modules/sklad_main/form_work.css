@@ -15,7 +15,7 @@
     bottom: 250px;
     left:800px;
     right: 800px;
-    z-index: 10000;
+   
     
     
 }
@@ -111,4 +111,16 @@ padding-top: 10px;
 .ButNaim{
     margin-top: 10px;
     margin-left: 5px;
+}
+.FonMod{
+    position: absolute; ;
+    background-color: rgba(105, 122, 122, 0.596);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0 ;
+
 }

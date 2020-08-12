@@ -2,21 +2,32 @@ import React, {Component} from 'react';
 import './main_page.css'
 import Form_work from './form_work'
 import axio from 'axios';
+import Form_add from './form_add'
+import Form_arch from './form_arch'
 
 export default class Main_page_cont extends Component {
     constructor() {
         super();
         this.state = {
+            arr:[],
             newRow:false,
             arch:false,
             changePrim1:false,
             changePrim2:false,
             txt:'',
             text:'',
-        }
+            frget: false,
+            srok:false,
+            orgn:false,
+            syst:false,
+            contr:false,
+            prim_on:false,
+            prim_tw:false,
+            show_formPrim:false,      
+              }
     }
-
-    
+/*
+   
     ToChangePrim1=()=>{
         let Chan_perem =this.state.changePrim1;
         if (Chan_perem && this.state.txt !==this.props.row.io_prim1)
@@ -35,8 +46,8 @@ export default class Main_page_cont extends Component {
     }
 
     ToChangePrim2=()=>{
-        let Chan_perem =this.state.changePrim2;
-        if (Chan_perem && this.state.text !==this.props.row.io_prim2)
+        let Chan_perems =this.state.changePrim2;
+        if (Chan_perems && this.state.text !==this.props.row.io_prim2)
         {
             let data=
             {io_id:this.props.row.io_id,
@@ -50,39 +61,58 @@ export default class Main_page_cont extends Component {
         }
         this.setState({ changePrim2: true, txt:this.props.row.io_prim2});
     }
-
+*/
 
     AddRow =()=>{
         this.setState({newRow: !this.state.newRow})
     }
 
-   
+    componentDidMount (){
+        axio.get('/main/all').then(res=>{
+          console.log(res.data)
+            this.setState({
+                arr: res.data
+            });
+        });
+    }
+  
+    onCliks=()=>{
+        this.props.ChangePrim(this.props.row)
+    }
+    ChangePrim=()=>{
+        this.setState({show_formPrim:!this.state.show_formPrim})
+        }
+        AddRow =()=>{
+            this.setState({newRow: !this.state.newRow})
+        }
     render(){
+        let id = this.props.row
         return (
-            <tr width='100%' className='Table_text' > 
-            <td>{this.props.row.io_id}</td>
-            <td>{this.props.row.skzi_name}</td>
-            <td>{this.props.row.skzi_ver}</td>
-            <td>{this.props.row.skzi_ser}</td>
-            <td>{this.props.row.ktr_name}</td>
-            <td>{this.props.row.sk_srok}</td>
-            <td>{this.props.row.ma_fio}</td>
-            <td>{this.props.row.ot_name}</td>
-            <td>{this.props.row.pc_name}</td>
-            <td>{this.props.row.pc_inv_num}</td>
-            <td>{this.props.row.org_name}</td>
-            <td>{this.props.row.inf_name}</td>
-            <td>{this.props.row.kg_dgvr}</td>
-            <td>{this.props.row.io}</td>
-            <td onClick={this.ToChangePrim1}>{(this.state.changePrim1) ? <textarea onChange={(e) => {this.setState({ txt: e.target.value})}} 
-                                                                                    value={this.state.txt}/> 
-                                                                        : this.props.row.io_prim1}</td>
-            <td onClick={this.ToChangePrim2}>{(this.state.changePrim2) ? <textarea onChange={(e) => {this.setState({ text: e.target.value})}} 
-                                                                                    value={this.state.text}/> 
-                                                                        : this.props.row.io_prim2}</td>                                                            
-            <td><button className='ButAdd' onClick={this.AddRow}>*</button></td>
+            <tr >
+            <td className='Table_text'>{id.io_id}</td>
+            <td className='Table_text'>{id.skzi_name}</td>
+            <td className='Table_text'>{id.skzi_ver}</td>
+            <td className='Table_text'>{id.skzi_ser}</td>
+            <td className={(this.props.frget===true)?'hide':'Table_text'} >{id.ktr_name}</td>
+            <td className={(this.props.srok===true)?'hide':'Table_text'} >{id.sk_srok}</td>
+            <td className='Table_text'>{id.ma_fio}</td>
+            <td className='Table_text'>{id.otdel}</td>
+            <td className='Table_text'>{id.pc_name}</td>
+            <td className='Table_text'>{id.pc_inv_num}</td>
+            <td className={(this.props.orgn===true)?'hide':'Table_text'} >{id.org_name}</td>
+            <td className={(this.props.syst===true)?'hide':'Table_text'} >{id.inf_name}</td>
+            <td className={(this.props.contr===true)?'hide':'Table_text'} >{id.kg_dgvr}</td>
+            <td></td>
+            <td className={(this.props.prim_on===true)?'hide':'Table_text'}> {id.io_prim1} </td> 
+            <td className={(this.props.prim_tw===true)?'hide':'Table_text'}>{id.io_prim2}
+            </td>                                                            
+            <td><button className='ButAdd' onClick={this.AddRow}>+</button>
+            <button className='Changer' onClick={this.onCliks} >▲</button>
+            </td>
             {this.state.newRow && <Form_work  newRow={this.AddRow}/>}
-            </tr>);
+            
+            </tr>
+            );
     }   
 }
 
