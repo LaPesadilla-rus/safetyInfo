@@ -61,7 +61,9 @@ export default class Main_page_cont extends Component {
         }
         this.setState({ changePrim2: true, txt:this.props.row.io_prim2});
     }
-*/
+*/ onClick=()=>{
+    this.props.changeRow(this.props.row)
+}
 
     AddRow =()=>{
         this.setState({newRow: !this.state.newRow})
@@ -69,7 +71,6 @@ export default class Main_page_cont extends Component {
 
     componentDidMount (){
         axio.get('/main/all').then(res=>{
-          console.log(res.data)
             this.setState({
                 arr: res.data
             });
@@ -89,25 +90,25 @@ export default class Main_page_cont extends Component {
         let id = this.props.row
         return (
             <tr >
-            <td className='Table_text'>{id.io_id}</td>
-            <td className='Table_text'>{id.skzi_name}</td>
-            <td className='Table_text'>{id.skzi_ver}</td>
-            <td className='Table_text'>{id.skzi_ser}</td>
-            <td className={(this.props.frget===true)?'hide':'Table_text'} >{id.ktr_name}</td>
-            <td className={(this.props.srok===true)?'hide':'Table_text'} >{id.sk_srok}</td>
-            <td className='Table_text'>{id.ma_fio}</td>
-            <td className='Table_text'>{id.otdel}</td>
-            <td className='Table_text'>{id.pc_name}</td>
-            <td className='Table_text'>{id.pc_inv_num}</td>
-            <td className={(this.props.orgn===true)?'hide':'Table_text'} >{id.org_name}</td>
-            <td className={(this.props.syst===true)?'hide':'Table_text'} >{id.inf_name}</td>
-            <td className={(this.props.contr===true)?'hide':'Table_text'} >{id.kg_dgvr}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.io_id}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.skzi_name}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.skzi_ver}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.skzi_ser}</td>
+            <td onClick={this.onClick} className={(this.props.frget===true)?'hide':'Table_text'} >{id.ktr_name}</td>
+            <td onClick={this.onClick} className={(this.props.srok===true)?'hide':'Table_text'} >{id.sk_srok}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.ma_fio}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.otdel}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.pc_name}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.pc_inv_num}</td>
+            <td onClick={this.onClick} className={(this.props.orgn===true)?'hide':'Table_text'} >{id.org_name}</td>
+            <td onClick={this.onClick} className={(this.props.syst===true)?'hide':'Table_text'} >{id.inf_name}</td>
+            <td onClick={this.onClick} className={(this.props.contr===true)?'hide':'Table_text'} >{id.kg_dgvr}</td>
             <td></td>
-            <td className={(this.props.prim_on===true)?'hide':'Table_text'}> {id.io_prim1} </td> 
-            <td className={(this.props.prim_tw===true)?'hide':'Table_text'}>{id.io_prim2}
+            <td onClick={this.onClick} className={(this.props.prim_on===true)?'hide':'Table_text'}> {id.io_prim1} </td> 
+            <td onClick={this.onClick}className={(this.props.prim_tw===true)?'hide':'Table_text'}>{id.io_prim2}
             </td>                                                            
-            <td><button className='ButAdd' onClick={this.AddRow}>+</button>
-            <button className='Changer' onClick={this.onCliks} >▲</button>
+            <td>
+            <button className='Changer' onClick={this.onCliks} >*</button>
             </td>
             {this.state.newRow && <Form_work  newRow={this.AddRow}/>}
             

@@ -9,11 +9,13 @@ import axio from 'axios';
 export default class Form_work extends Component {
     constructor() {
         super();
+        this.arr=[]
         this.state = {
             transfer:false,
             addRow:false,
             changeRow:false,
-            chrow:[]
+            chrow:[],
+            arr:[]
             
         }
     }
@@ -34,8 +36,9 @@ export default class Form_work extends Component {
     AddRows=()=>{
         this.setState({addRow: !this.state.addRow})
     }
-    ChangeRows=(e)=>{
-        this.setState({changeRow: !this.state.changeRow,chrow:e })
+    ChangeRows=(arr)=>{
+        this.setState({changeRow: !this.state.changeRow })
+        this.arr=arr;
     }
     
     
@@ -53,8 +56,8 @@ export default class Form_work extends Component {
                <button className='ButChoose' onClick={this.props.newRow}>Отмена</button>
                  </div>
                  {this.state.transfer && this.state.arr.map(id=><Form_arch key={id.io_id} row={id}  transfer={this.TransferData}/>)}
-                 {this.state.addRow && <Form_add   addRow={this.AddRows}/>}
-                 {this.state.changeRow && <Form_change  changeRow={this.ChangeRows}/>}
+                 {this.state.addRow && <Form_add addRow={this.AddRows}/>}
+                 {this.state.changeRow && <Form_change arr={this.arr}  changeRow={this.ChangeRows}/>}
                 </div>
                
         </div>

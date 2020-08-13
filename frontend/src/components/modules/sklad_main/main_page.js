@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import axio from 'axios';
-import Form_work from './form_work'
 import FormchangePrim1 from './formchangePrim1'
 import '../spr/spr_all.css'
 import Main_page_cont from './main_page_cont'
+import Form_add from './form_add'
+import Form_change from './form_change'
 
 
 export default class Main_page extends Component {
 
     constructor() {
         super();
+        this.arr=[];
         this.state = {
             arr:[],
             dates:[],
@@ -28,7 +30,9 @@ export default class Main_page extends Component {
             fio:'',
             system:'',
             pc:'',
-            ars:[]
+            ars:[],
+            changeRow:false,
+            arrt:[]
 
 
         }
@@ -57,7 +61,6 @@ export default class Main_page extends Component {
 
     componentDidMount (){
         axio.get('/main/all').then(res=>{
-            console.log(res.data)
             this.setState({
                 arr: res.data
             });
@@ -87,7 +90,12 @@ if (this.state.pc!==''){
     });
  
 }
-  
+ChangeRows=(arr)=>{
+    this.setState({changeRow: !this.state.changeRow })
+    this.arr=arr;
+}
+
+
     render(){
         return (
             <div>
@@ -148,6 +156,7 @@ if (this.state.pc!==''){
            </table>             
            </div>
            <button onClick={this.primFilter}  className='FindAndReset'>Применить</button>
+           <button onClick={this.AddRow} className='FindAndReset'>Добавить</button>
            <button className='FindAndReset'>Сбросить</button>
            </div> 
         <div className='Table_pol'>
@@ -179,9 +188,10 @@ if (this.state.pc!==''){
                                                                         orgn={this.state.orgn} syst={this.state.syst}
                                                                         contr={this.state.contr} prim_on={this.state.prim_on}
                                                                         prim_tw={this.state.prim_tw}
-                                                                          ChangePrim={this.ChangePrim} />)}
+                                                                        ChangePrim={this.ChangePrim} changeRow={this.ChangeRows} />)}
                     </tbody>
-                </table>{this.state.newRow && <Form_work  newRow={this.AddRow}/>}
+                </table>{this.state.newRow && <Form_add  newRow={this.AddRow}/>}
+                {this.state.changeRow && <Form_change arr={this.arr} changeRow={this.ChangeRows}/>}
                 {this.state.show_formPrim &&  <FormchangePrim1 show_formPrim={this.ChangePrim} row={this.state.actArr}/>}
                 </div> 
         </div>
