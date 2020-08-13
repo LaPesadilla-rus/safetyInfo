@@ -511,8 +511,9 @@ exports.DeleteArch_tbl= function(req,cb) {
 
 exports.InsertKontr =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.kontragents(kg_dgvr, kg_kol)
-    VALUES ( '`+data.val_dgvr+`',`+data.val_count+`);`;
+    var sql = `INSERT INTO public.kontragents
+    (kg_dgvr,kg_kol)
+    VALUES (`+data.val_dgvr+`,`+data.val_count+`)`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
         cb(err,res)
@@ -520,8 +521,9 @@ exports.InsertKontr =function(req,cb){
 }
 exports.InsertSKZI =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.skzi(sk_ver,sk_serial,sk_srok)
-    VALUES (`+data.val_vers+`,`+data.val_serial+`,'`+data.val_srok+`');`;
+    var sql = `INSERT INTO public.skzi
+    (sk_ver , sk_serial , sk_srok)
+    VALUES (`+data.val_vers+`,`+data.val_serial+`,`+data.val_srok+`)`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
         cb(err,res)
@@ -529,15 +531,22 @@ exports.InsertSKZI =function(req,cb){
 }
 exports.InsertKTR =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.spr_ktr (kt_name)
-    VALUES ('`+data.name_kontrg+`');`;
+    var sql = `INSERT INTO public.spr_ktr 
+    (kt_name)
+    VALUES ('`+data.name_kontrg+`')`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
         cb(err,res)
     });
 }
-
-
+exports.UpdateRow =function (data, cb) {
+    var sql = `UPDATE info_safe SET io_pers_id =`+data.user+`,io_pc_id=`+data.pc+`,io_org_id=`+data.org+`,io_ktr_id=`+data.skzi_naim+`, io_usr1=`+data.users+` WHERE io_id = `+data.id+` `;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
 
 
 

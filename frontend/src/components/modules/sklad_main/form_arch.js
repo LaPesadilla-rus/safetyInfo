@@ -25,7 +25,7 @@ export default class Form_arch extends Component{
     }
 
     ToArch=()=>{
-
+        this.props.transfer(this.props.row)
         const data={
             io_id:this.props.row.io_id,
             id_pers:this.props.row.io_pers_id,
@@ -60,7 +60,7 @@ export default class Form_arch extends Component{
         return (
         <div className='modal_arch'>
             <div className="modal_pos_arch">
-                <div>Перенос данных в архив<div>
+                <div>Перенос данных в архив<div>{console.log(this.props)}
                 <label className='label_txt'>Перенести данную запись в архив?</label>
                 <div>
                <button className='ButtonCh' onClick={this.ToArch}>Перенести</button>

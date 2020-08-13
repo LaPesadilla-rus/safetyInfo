@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import './form_work.css'
 import axio from 'axios';
+import Form_arch from './form_arch'
 export default class Form_change extends Component {
 
     constructor() {
         super();
+        this.arts=[]
         this.state ={
             arr:[],
             new_arr:[],
@@ -28,13 +30,17 @@ export default class Form_change extends Component {
             systems:[],
             contrackName:[],
             pers:[],
-            systa:[]
+            systa:[],
+            transfer:false,
+            arty:[],
+            changeRow:false,
+            users:'',
+            
         } 
     }
 
     componentDidMount (){
         axio.get('/main/data').then(res=>{
-            console.log(res.data)
         this.setState({
             arr: res.data,
             namePO:res.data.spr_skzi,
@@ -57,7 +63,9 @@ export default class Form_change extends Component {
                        inv_num:this.props.arr.io_pc_id,
                        org:this.props.arr.io_org_id,
                        syst:this.props.arr.io_ktr_id,
-                       cont:this.props.arr.io_ins_id
+                       cont:this.props.arr.io_ins_id,
+                       users:this.props.arr.io_usr1,
+                       id:this.props.arr.io_id
         });
         });
         
@@ -96,12 +104,48 @@ export default class Form_change extends Component {
     ChangeSyst=(e)=>{
         this.setState({syst:e.target.value})
     }
+
+    TransferData =(e)=>{
+        this.setState({transfer: !this.state.transfer,arty:e})
+        
+    }
+
+    ChangeRows=(arr)=>{
+            this.arts=arr
+        
+    }
+        
+    onSubmit=()=>{
+        const data={
+            skzi_naim:this.state.skzi_naim,
+            vers:this.state.vers,
+            serial:this.state.serial,
+            from:this.state.from,
+            srok:this.state.srok,
+            user:this.state.user,
+            otdel:this.state.otdel,
+            pc:this.state.pc,
+            inv_num:this.state.inv_num,
+            org:this.state.org,
+            syst:this.state.syst,
+            id:this.state.id,
+            users:this.state.users
+        }
+        axio.post('/main/UpdateRow', {data}).then(res => {
+            this.setState({
+                data: res.data
+            });
+        });
+
+       }
+   
     render(){
         return (
         <div className='modal_add'>
             <div className="modal_pos_add">
-                <div>Изменение данных
-                    <div>{console.log(this.props)}
+                <div className='Zap'>
+                    <label className='Names'>Изменение полей</label>
+                    <div>
               <div className='NaimPole'>Наименование ПО и СКЗИ
               <select className='SelectPole' onChange={this.ChangeName} value={this.state.skzi_naim}>
                 {this.state.namePO.map( id => 
@@ -163,11 +207,12 @@ export default class Form_change extends Component {
                 <option key={id.kg_id} value={id.kg_id}>{id.kg_dgvr}</option>)}
                 </select></div>
                 <div>
-                <button className='ButNaim'>Отправить</button>
-                <button className='ButNaim' onClick={this.props.changeRow}>Отмена</button>    
+                <button onClick={this.onSubmit} className='ButNaim_s'>Отправить</button>
+                <button className='ButNaim_cl' onClick={this.props.changeRow}>Отмена</button>    
                 </div>
+                <button onClick={this.TransferData} className='ButNaim_ch'>Перенести в архив</button>
                  </div>
-                </div>
+                </div>{this.state.transfer && <Form_arch arr={this.arts}  row={this.state.arty}  transfer={this.TransferData}/>}
                
         </div>
         </div>

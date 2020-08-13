@@ -383,10 +383,10 @@ exports.DeleteArch_tbl= (req, res) => {
 }
 
 
-exports.kontr = async (req, res) => {
+exports.kontrs = async (req, res) => {
     let data = {};
 
-    await Main.InsertKontr(req,(err, docs) =>{
+  await Main.InsertKontr(req,(err, docs) =>{
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -410,4 +410,14 @@ exports.kontr = async (req, res) => {
         data.ktr = docs.rows;
     });
     return res.send(data);
+}
+exports.UpdateRow =function(req, res)
+{
+    Main.UpdateRow(req.body.data ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
 }

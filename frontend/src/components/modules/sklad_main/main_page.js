@@ -191,7 +191,7 @@ ChangeRows=(arr)=>{
                                                                         ChangePrim={this.ChangePrim} changeRow={this.ChangeRows} />)}
                     </tbody>
                 </table>{this.state.newRow && <Form_add  newRow={this.AddRow}/>}
-                {this.state.changeRow && <Form_change arr={this.arr} changeRow={this.ChangeRows}/>}
+                {this.state.changeRow && <Form_change row={this.state.actArr} arr={this.arr} changeRow={this.ChangeRows}/>}
                 {this.state.show_formPrim &&  <FormchangePrim1 show_formPrim={this.ChangePrim} row={this.state.actArr}/>}
                 </div> 
         </div>

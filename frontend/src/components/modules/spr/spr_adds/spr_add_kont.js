@@ -44,7 +44,7 @@ export default class Spr_add_kont extends Component {
         val_srok:this.state.val_srok,
         val_count:this.state.val_count
     }
-    axio.post('/main/kontr', {data}).then(res => {
+    axio.post('/main/kontrs', {data}).then(res => {
         if (res.data === 'INSERT COMPLITE') {
             alert('Сохранено');
         

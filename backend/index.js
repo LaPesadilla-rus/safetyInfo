@@ -75,12 +75,14 @@ app.post('/main/DeleteKontr',mainController.DeleteKontr)
 app.post('/main/DeleteOtd',mainController.DeleteOtd)
 
 app.post('/main/insert', mainController.insert);
+app.post('/main/kontrs', mainController.kontrs);
 app.post('/main/InsertArch', mainController.InsertArch);// Перенос в архив
 app.post('/main/DeleteMain_tab', mainController.DeleteMain_tab);// Удаление строки из общей таблицы для переноса в архив
 app.post('/main/InsertFrArcToMain', mainController.InsertFrArcToMain);// Перенос в основную таблицу
 app.post('/main/DeleteArch_tbl', mainController.DeleteArch_tbl);// Удаление строки из архивной таблицы для переноса в основную
 app.post('/main/Prim1Up',mainController.Prim1Up) // изменение примечания 1
 app.post('/main/Prim2Up',mainController.Prim2Up) // изменение примечания 2  
+app.post('/main/UpdateRow',mainController.UpdateRow) // изменение примечания 2  
 //---------------------------------------- SPR
 /*app.get('/sklad/all', skladController.all);
 app.get('/sklad/new/type', skladController.type);

@@ -89,7 +89,7 @@ export default class Main_page_cont extends Component {
     render(){
         let id = this.props.row
         return (
-            <tr >
+            <tr className='Hover'>{console.log(this.props)}
             <td onClick={this.onClick} className='Table_text'>{id.io_id}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_name}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_ver}</td>
