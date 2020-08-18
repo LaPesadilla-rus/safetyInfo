@@ -16,7 +16,6 @@ for(let i = 0; i < data.length; i += 1){
                 return res.sendStatus(500);
             }
            data[i].ma_fio = docs.rows[0].pe_fio;
-            data[i].ot_name = docs.rows[0].ot_name;
         }); 
    }
     return res.send(data);
@@ -289,6 +288,7 @@ exports.DeleteNaim = (req, res) => {
     });
     return 0;
 }
+
 exports.DeletePC= (req, res) => {
     Main.DeletePC(req, (err, docs) =>{
         if (err) {
@@ -401,13 +401,20 @@ exports.kontrs = async (req, res) => {
         }
         data.spr_skzi = docs.rows;
     });
-
     await Main.InsertKTR(req,(err, docs) =>{
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
         data.ktr = docs.rows;
+    });
+
+    await Main.InsertSystem(req,(err, docs) =>{
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        data.sys = docs.rows;
     });
     return res.send(data);
 }
@@ -420,4 +427,74 @@ exports.UpdateRow =function(req, res)
         }
         res.send(docs.rows);
     })
+}
+exports.UpdateNaim =function(req, res)
+{
+    Main.UpdateNaim(req.body.data1 ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+exports.UpdateOtd =function(req, res)
+{
+    Main.UpdateOtd(req.body.data1 ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+exports.UpdateSyst =function(req, res)
+{
+    Main.UpdateSyst(req.body.data1 ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+exports.UpdateFrom =function(req, res)
+{
+    Main.UpdateFrom(req.body.data1 ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+exports.UpdatePC =function(req, res)
+{
+    Main.UpdatePC(req.body.data1 ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+exports.UpdateInv_num =function(req, res)
+{
+    Main.UpdateInv_num(req.body.data2 ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+exports.UpdateKTR= (req, res) => {
+    Main.UpdateKTR(req, (err, docs) =>{
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('UPDATE COMPLITE')
+    });
+    return 0;
 }

@@ -20,10 +20,10 @@ left: 25%;
     position: relative;
     background-color: rgb(136, 110, 90);
     border-radius: 15px;
-    width: 26%;
-    min-width: 100px;
+    width: 65%;
+    min-width: 250px;
     min-height: 100px;
-    left: 47%;
+    left: 35%;
     border-style: solid;
     border-color:rgb(110, 88, 71); ;
 }
@@ -64,4 +64,12 @@ left: 25%;
 }
 .TheHead{
     font-size: 10pt;
+
+}
+.Edit_pc{
+    position: relative;
+    width: 30px;
+    height: 10px;
+    margin-bottom: 10px;
+    
 }

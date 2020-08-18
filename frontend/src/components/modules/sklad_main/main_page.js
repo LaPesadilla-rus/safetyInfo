@@ -5,15 +5,17 @@ import '../spr/spr_all.css'
 import Main_page_cont from './main_page_cont'
 import Form_add from './form_add'
 import Form_change from './form_change'
-
+import Form_arch from './form_arch'
 
 export default class Main_page extends Component {
 
     constructor() {
         super();
         this.arr=[];
+        this.ar_tw=[];
         this.state = {
             arr:[],
+            arss:[],
             dates:[],
             frget: false,
             srok:false,
@@ -32,7 +34,8 @@ export default class Main_page extends Component {
             pc:'',
             ars:[],
             changeRow:false,
-            arrt:[]
+            arrt:[],
+            archrow:false,
 
 
         }
@@ -61,8 +64,10 @@ export default class Main_page extends Component {
 
     componentDidMount (){
         axio.get('/main/all').then(res=>{
+            console.log(res.data)
             this.setState({
-                arr: res.data
+                arr: res.data,
+                arss:res.data
             });
         });
     }
@@ -73,7 +78,7 @@ ChangePrim=(e)=>{
     
 this.setState({show_formPrim:!this.state.show_formPrim,actArr:e })
 }
-
+/*
 primFilter=()=>{
     let data={}
 if  ( this.state.fio!== ''){
@@ -86,15 +91,31 @@ if (this.state.pc!==''){
     data.pc=this.state.pc
 }   
     axio.post('/main/filterAll', {data}).then(res=>{
-        
+        this.setState({
+            data: res.data
     });
- 
+});
 }
+
+AddRow =(arr)=>{
+        this.setState({
+            newRow: !this.state.newRow,
+            arrt:arr
+        })
+    }
+
+
+
+*/
 ChangeRows=(arr)=>{
     this.setState({changeRow: !this.state.changeRow })
     this.arr=arr;
 }
 
+Archrows=(arss)=>{
+    this.setState({archrow: !this.state.archrow })
+    this.ar_tw=arss;
+}
 
     render(){
         return (
@@ -191,8 +212,9 @@ ChangeRows=(arr)=>{
                                                                         ChangePrim={this.ChangePrim} changeRow={this.ChangeRows} />)}
                     </tbody>
                 </table>{this.state.newRow && <Form_add  newRow={this.AddRow}/>}
-                {this.state.changeRow && <Form_change row={this.state.actArr} arr={this.arr} changeRow={this.ChangeRows}/>}
+                {this.state.changeRow && <Form_change row={this.state.actArr} arr={this.arr} arss={this.ar_tw} archrow={this.Archrows}  changeRow={this.ChangeRows}/>}
                 {this.state.show_formPrim &&  <FormchangePrim1 show_formPrim={this.ChangePrim} row={this.state.actArr}/>}
+                
                 </div> 
         </div>
         </div>
@@ -203,7 +225,10 @@ ChangeRows=(arr)=>{
 
  
 
+/*
 
+{this.state.transfer && <Form_arch transfer={this.TransferData} row={this.state.actArr} arr={this.arr}  changeRow={this.ChangeRows} />}
+*/
 
 
  

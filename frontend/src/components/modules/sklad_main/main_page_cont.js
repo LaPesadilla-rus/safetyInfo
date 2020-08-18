@@ -64,39 +64,24 @@ export default class Main_page_cont extends Component {
 */ onClick=()=>{
     this.props.changeRow(this.props.row)
 }
-
-    AddRow =()=>{
-        this.setState({newRow: !this.state.newRow})
-    }
-
-    componentDidMount (){
-        axio.get('/main/all').then(res=>{
-            this.setState({
-                arr: res.data
-            });
-        });
-    }
-  
     onCliks=()=>{
         this.props.ChangePrim(this.props.row)
     }
     ChangePrim=()=>{
         this.setState({show_formPrim:!this.state.show_formPrim})
         }
-        AddRow =()=>{
-            this.setState({newRow: !this.state.newRow})
-        }
+       
     render(){
         let id = this.props.row
         return (
-            <tr className='Hover'>{console.log(this.props)}
+            <tr className='Hover'>
             <td onClick={this.onClick} className='Table_text'>{id.io_id}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_name}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_ver}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_ser}</td>
             <td onClick={this.onClick} className={(this.props.frget===true)?'hide':'Table_text'} >{id.ktr_name}</td>
             <td onClick={this.onClick} className={(this.props.srok===true)?'hide':'Table_text'} >{id.sk_srok}</td>
-            <td onClick={this.onClick} className='Table_text'>{id.ma_fio}</td>
+            <td onClick={this.onClick} className='Table_text'>{id.pe_fio}</td>
             <td onClick={this.onClick} className='Table_text'>{id.otdel}</td>
             <td onClick={this.onClick} className='Table_text'>{id.pc_name}</td>
             <td onClick={this.onClick} className='Table_text'>{id.pc_inv_num}</td>
@@ -110,7 +95,7 @@ export default class Main_page_cont extends Component {
             <td>
             <button className='Changer' onClick={this.onCliks} >*</button>
             </td>
-            {this.state.newRow && <Form_work  newRow={this.AddRow}/>}
+            
             
             </tr>
             );

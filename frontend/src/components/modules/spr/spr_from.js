@@ -9,6 +9,7 @@ export default class Spr_from extends Component {
             arr:[],
             org:'',
             form_org:false,
+            og_name:''
 
         }
     }
@@ -46,6 +47,19 @@ export default class Spr_from extends Component {
 
        }
    
+       onChange=(e)=>{
+        this.setState({og_name: e.target.value})
+       }
+
+       ChangeFrom=(e)=>{
+        const data1 ={
+            og_name:this.state.og_name,
+            og_id: e.target.value
+        }
+         axio.post('/main/UpdateFrom', {data1}).then(res => { 
+        });this.onReboot()
+        }
+
     render(){
         return(<div className='Ps_from'>
             <div className='Ps_st'>
@@ -53,7 +67,11 @@ export default class Spr_from extends Component {
                 <button onClick={this.Show_form} className='But'>Добавить</button>
                 <table className='txt'>
                 <tr>
-                {this.state.arr.map(id=> <tr key={id.og_id} row={id}><td>{id.og_name}</td> <button onClick={this.DeleteRow} value={id.og_id}>x</button></tr>)}
+                {this.state.arr.map(id=> <tr key={id.og_id} row={id}>
+                    <td><textarea onChange={this.onChange}>{id.og_name}</textarea></td> 
+                    <button onClick={this.DeleteRow} value={id.og_id}>x</button>
+                    <button className='But' onClick={this.ChangeFrom} value={id.og_id}  >у</button>
+                    </tr>)}
                 </tr>
                 </table>
             <div>

@@ -4,39 +4,45 @@ const pool = new Pool (conn.conn_saf);
 const pool_bahos = new Pool (conn.conn_bahos);
 
 exports.all =  async (cb) => {
-    await pool.query(`SELECT ss.ss_name as skzi_name, ins.ins_name as inf_name, ins.ins_id,
-                        sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, 
-                        kt.kt_name as ktr_name, kg.kg_dgvr, kg.kg_kol, sk.sk_srok,
-                        kg.kg_arch , pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id, og.og_name as org_name, to_char(io.io_date1, 'YYYY-MM-DD') as io,
-                        io.*
-                        
-                        FROM info_safe io
-                        
-                        inner join spr_pc pc
-                        on pc.pc_id = io.io_pc_id
-                        
-                        inner join spr_org og
-                        on og.og_id = io.io_org_id
-                        
-                        inner join kontragents kg
-                        on kg.kg_id = io.io_ktr_id
-                        
-                        inner join spr_ktr kt
-                        on kt.kt_id = kg.kg_name_id
-                        
-                        inner join skzi sk
-                        on sk.sk_id = kg.kg_skzi_id
-                        
-                        inner join spr_skzi ss
-                        on ss.ss_id = sk.sk_name_id
-                        
-                        inner join spr_inf_sys ins
-                        on ins.ins_id = sk_inf_id 
-
-                        inner join spr_otdel ot
-                        on ot.otdel_id = io.io_id 
-                        
-                        Order by io_id
+    await pool.query(`SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
+    pp.pe_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
+    kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
+    og.og_name as org_name, to_char(io.io_date1, 'YYYY-MM-DD') as io,io.*
+    
+    FROM info_safe io
+                     
+     inner join spr_pc pc
+     on pc.pc_id = io.io_pc_id
+                            
+      inner join spr_org og
+      on og.og_id = io.io_org_id
+                            
+      inner join kontragents kg
+      on kg.kg_id = io.io_ktr_id
+                            
+      inner join spr_ktr kt
+      on kt.kt_id = kg.kg_name_id
+                            
+      inner join skzi sk
+      on sk.sk_id = kg.kg_skzi_id
+                            
+      inner join spr_skzi ss
+      on ss.ss_id = sk.sk_name_id
+                            
+      inner join spr_inf_sys ins
+      on ins.ins_id = sk_inf_id 
+                            
+      inner join chain_pers cp
+      on cp.chain_id=io.io_pers_id
+                            
+      inner join spr_otdel ot
+      on ot.otdel_id = cp.chain_otdel_id
+                            
+      inner join remote_personal pp 
+      on pp.pe_id=cp.chain_pers_id
+                            
+     Order by io_id
+      
         `).then( res => {
             return cb('',res);
         }).catch( err => {
@@ -168,10 +174,10 @@ exports.filterAll = function (data, cb) {
         a++;
     }
 
-  /*  if (a > 0){
+    if (a > 0){
         where = ` WHERE ` + where;
         sql += where;
-    }*/
+    }
     sql += ` order by a_id desc`;
     //console.log(sql)
     pool.query(sql
@@ -495,6 +501,9 @@ exports.InsertFrArcToMain =function(req,cb){
     });
 }
 
+
+
+
 exports.DeleteArch_tbl= function(req,cb) {
     let data = req.body.data;
     var sql = `DELETE FROM public.arch_safe where a_id=`+data.a_id+``;
@@ -511,24 +520,26 @@ exports.DeleteArch_tbl= function(req,cb) {
 
 exports.InsertKontr =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.kontragents
-    (kg_dgvr,kg_kol)
-    VALUES (`+data.val_dgvr+`,`+data.val_count+`)`;
+    var sql = `INSERT INTO public.kontragents (kg_dgvr, kg_kol) VALUES (`+data.val_dgvr+`,`+data.val_count+`)`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
-        cb(err,res)
+        if (err !== undefined) {
+            console.log("Postgres INSERT error:", err); 
+        }else{
+                cb(err,'INSERT COMPLITE');
+            }
     });
 }
 exports.InsertSKZI =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.skzi
-    (sk_ver , sk_serial , sk_srok)
-    VALUES (`+data.val_vers+`,`+data.val_serial+`,`+data.val_srok+`)`;
+    var sql = `INSERT INTO public.skzi (sk_ver,sk_serial,sk_srok)
+    VALUES ('`+data.val_vers+`','`+data.val_serial+`','`+data.val_srok+`')`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
         cb(err,res)
     });
 }
+
 exports.InsertKTR =function(req,cb){
     let data = req.body.data;
     var sql = `INSERT INTO public.spr_ktr 
@@ -539,6 +550,17 @@ exports.InsertKTR =function(req,cb){
         cb(err,res)
     });
 }
+exports.InsertSystem=function(req,cb){
+    let data = req.body.data;
+    var sql = `INSERT INTO public.spr_inf_sys
+    (ins_name)
+    VALUES ('`+data.val_syst+`')`;
+    console.log(sql);
+    pool.query(sql, (err,res)=>{
+        cb(err,res)
+    });
+}
+
 exports.UpdateRow =function (data, cb) {
     var sql = `UPDATE info_safe SET io_pers_id =`+data.user+`,io_pc_id=`+data.pc+`,io_org_id=`+data.org+`,io_ktr_id=`+data.skzi_naim+`, io_usr1=`+data.users+` WHERE io_id = `+data.id+` `;
     console.log(sql); 
@@ -548,10 +570,80 @@ exports.UpdateRow =function (data, cb) {
         });
 };
 
+exports.UpdateNaim =function (data1, cb) {
+    var sql = `UPDATE public.spr_skzi SET ss_name='`+data1.ss_name+`' where ss_id=`+data1.ss_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
 
+exports.UpdateOtd =function (data1, cb) {
+    var sql = `UPDATE public.spr_otdel SET otdel_name='`+data1.otdel_name+`' where otdel_id=`+data1.otdel_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+exports.UpdateSyst =function (data1, cb) {
+    var sql = `UPDATE public.spr_inf_sys SET ins_name='`+data1.ins_name+`' where ins_id=`+data1.ins_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+exports.UpdateFrom =function (data1, cb) {
+    var sql = `UPDATE public.spr_org  SET og_name='`+data1.og_name+`' where og_id=`+data1.og_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+exports.UpdatePC =function (data1, cb) {
+    var sql = `UPDATE public.spr_pc SET pc_name='`+data1.pc_name+`' where pc_id=`+data1.pc+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+exports.UpdateInv_num =function (data2, cb) {
+    var sql = `UPDATE public.spr_pc SET pc_inv_num='`+data2.pc_inv_num+`' where pc_id=`+data2.pc+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+exports.UpdateKontr =function (data2, cb) {
+    var sql = `UPDATE public.kontragents SET kg_dgvr='`+data1.kg_dgvr+`',kg_kol='`+data1.kg_kol+`' where kg_id=`+data1.kg_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
+exports.UpdateSKZI =function (data2, cb) {
+    var sql = `UPDATE public.skzi SET sk_ver='`+data1.sk_ver+`',sk_serial='`+data1.sk_serial+`',sk_srok='`+data1.sk_srok+`' where sk_id=`+data1.sk_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
 
-
-
+exports.UpdateKTR =function (data2, cb) {
+    var sql = `UPDATE public.spr_ktr  SET kt_name='`+data1.kt_name+`' where kt_id=`+data1.kt_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
 
 
 /*

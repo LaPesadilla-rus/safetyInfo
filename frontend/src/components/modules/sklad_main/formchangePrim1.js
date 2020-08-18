@@ -13,39 +13,40 @@ export default class FormchangePrim1 extends Component {
             
         }
     }
+
+    componentDidMount=()=>{
+        this.setState({prim1_ch:this.props.row.io_prim1,prim2_ch:this.props.row.io_prim2})
+    }
      ChangePrims=(e)=>{
-    this.setState({txt:e.target.value})
+    this.setState({prim1_ch:e.target.value})
      }
 
      ChangePrimss=(e)=>{
-        this.setState({text:e.target.value})
+        this.setState({prim2_ch:e.target.value})
          }
 
      SendSB =()=> {
         const data={
             io_id:this.props.row.io_id,
-            prim1_ch:this.state.txt,
+            prim1_ch:this.state.prim1_ch,
         }
-        
+        const data1={
+            io_id1:this.props.row.io_id,
+            prim2_ch:this.state.prim2_ch,
+        }
         axio.post('/main/Prim1Up', {data}).then(res=>{
             this.setState({
                 data: res.data
             });
         });
-       
-    }
-
-    SendDB =()=>{
-        const data1={
-            io_id1:this.props.row.io_id,
-            prim2_ch:this.state.text,
-        }
         axio.post('/main/Prim2Up', {data1}).then(res=>{
             this.setState({
                 data1: res.data
             });
         });
+       
     }
+
      
      
    
@@ -54,11 +55,10 @@ export default class FormchangePrim1 extends Component {
             <div className='Ps_st'>
             <label className='textar'>Редакция примечаний</label>
             <div >
-         <textarea className='textar' onChange={this.ChangePrims} >{this.props.row.io_prim1}</textarea></div>
+    <textarea className='textar' onChange={this.ChangePrims}value={this.state.prim1_ch}></textarea></div>
          <div>
-         <textarea className='textar' onChange={this.ChangePrimss} >{this.props.row.io_prim2}</textarea> </div>
+    <textarea className='textar' onChange={this.ChangePrimss} value={this.state.prim2_ch}></textarea> </div>
          <button className='ButSet' onClick={this.SendSB}>1</button>
-         <button className='ButSet' onClick={this.SendDB}>2</button>
          <button className='ButSet'  onClick={this.props.show_formPrim}>x</button>
             </div>
             </div>

@@ -23,7 +23,7 @@ componentDidMount(){
         this.setState({
             arr: res.data
             
-        });console.log(res.data)
+        });console.log(this.arr)
     });
 }
 onReboot=()=>{
@@ -39,6 +39,7 @@ onSubmit=(e)=>{
         a_prim1:this.props.row.a_prim1,
         a_prim2:this.props.row.a_prim2,
         a_usr:this.props.row.a_usr,
+     //   row: this.props.row
     }
     axio.post('/main/InsertFrArcToMain', {data}).then(res => {
         if (res.data === 'INSERT COMPLITE') {
@@ -60,7 +61,7 @@ onSubmit=(e)=>{
     render(){
         return (
         <div className='modal_arch'>
-            <div className="modal_pos_arch">
+            <div className="modal_pos_arch">{console.log(this.props)}
             <div>Перенос данных в основную таблицу</div>
             <label className='label_txt'>Перенести данную запись в основную таблицу?</label>
             <div>

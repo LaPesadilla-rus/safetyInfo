@@ -105,16 +105,14 @@ export default class Form_change extends Component {
         this.setState({syst:e.target.value})
     }
 
-    TransferData =(e)=>{
-        this.setState({transfer: !this.state.transfer,arty:e})
-        
+    TransferData =(arr)=>{
+        this.props.archrow(this.props.row)
+        this.setState({transfer: !this.state.transfer})
+        this.arts=arr
     }
+   
 
-    ChangeRows=(arr)=>{
-            this.arts=arr
-        
-    }
-        
+      
     onSubmit=()=>{
         const data={
             skzi_naim:this.state.skzi_naim,
@@ -212,7 +210,7 @@ export default class Form_change extends Component {
                 </div>
                 <button onClick={this.TransferData} className='ButNaim_ch'>Перенести в архив</button>
                  </div>
-                </div>{this.state.transfer && <Form_arch arr={this.arts}  row={this.state.arty}  transfer={this.TransferData}/>}
+                </div>{this.state.transfer && <Form_arch row={this.state.arts}  transfer={this.TransferData}/>}
                
         </div>
         </div>
@@ -222,3 +220,7 @@ export default class Form_change extends Component {
 
 
 
+/*
+{this.state.transfer && <Form_arch row={this.state.arty} arr={this.arts}  transfer={this.TransferData}/>}
+
+*/

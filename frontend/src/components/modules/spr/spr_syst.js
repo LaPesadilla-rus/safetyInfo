@@ -10,7 +10,7 @@ export default class Spr_naim extends Component {
             need_ar:[],
             ins:'',
             show_ins:false,
-
+            ins_name:''
 
         }
     }
@@ -40,16 +40,22 @@ export default class Spr_naim extends Component {
         }
         axio.post('/main/DeleteSys', {data}).then(res => {
             if (res.data === 'Delete COMPLITE') {
-                alert('Удалено');
-                
+                alert('Удалено');  
             }
         });this.onReboot()
-             
-
        }       
-    
-       
+       onChange=(e)=>{
+        this.setState({ins_name: e.target.value})
+       }
 
+       ChangeNaim=(e)=>{
+        const data1 ={
+            ins_name:this.state.ins_name,
+            ins_id: e.target.value
+        }
+         axio.post('/main/UpdateSyst', {data1}).then(res => { 
+        });this.onReboot()
+        }
 
        AddIns=()=>{
         this.setState({show_ins:!this.state.show_ins})
@@ -62,7 +68,9 @@ export default class Spr_naim extends Component {
                 <table className='txt'>
                     <tr>
                     {this.state.arr.map(id=> <tr key={id.ins_id} row={id}>
-                    <td>{id.ins_name}</td>  <button onClick={this.DeleteRow} value={id.ins_id}>x</button></tr>)}
+                    <td><textarea onChange={this.onChange}>{id.ins_name}</textarea></td> 
+                     <button onClick={this.DeleteRow} value={id.ins_id}>x</button>
+                    <button className='But' onClick={this.ChangeNaim} value={id.ins_id} >у</button></tr>)}
                     </tr>
                 </table>
             <div>

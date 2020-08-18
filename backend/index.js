@@ -83,6 +83,13 @@ app.post('/main/DeleteArch_tbl', mainController.DeleteArch_tbl);// Удален�
 app.post('/main/Prim1Up',mainController.Prim1Up) // изменение примечания 1
 app.post('/main/Prim2Up',mainController.Prim2Up) // изменение примечания 2  
 app.post('/main/UpdateRow',mainController.UpdateRow) // изменение примечания 2  
+app.post('/main/UpdateNaim',mainController.UpdateNaim) // мзменения в справочнике
+app.post('/main/UpdateOtd',mainController.UpdateOtd) 
+app.post('/main/UpdateSyst',mainController.UpdateSyst) 
+app.post('/main/UpdateFrom',mainController.UpdateFrom) 
+app.post('/main/UpdatePC',mainController.UpdatePC) 
+app.post('/main/UpdateInv_num',mainController.UpdateInv_num) 
+app.post('/main/UpdateKTR',mainController.UpdateKTR) 
 //---------------------------------------- SPR
 /*app.get('/sklad/all', skladController.all);
 app.get('/sklad/new/type', skladController.type);

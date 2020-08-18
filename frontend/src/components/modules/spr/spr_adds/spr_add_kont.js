@@ -10,7 +10,8 @@ export default class Spr_add_kont extends Component {
         val_serial:'',
         val_dgvr:'',
         val_srok:'',
-        val_count:''
+        val_count:'',
+        val_syst:''
 
 
         }
@@ -33,6 +34,10 @@ export default class Spr_add_kont extends Component {
       Name_count=(e)=>{
         this.setState({val_count: e.target.value});  
       }
+      Name_syst=(e)=>{
+        this.setState({val_syst: e.target.value});  
+      }
+
 
    SendDB=event=>{
     event.preventDefault();
@@ -42,7 +47,8 @@ export default class Spr_add_kont extends Component {
         val_serial:this.state.val_serial,
         val_dgvr: this.state.val_dgvr,
         val_srok:this.state.val_srok,
-        val_count:this.state.val_count
+        val_count:this.state.val_count,
+        val_syst:this.state.val_syst
     }
     axio.post('/main/kontrs', {data}).then(res => {
         if (res.data === 'INSERT COMPLITE') {
@@ -56,17 +62,19 @@ export default class Spr_add_kont extends Component {
         return(<div className='Ps_froms'>
             <div className='Ps_sts'>
                 <p className='label-posits'>Наименование контрагента</p>
-              <textarea className='txtar' onChange={this.state.name_kontrg}>{this.state.name_kontrg}</textarea>  
+              <textarea className='txtar' onChange={this.Name_kontr}></textarea>  
               <p className='label-posits'>Версия СКЗИ</p>
-              <textarea  className='txtar' onChange={this.state.val_vers}>{this.state.val_vers}</textarea>  
+              <textarea  className='txtar' onChange={this.Name_vers}></textarea>  
               <p className='label-posits'>Серийный номер</p>
-              <textarea  className='txtar' onChange={this.state.val_serial}>{this.state.val_serial}</textarea>  
+              <textarea  className='txtar' onChange={this.Name_serial}></textarea>  
               <p className='label-posits'>Договор</p>
-              <textarea  className='txtar' onChange={this.state.val_dgvr}>{this.state.val_dgvr}</textarea>  
+              <textarea  className='txtar' onChange={this.Name_dgvr}></textarea>  
               <p className='label-posits'>Срок</p>
-              <textarea  className='txtar' onChange={this.state.val_srok}>{this.state.val_srok}</textarea>  
+              <textarea  className='txtar' onChange={this.Name_srok}></textarea>  
               <p className='label-posits'>Количество</p>
-              <textarea  className='txtar' onChange={this.state.val_count}>{this.state.val_count}</textarea>  
+              <textarea  className='txtar' onChange={this.Name_count}></textarea>  
+              <p className='label-posits'>Система</p>
+              <textarea  className='txtar' onChange={this.Name_syst}></textarea>  
             <div><button  className='Buts' onClick={this.SendDB}> Добавить</button>
              <button className='Buts' onClick={this.props.addKont}>x</button>
             </div>

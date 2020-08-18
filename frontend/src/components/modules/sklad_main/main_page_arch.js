@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './main_page.css';
 import axio from 'axios';
 import BackToMain from './BackToMain'
+import Main_page_cont_arch from './main_page_cont_arch'
 
 export default class Main_page_arch extends Component {
 
@@ -23,6 +24,7 @@ export default class Main_page_arch extends Component {
             txt:'',
             text:'',
             newRow:false,
+            act_arr:[]
         }
     }
 
@@ -57,8 +59,11 @@ export default class Main_page_arch extends Component {
         });
     }
     
-    AddRow =()=>{
-        this.setState({newRow: !this.state.newRow})
+    AddRow =(arr)=>{
+        this.setState({
+            newRow: !this.state.newRow,
+            act_arr:arr
+        })
     }
 
     render(){
@@ -148,7 +153,7 @@ export default class Main_page_arch extends Component {
                      </tr>
                      </thead>
                  <tbody>
-                 {this.state.arr_arch.map(id => <tr key={id.a_id} row={id}>
+                 {/*this.state.arr_arch.map(id => <tr key={id.a_id} row={id}>
                          <td className='Table_text'>{id.a_id}</td>
                          <td className='Table_text'>{id.skzi_name}</td>
                          <td className='Table_text'>{id.skzi_ver}</td>
@@ -170,9 +175,9 @@ export default class Main_page_arch extends Component {
                          <td><button onClick={this.AddRow} value={id.a_id}  className='Changer'>▲</button></td>                                                           
                          
                          </tr>
-     )} 
+                         )*/} {this.state.arr_arch.map(id=> <Main_page_cont_arch key={id.io_id} row={id} newRow={this.AddRow}/>)}
                  </tbody>
-             </table>{this.state.newRow &&this.state.arr_arch.map(id=><BackToMain key={id.a_id} row={id} value={id.a_id} newRow={this.AddRow}/>)}
+             </table>{this.state.newRow && <BackToMain  row={this.state.act_arr} newRow={this.AddRow}/>}
              </div>
      </div>
      </div>

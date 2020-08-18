@@ -9,15 +9,16 @@ export default class Spr_naim extends Component {
             arr:[],
             pc_names:'',
             pc_ser_num:'',
-            addnaim:false
-
+            addnaim:false,
+            pc_name:'',
+            pc_inv_num:''
 
         }
     }
 
     onReboot = () =>{
         axio.get('/main/spr_pc').then(res=>{
-          //console.log(res.data)
+          console.log(res.data)
               this.setState({
                   arr: res.data
               });
@@ -31,7 +32,6 @@ export default class Spr_naim extends Component {
                 });
             });
        }
-
        DeleteRow=(e)=>{
         const data={
             pc: e.target.value
@@ -40,14 +40,40 @@ export default class Spr_naim extends Component {
             if (res.data === 'Delete COMPLITE') {
                 alert('Удалено');
             }
-        });this.onReboot()
-
-       }
+        });this.onReboot() }
    
        ADDNAIM=()=>{
         this.setState({addnaim:!this.state.addnaim})
        }
+       PCChange=(e)=>{
+        this.setState({pc_name: e.target.value})
+       }
 
+       ChangePC=(e)=>{
+        const data1 ={
+            pc_name:this.state.pc_name,
+            pc: e.target.value
+        }
+        
+         axio.post('/main/UpdatePC', {data1}).then(res => {
+           
+        });this.onReboot()
+        }
+    
+        InvNumChange=(e)=>{
+            this.setState({pc_inv_num: e.target.value})
+           }
+    
+           ChangeInv_num=(e)=>{
+            const data2 ={
+                pc_inv_num:this.state.pc_inv_num,
+                pc: e.target.value
+            }
+            
+             axio.post('/main/UpdateInv_num', {data2}).then(res => {
+               
+            });this.onReboot()
+            }
     render(){
         return(<div className='Ps_from'>
             <div className='Ps_st'>
@@ -61,8 +87,14 @@ export default class Spr_naim extends Component {
                     </tr>
                     <tr>
                     {this.state.arr.map(id=> <tr key={id.pc_id} row={id}>
-                    <td>{id.pc_name}</td> 
-                    <td>{id.pc_inv_num}</td> 
+                    <td>
+                    <textarea onChange={this.PCChange}>{id.pc_name}</textarea>
+                    <button className='Edit_pc' onClick={this.ChangePC} value={id.pc_id}></button>
+                    </td>
+                    <td>
+                    <textarea onChange={this.InvNumChange}>{id.pc_inv_num}</textarea>
+                    <button className='Edit_pc' onClick={this.ChangeInv_num} value={id.pc_id}></button>
+                    </td> 
                     <button className='CloseBut' onClick={this.DeleteRow} value={id.pc_id}>x</button></tr>)} 
                     </tr>
                 </table>

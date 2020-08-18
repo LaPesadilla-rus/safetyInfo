@@ -10,7 +10,12 @@ export default class Spr_naim extends Component {
             need_ar:[],
             kg:'',
             addKont:false,
-
+            kt_name:'',
+            skzi_ver:'',
+            skzi_ser:'',
+            srok:'',
+            kg_dgvr:'',
+            kg_kol:''
         }
     }
     componentDidMount(){
@@ -19,6 +24,7 @@ export default class Spr_naim extends Component {
                     arr: res.data
                 });console.log(this.state.arr)
             });
+            this.setState({kt_name:this.props.row.kt_namel})
        }
        
 
@@ -46,7 +52,41 @@ export default class Spr_naim extends Component {
        AddKontragent=()=>{
            this.setState({addKont:!this.state.addKont})
        }
-    
+       
+       ChKt_name=(e)=>{
+        this.setState({kt_name: e.target.value})
+       }
+       ChVer=(e)=>{
+        this.setState({skzi_ver: e.target.value})
+       }
+       ChSer=(e)=>{
+        this.setState({skzi_ser: e.target.value})
+       }
+       ChSrok=(e)=>{
+        this.setState({srok: e.target.value})
+       }
+       Chdgvr=(e)=>{
+        this.setState({kg_dgvr: e.target.value})
+       }
+       Chkol=(e)=>{
+        this.setState({kg_kol: e.target.value})
+       }
+
+       ChangeNaim=(e)=>{
+        const data1 ={
+            kt_name:this.state.kt_name,
+            skzi_ver:this.state.skzi_ver,
+            skzi_ser:this.state.skzi_ser,
+            srok:this.state.srok,
+            kg_dgvr:this.state.kg_dgvr,
+            kg_kol:this.state.kg_kol,
+            kt_id: this.props.row.kt_id,
+            
+        }
+         axio.post('/main/UpdateKTR', {data1}).then(res => {
+           
+        });this.onReboot()
+        }
      
     render(){
         return(<div className='Ps_from'>
@@ -63,14 +103,15 @@ export default class Spr_naim extends Component {
                     <th>Количество</th> 
                     <th></th>
                     </tr>
-                    <tr>
+                    <tr className='Nap'>
                     {this.state.arr.map(id=> <tr key={id.kt_id} row={id}>
-                        <td>{id.kt_name}</td> 
-                        <td>{id.skzi_ver}</td> 
-                        <td>{id.skzi_ser}</td> 
-                        <td>{id.srok}</td> 
-                        <td>{id.kg_dgvr}</td> 
-                        <td>{id.kg_kol}</td> 
+                    <td><textarea onChange={this.ChKt_name} value={this.state.kt_name}>{id.kt_name}</textarea></td> 
+                        <td><textarea>{id.skzi_ver}</textarea></td> 
+                        <td><textarea>{id.skzi_ser}</textarea></td> 
+                        <td><textarea>{id.srok}</textarea></td> 
+                        <td><textarea>{id.kg_dgvr}</textarea></td> 
+                        <td><textarea>{id.kg_kol}</textarea></td> 
+                        <button onClick={this.ChangeNaim}>y</button>
                         <button onClick={this.DeleteRow} >x</button></tr>)} 
                     </tr>
                 </table>

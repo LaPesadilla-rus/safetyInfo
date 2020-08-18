@@ -8,7 +8,8 @@ export default class Spr_otdel extends Component {
         this.state = {
             arr:[],
             otdel_names:'',
-            addnaim:false
+            addnaim:false,
+            otdel_name:''
 
 
         }
@@ -41,6 +42,21 @@ export default class Spr_otdel extends Component {
         });this.onReboot()
 
        }
+
+       onChange=(e)=>{
+        this.setState({otdel_name: e.target.value})
+       }
+
+       ChangeOtd=(e)=>{
+        const data1 ={
+            otdel_name:this.state.otdel_name,
+            otdel_id: e.target.value
+        }
+         axio.post('/main/UpdateOtd', {data1}).then(res => {
+           
+        });this.onReboot()
+        }
+   
    
        ADDNAIM=()=>{
         this.setState({addnaim:!this.state.addnaim})
@@ -57,9 +73,9 @@ export default class Spr_otdel extends Component {
                     <th></th>
                     </tr>
                     <tr>
-                    {this.state.arr.map(id=> <tr key={id.otdel_id} row={id}>
-                    <td>{id.otdel_name}</td> 
-                    <button className='CloseBut' onClick={this.DeleteRow} value={id.otdel_id}>x</button></tr>)} 
+                    {this.state.arr.map(id=> <tr key={id.otdel_id} row={id}><td><textarea onChange={this.onChange}>{id.otdel_name}</textarea></td> 
+                    <button className='CloseBut' onClick={this.DeleteRow} value={id.otdel_id}>x</button>
+                    <button className='But' onClick={this.ChangeOtd} value={id.otdel_id}  >у</button></tr>)} 
                     </tr>
                 </table>
             <div>

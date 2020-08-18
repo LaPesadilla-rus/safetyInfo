@@ -55,7 +55,7 @@ export default class Form_add extends Component {
                    });
                });
         }
-        ChooseName=(e)=>{
+        Choosess=(e)=>{
             this.setState({val_ser:e.target.value})
         }
         ChooseVers=(e)=>{
@@ -108,7 +108,8 @@ export default class Form_add extends Component {
                 val_seria:this.state.val_seria,
                 val_srok:this.state.val_srok,
                 val_name:this.state.val_name,
-                inv_num:this.state.inv_num
+                inv_num:this.state.inv_num,
+                syst:this.state.syst,
             }
             
             axio.post('/main/insert', {data}).then(res => {
@@ -127,7 +128,7 @@ export default class Form_add extends Component {
             <div className="modal_pos_add">
                 <div>Добавление данных
                     <div>
-                <div className='NaimPole'>Наименование ПО и СКЗИ<select className='SelectPole' onChange={this.ChooseName} value={this.state.val_ser}>
+                <div className='NaimPole'>Наименование ПО и СКЗИ<select className='SelectPole' onChange={this.Choosess} value={this.state.val_ser}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.namePO.map( id => <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
                     </select></div>
@@ -168,17 +169,17 @@ export default class Form_add extends Component {
                     <option placeholder='----' value='-1'></option>
                     {this.state.systems.map( id => <option key={id.og_id} value={id.og_id}>{id.og_name}</option>)}
                     </select></div>
-                <div className='NaimPole'>Контракт<select className='SelectPole' onChange={this.ChooseSyst} value={this.state.syst}>
+                <div className='NaimPole'>Контракт<select className='SelectPole' onChange={this.ChooseContr} value={this.state.val_cont}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.contrackName.map( id => <option key={id.kg_id} value={id.kg_id}>{id.kg_dgvr}</option>)}
                     </select></div>
-                <div className='NaimPole'>Система<select className='SelectPole' onChange={this.ChooseSystema} value={this.state.val_cont}>
-                    <option placeholder='----' value='-1'></option>
+                <div className='NaimPole'>Система<select className='SelectPole' onChange={this.ChooseSystema} value={this.state.syst}>
+                <option placeholder='----' value='-1'></option>
                     {this.state.systa.map( id => <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
                     </select></div>
                 <div>
                 <button className='ButNaim' onClick={this.onSubmit}>Отправить</button>
-                <button className='ButNaim' onClick={this.props.addRow}>Отмена</button>    
+                <button className='ButNaim' onClick={this.props.newRow}>Отмена</button>    
                 </div>
                  </div>
                 </div>
