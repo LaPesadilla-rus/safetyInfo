@@ -52,39 +52,42 @@ exports.all =  async (cb) => {
 
 
 exports.ArchAll =  async (cb) => {
-    await pool.query(`SELECT ss.ss_name as skzi_name, ins.ins_name as inf_name, 
-                        sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, 
-                        kt.kt_name as ktr_name, kg.kg_dgvr, kg.kg_kol, sk.sk_srok,
-                        kg.kg_arch , pc.pc_name,pc.pc_inv_num,
-                        ot.otdel_name as otdel, og.og_name as org_name,
-                         to_char(ar.a_date1, 'YYYY-MM-DD') as ad,
-                        ar.*
-                        
-                        FROM arch_safe ar
-                        
-                        inner join spr_pc pc
-                        on pc.pc_id = ar.a_pc_id
-                        
-                        inner join spr_org og
-                        on og.og_id = ar.a_org_id
-                        
-                        inner join kontragents kg
-                        on kg.kg_id = ar.a_ktr_id
-                        
-                        inner join spr_ktr kt
-                        on kt.kt_id = kg.kg_name_id
-                        
-                        inner join skzi sk
-                        on sk.sk_id = kg.kg_skzi_id
-                        
-                        inner join spr_skzi ss
-                        on ss.ss_id = sk.sk_name_id
-                        
-                        inner join spr_inf_sys ins
-                        on ins.ins_id = sk_inf_id 
-
-                        inner join spr_otdel ot
-                        on ot.otdel_id = ar.a_id 
+    await pool.query(`SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
+    pp.pe_fio as ma_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
+    kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
+    og.og_name as org_name, to_char(ar.a_date1, 'YYYY-MM-DD') as ad,ar.*
+    
+    FROM arch_safe ar
+                     
+     inner join spr_pc pc
+     on pc.pc_id = ar.a_pc_id
+                            
+      inner join spr_org og
+      on og.og_id = ar.a_org_id
+                            
+      inner join kontragents kg
+      on kg.kg_id = ar.a_ktr_id
+                            
+      inner join spr_ktr kt
+      on kt.kt_id = kg.kg_name_id
+                            
+      inner join skzi sk
+      on sk.sk_id = kg.kg_skzi_id
+                            
+      inner join spr_skzi ss
+      on ss.ss_id = sk.sk_name_id
+                            
+      inner join spr_inf_sys ins
+      on ins.ins_id = sk_inf_id 
+                            
+      inner join chain_pers cp
+      on cp.chain_id=ar.a_pers_id
+                            
+      inner join spr_otdel ot
+      on ot.otdel_id = cp.chain_otdel_id
+                            
+      inner join remote_personal pp 
+      on pp.pe_id=cp.chain_pers_id
             
         `).then( res => {
             return cb('',res);
@@ -112,40 +115,43 @@ exports.persFromIdArch =  async (data,cb) => {
 };
 
 exports.filterAll = function (data, cb) {
-    //console.log(data)
-    let sql = `SELECT ss.ss_name as skzi_name, ins.ins_name as inf_name, 
-                sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, 
-                kt.kt_name as ktr_name, kg.kg_dgvr, kg.kg_kol, sk.sk_srok,
-                kg.kg_arch ,ot.otdel_name as otdel,
-                 pc.pc_name,pc.pc_inv_num, og.og_name as org_name, 
-                 to_char(ar.a_date1, 'YYYY-MM-DD') as ad,
-                ar.*
+    console.log(data)
+    let sql = `SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
+    pp.pe_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
+    kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
+    og.og_name as org_name, to_char(io.io_date1, 'YYYY-MM-DD') as io,io.*
     
-    FROM arch_safe ar
-    
-    inner join spr_pc pc
-    on pc.pc_id = ar.a_pc_id
-    
-    inner join spr_org og
-    on og.og_id = ar.a_org_id
-    
-    inner join kontragents kg
-    on kg.kg_id = ar.a_ktr_id
-    
-    inner join spr_ktr kt
-    on kt.kt_id = kg.kg_name_id
-    
-    inner join skzi sk
-    on sk.sk_id = kg.kg_skzi_id
-    
-    inner join spr_skzi ss
-    on ss.ss_id = sk.sk_name_id
-    
-    inner join spr_inf_sys ins
-    on ins.ins_id = sk_inf_id 
-
-    inner join spr_otdel ot
-    on ot.otdel_id = io.io_id 
+    FROM info_safe io
+                     
+     inner join spr_pc pc
+     on pc.pc_id = io.io_pc_id
+                            
+      inner join spr_org og
+      on og.og_id = io.io_org_id
+                            
+      inner join kontragents kg
+      on kg.kg_id = io.io_ktr_id
+                            
+      inner join spr_ktr kt
+      on kt.kt_id = kg.kg_name_id
+                            
+      inner join skzi sk
+      on sk.sk_id = kg.kg_skzi_id
+                            
+      inner join spr_skzi ss
+      on ss.ss_id = sk.sk_name_id
+                            
+      inner join spr_inf_sys ins
+      on ins.ins_id = sk_inf_id 
+                            
+      inner join chain_pers cp
+      on cp.chain_id=io.io_pers_id
+                            
+      inner join spr_otdel ot
+      on ot.otdel_id = cp.chain_otdel_id
+                            
+      inner join remote_personal pp 
+      on pp.pe_id=cp.chain_pers_id
     `;
     let where = ``,
     a = 0;
@@ -153,7 +159,7 @@ exports.filterAll = function (data, cb) {
         if ( a > 0){
             where += ` AND ma_fio LIKE '%`+data.fio+`%'`;
         }else{
-            where += ` ma_fio LIKE '%`+data.fio+`%'`;
+            where += ` pe_fio LIKE '%`+data.fio+`%'`;
         }
         a++;
     }
@@ -178,7 +184,7 @@ exports.filterAll = function (data, cb) {
         where = ` WHERE ` + where;
         sql += where;
     }
-    sql += ` order by a_id desc`;
+    sql += ` order by io_id desc`;
     //console.log(sql)
     pool.query(sql
     , (err,res)=>{
@@ -212,6 +218,14 @@ exports.kontragents =  async (req,cb) => {
 
 exports.spr_inf_sys = async(req,cb)=>{
     await pool.query(`SELECT * FROM spr_inf_sys`).then( res => {
+        return cb('',res);
+    }).catch( err => {
+        return cb(err,'')
+    })
+}
+
+exports.spr_ktr= async(req,cb)=>{
+    await pool.query(`SELECT * FROM spr_ktr`).then( res => {
         return cb('',res);
     }).catch( err => {
         return cb(err,'')
@@ -311,6 +325,8 @@ exports.insertPC= function(req,cb) {
     }); 
 }
 
+
+
 exports.insertFrom= function(req,cb) {
     let data = req.body.data;
     var sql = `INSERT INTO public.spr_org (og_name,og_recv)
@@ -357,7 +373,35 @@ exports.insertOtd= function(req,cb) {
     }); 
 }
 
+exports.InsertKTR =function(req,cb){
+    let data = req.body.data;
+    var sql = `INSERT INTO public.spr_ktr 
+    (kt_name)
+    VALUES ('`+data.name_ktr+`')`;
+    console.log(sql);
+    pool.query(sql
+        , (err,res)=>{
+            if (err !== undefined) {
+                console.log("Postgres INSERT error:", err);
+            }else{
+                cb(err,'INSERT COMPLITE');
+            }
+    });
+}
 
+exports.DeleteKTR= function(req,cb) {
+    let data = req.body.data;
+    var sql = `DELETE FROM public.spr_ktr where kt_id=`+data.name_ktr+``;
+    console.log(sql)
+    pool.query(sql
+    , (err,res)=>{
+        if (err !== undefined) {
+            console.log("Postgres DELETE error:", err);
+        }else{
+            cb(err,'DELETE COMPLITE');
+        }
+    }); 
+}
 
 exports.DeleteNaim= function(req,cb) {
     let data = req.body.data;
@@ -427,22 +471,10 @@ exports.DeleteOtd= function(req,cb) {
 }
 
 exports.DeleteKontr =  async (req,cb) => {
+    let data = req.body.data;
     await pool.query(`DELETE 
                         FROM public.kontragents kg
-
-                        inner join spr_ktr kt
-                        on kt.kt_id = kg.kg_name_id 
-                        
-                        inner join skzi sk
-                        on sk.sk_id = kg.kg_skzi_id
-                        
-                        inner join spr_skzi ss
-                        on ss.ss_id = sk.sk_name_id
-                        
-                        inner join spr_inf_sys ins
-                        on ins.ins_id = sk_inf_id 
-                        
-                        WHERE kg_id=`+data.kg+``).then( res => {
+                        WHERE kg_id=`+data.kt_id+``).then( res => {
             return cb('',res);
         }).catch( err => {
            // return cb(err,'')
@@ -469,6 +501,8 @@ exports.Prim2Up =function (data1, cb) {
 };
 exports.InsertArch =function(req,cb){
     let data = req.body.data;
+    if (data.io_prim1==='null'){data.io_prim1=''}
+    if (data.io_prim2==='null'){data.io_prim2=''}
     var sql = `INSERT INTO public.arch_safe (a_ktr_id, a_org_id, a_pc_id, a_pers_id, a_prim1, a_prim2, a_usr)
     VALUES ( `+data.io_ktr_id+`,`+data.io_org_id+`,`+data.io_pc_id+`,`+data.id_pers+`,'`+data.io_prim1+`', '`+data.io_prim2+`', `+data.io_usr1+`);`;
     console.log(sql);
@@ -520,7 +554,7 @@ exports.DeleteArch_tbl= function(req,cb) {
 
 exports.InsertKontr =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.kontragents (kg_dgvr, kg_kol) VALUES (`+data.val_dgvr+`,`+data.val_count+`)`;
+    var sql = `INSERT INTO public.kontragents (kg_dgvr, kg_kol,kg_skzi_id,kg_name_id) VALUES ('`+data.val_dgvr+`',`+data.val_count+`,`+data.val_name+`,`+data.val_syst+`)`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
         if (err !== undefined) {
@@ -532,24 +566,19 @@ exports.InsertKontr =function(req,cb){
 }
 exports.InsertSKZI =function(req,cb){
     let data = req.body.data;
-    var sql = `INSERT INTO public.skzi (sk_ver,sk_serial,sk_srok)
-    VALUES ('`+data.val_vers+`','`+data.val_serial+`','`+data.val_srok+`')`;
+    var sql = `INSERT INTO public.skzi (sk_ver,sk_serial,sk_srok,sk_name_id,sk_inf_id)
+    VALUES ('`+data.ver+`','`+data.ser+`','`+data.srok+`','`+data.ss_name+`','`+data.ins_name+`')`;
     console.log(sql);
     pool.query(sql, (err,res)=>{
-        cb(err,res)
+        if (err !== undefined) {
+            console.log("Postgres INSERT error:", err); 
+        }else{
+                cb(err,'INSERT COMPLITE');
+            }
     });
 }
 
-exports.InsertKTR =function(req,cb){
-    let data = req.body.data;
-    var sql = `INSERT INTO public.spr_ktr 
-    (kt_name)
-    VALUES ('`+data.name_kontrg+`')`;
-    console.log(sql);
-    pool.query(sql, (err,res)=>{
-        cb(err,res)
-    });
-}
+
 exports.InsertSystem=function(req,cb){
     let data = req.body.data;
     var sql = `INSERT INTO public.spr_inf_sys
@@ -659,4 +688,42 @@ exports.personal =  async (req,cb) => {
             return cb(err,'')
         })
 };
+*
+
+
+SELECT ss.ss_name as skzi_name, ins.ins_name as inf_name, 
+                        sk.sk_ver as skzi_ver, sk.sk_serial as skzi_ser, 
+                        kt.kt_name as ktr_name, kg.kg_dgvr, kg.kg_kol, sk.sk_srok,
+                        kg.kg_arch , pc.pc_name,pc.pc_inv_num,
+                        ot.otdel_name as otdel, og.og_name as org_name,
+                         to_char(ar.a_date1, 'YYYY-MM-DD') as ad,
+                        ar.*
+                        
+                        FROM arch_safe ar
+                        
+                        inner join spr_pc pc
+                        on pc.pc_id = ar.a_pc_id
+                        
+                        inner join spr_org og
+                        on og.og_id = ar.a_org_id
+                        
+                        inner join kontragents kg
+                        on kg.kg_id = ar.a_ktr_id
+                        
+                        inner join spr_ktr kt
+                        on kt.kt_id = kg.kg_name_id
+                        
+                        inner join skzi sk
+                        on sk.sk_id = kg.kg_skzi_id
+                        
+                        inner join spr_skzi ss
+                        on ss.ss_id = sk.sk_name_id
+                        
+                        inner join spr_inf_sys ins
+                        on ins.ins_id = sk_inf_id 
+
+                        inner join spr_otdel ot
+                        on ot.otdel_id = ar.a_id 
+            
+        `
 */ 

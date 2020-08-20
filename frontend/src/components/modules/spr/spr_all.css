@@ -20,7 +20,7 @@ left: 25%;
     position: relative;
     background-color: rgb(136, 110, 90);
     border-radius: 15px;
-    width: 65%;
+    max-width: 420px;
     min-width: 250px;
     min-height: 100px;
     left: 35%;
@@ -64,7 +64,19 @@ left: 25%;
 }
 .TheHead{
     font-size: 10pt;
+    border: 2px solid rgb(24, 1, 1);
+    padding: .1em 1em;
+    color: rgb(1, 1, 37);
+    
 
+
+
+}
+.THeHeadBack{
+    background-color: rgb(207, 182, 127);
+}
+.TheBodyBack{
+    background-color: rgb(177, 173, 165);
 }
 .Edit_pc{
     position: relative;
@@ -72,4 +84,23 @@ left: 25%;
     height: 10px;
     margin-bottom: 10px;
     
+}
+.Ps_stz{
+    margin-top: 10px;
+    align-items: center;
+    position: relative;
+    background-color: rgb(136, 110, 90);
+    border-radius: 15px;
+    max-width:1150px;
+    min-width: 250px;
+    min-height: 100px;
+    left: 25%;
+    border-style: solid;
+    border-color:rgb(110, 88, 71); ;
+}
+.Table_tabl{
+    margin-left: 10px;
+    border-collapse: collapse;
+   
+
 }

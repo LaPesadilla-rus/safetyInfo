@@ -37,9 +37,11 @@ export default class Form_add extends Component {
 
         } }
     
+        
+
         componentDidMount(){
             axio.get('/main/data').then(res=>{
-            console.log(res.data)
+         //   console.log(res.data)
             this.setState({
                        arr: res.data,
                        namePO:res.data.spr_skzi,
@@ -91,8 +93,8 @@ export default class Form_add extends Component {
         ChooseSystema=(e)=>{
             this.setState({syst:e.target.value})
         }
-        onSubmit=event=>{
-            event.preventDefault();
+        onSubmit=()=>{
+            
             let data={
                 val_ser:this.state.val_ser,  
                 val_ver:this.state.val_ver,
@@ -113,13 +115,16 @@ export default class Form_add extends Component {
             }
             
             axio.post('/main/insert', {data}).then(res => {
-                if (res.data === 'SAVE COMPLITE') {
-                    this.props.onReboot();
+                if (res.data === 'INSERT COMPLITE') {
                     alert('Добавлено');
-                }else{
-                   alert('Не добавлено');
-                }
+                    this.onClose();
+                    this.props.onReboot()
+                }         
             });
+        }
+
+        onClose=()=>{
+            this.props.newRow()
         }
 
     render(){
@@ -179,7 +184,7 @@ export default class Form_add extends Component {
                     </select></div>
                 <div>
                 <button className='ButNaim' onClick={this.onSubmit}>Отправить</button>
-                <button className='ButNaim' onClick={this.props.newRow}>Отмена</button>    
+                <button className='ButNaim' onClick={this.onClose}>Отмена</button>    
                 </div>
                  </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import './spr_all.css'
-import Spr_add_naim from './spr_adds/spr_add_naim'
+import './spr_all.css';
+import Spr_add_naim from './spr_adds/spr_add_naim';
 import axio from 'axios';
 export default class Spr_naim extends Component {
     constructor() {
@@ -18,6 +18,7 @@ export default class Spr_naim extends Component {
     }
     componentDidMount(){
         axio.get('/main/spr_skzi').then(res=>{
+          //  console.log(res.data)
                 this.setState({
                     arr: res.data
                 });
@@ -26,7 +27,7 @@ export default class Spr_naim extends Component {
     
        onReboot = () =>{
         axio.get('/main/spr_skzi').then(res=>{
-          //console.log(res.data)
+         // console.log(res.data)
               this.setState({
                   arr: res.data
               });

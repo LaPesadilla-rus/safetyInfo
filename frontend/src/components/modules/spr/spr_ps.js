@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './spr_all.css'
 import axio from 'axios';
 import Spr_add_pc from '../spr/spr_adds/spr_add_pc'
-export default class Spr_naim extends Component {
+export default class Spr_ps extends Component {
     constructor() {
         super();
         this.state = {
@@ -15,10 +15,9 @@ export default class Spr_naim extends Component {
 
         }
     }
-
     onReboot = () =>{
         axio.get('/main/spr_pc').then(res=>{
-          console.log(res.data)
+         // console.log(res.data)
               this.setState({
                   arr: res.data
               });

@@ -16,6 +16,7 @@
 }
 .Table_text{
     color:rgb(59, 27, 1);
+    background-color: rgb(230, 221, 221,0.5);
     text-align: center;
 }
 .ButAdd{
@@ -107,8 +108,6 @@
     background-color: rgb(95, 4, 16);
     border-color: rgb(100, 1, 17);
 }
-
-
 .textar{
     position: relative;
     left:30%;

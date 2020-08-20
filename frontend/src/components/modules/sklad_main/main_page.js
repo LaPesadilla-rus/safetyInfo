@@ -40,6 +40,17 @@ export default class Main_page extends Component {
 
         }
     }
+
+    onReboot=()=>{
+        axio.get('/main/all').then(res=>{
+            this.setState({
+                arr: res.data,
+                arss:res.data,
+                
+            });
+         });
+    }
+
     HideColFrom=()=>{
         this.setState({frget:!this.state.frget})
     }
@@ -67,7 +78,8 @@ export default class Main_page extends Component {
             console.log(res.data)
             this.setState({
                 arr: res.data,
-                arss:res.data
+                arss:res.data,
+                
             });
         });
     }
@@ -112,9 +124,9 @@ ChangeRows=(arr)=>{
     this.arr=arr;
 }
 
-Archrows=(arss)=>{
+Archrows=(arr)=>{
     this.setState({archrow: !this.state.archrow })
-    this.ar_tw=arss;
+    this.ar_tw=arr;
 }
 
     render(){
@@ -211,9 +223,9 @@ Archrows=(arss)=>{
                                                                         prim_tw={this.state.prim_tw}
                                                                         ChangePrim={this.ChangePrim} changeRow={this.ChangeRows} />)}
                     </tbody>
-                </table>{this.state.newRow && <Form_add  newRow={this.AddRow}/>}
-                {this.state.changeRow && <Form_change row={this.state.actArr} arr={this.arr} arss={this.ar_tw} archrow={this.Archrows}  changeRow={this.ChangeRows}/>}
-                {this.state.show_formPrim &&  <FormchangePrim1 show_formPrim={this.ChangePrim} row={this.state.actArr}/>}
+                </table>{this.state.newRow && <Form_add  onReboot={this.onReboot}newRow={this.AddRow}/>}
+                {this.state.changeRow && <Form_change onReboot={this.onReboot} row={this.state.actArr} arr={this.arr} changeRow={this.ChangeRows}/>}
+                {this.state.show_formPrim &&  <FormchangePrim1 show_formPrim={this.ChangePrim} onReboot={this.onReboot} row={this.state.actArr}/>}
                 
                 </div> 
         </div>

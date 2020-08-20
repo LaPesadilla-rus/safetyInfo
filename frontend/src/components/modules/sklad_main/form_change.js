@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import './form_work.css'
+import './form_work.css';
+import UnicId from 'react-html-id';
 import axio from 'axios';
-import Form_arch from './form_arch'
 export default class Form_change extends Component {
 
     constructor() {
         super();
-        this.arts=[]
+        this.arts=[];
+        UnicId.enableUniqueIds(this);
         this.state ={
             arr:[],
             new_arr:[],
@@ -39,6 +40,11 @@ export default class Form_change extends Component {
         } 
     }
 
+    Reboot=()=>{
+        axio.get('/main/data').then(res=>{this.setState({
+            arr: res.data})})
+    }
+
     componentDidMount (){
         axio.get('/main/data').then(res=>{
         this.setState({
@@ -65,7 +71,15 @@ export default class Form_change extends Component {
                        syst:this.props.arr.io_ktr_id,
                        cont:this.props.arr.io_ins_id,
                        users:this.props.arr.io_usr1,
-                       id:this.props.arr.io_id
+                       id:this.props.arr.io_id,
+                       id_pers:'',
+           io_pc_id:'',
+           io_org_id:'',
+           io_ktr_id:'',
+           io_prim1:'',
+           io_prim2:'',
+           io_usr1:'',
+           io_id:'',
         });
         });
         
@@ -105,12 +119,38 @@ export default class Form_change extends Component {
         this.setState({syst:e.target.value})
     }
 
-    TransferData =(arr)=>{
-        this.props.archrow(this.props.row)
-        this.setState({transfer: !this.state.transfer})
-        this.arts=arr
+    ToArch=()=>{
+       
+        const data={
+            io_id:this.props.arr.io_id,
+            id_pers:this.props.arr.io_pers_id,
+            io_pc_id:this.props.arr.io_pc_id,
+            io_org_id:this.props.arr.io_org_id,
+            io_ktr_id:this.props.arr.io_ktr_id,
+            io_prim1:this.props.arr.io_prim1,
+            io_prim2:this.props.arr.io_prim2,
+            io_usr1:this.props.arr.io_usr1,
+
+        }
+
+        axio.post('/main/InsertArch', {data}).then(res => {
+            if (res.data === 'INSERT COMPLITE') {
+                alert('Запис перенесена в архив');
+            }else{
+               alert('Ошибка');
+            }
+        });
+
+        axio.post('/main/DeleteMain_tab', {data}).then(res => {
+            if (res.data === 'Delete COMPLITE') {
+                alert('Запись удалена из основной таблицы')
+                this.props.Reboot();
+            }else{
+               alert('Ошибка');
+            }
+        });
+
     }
-   
 
       
     onSubmit=()=>{
@@ -132,10 +172,16 @@ export default class Form_change extends Component {
         axio.post('/main/UpdateRow', {data}).then(res => {
             this.setState({
                 data: res.data
-            });
+            });this.props.onReboot();
+            this.onClose();
         });
 
        }
+
+       onClose=()=>{
+        this.props.changeRow()
+    }
+     
    
     render(){
         return (
@@ -152,12 +198,12 @@ export default class Form_change extends Component {
                 <div className='NaimPole'>Версия ПО и СКЗИ
                 <select className='SelectPole' onChange={this.ChangeSer} value={this.state.vers}>
                 {this.state.versPO.map( id => 
-                <option key={id.sk_id} value={id.sk_id}>{id.sk_ver}</option>)}
+                <option key={this.nextUniqueId()} value={id.sk_id}>{id.sk_ver}</option>)}
                 </select></div>
                 <div className='NaimPole'>Серийный номер
                 <select className='SelectPole' onChange={this.ChangeSeria} value={this.state.serial}>
                 {this.state.versPO.map( id => 
-                <option key={id.sk_id} value={id.sk_id}>{id.sk_serial}</option>)}
+                <option key={this.nextUniqueId()} value={id.sk_id}>{id.sk_serial}</option>)}
                 </select></div>
                 <div className='NaimPole'> От кого получено 
                 <select className='SelectPole' onChange={this.Changefrom} value={this.state.from}>
@@ -167,7 +213,7 @@ export default class Form_change extends Component {
                 <div className='NaimPole'>Срок действия лицензии
                 <select className='SelectPole' onChange={this.ChangeSrok} value={this.state.srok}>
                 {this.state.versPO.map( id => 
-                <option key={id.sk_id} value={id.sk_id}>{id.sk_srok}</option>)}
+                <option key={this.nextUniqueId()} value={id.sk_id}>{id.sk_srok}</option>)}
                 </select></div>
                 <div className='NaimPole'>ФИО пользователя
                 <select className='SelectPole' onChange={this.ChangeUs} value={this.state.user}>
@@ -206,11 +252,11 @@ export default class Form_change extends Component {
                 </select></div>
                 <div>
                 <button onClick={this.onSubmit} className='ButNaim_s'>Отправить</button>
-                <button className='ButNaim_cl' onClick={this.props.changeRow}>Отмена</button>    
+                <button className='ButNaim_cl' onClick={this.onClose}>Отмена</button>    
                 </div>
-                <button onClick={this.TransferData} className='ButNaim_ch'>Перенести в архив</button>
+                <button onClick={this.ToArch} className='ButNaim_ch'>Перенести в архив</button>
                  </div>
-                </div>{this.state.transfer && <Form_arch row={this.state.arts}  transfer={this.TransferData}/>}
+                </div>
                
         </div>
         </div>

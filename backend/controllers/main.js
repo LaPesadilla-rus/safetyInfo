@@ -9,7 +9,7 @@ exports.all = async (req, res) => {
         }
         data = docs.rows;
     });
-for(let i = 0; i < data.length; i += 1){
+/*for(let i = 0; i < data.length; i += 1){
         await Main.persFromId(data[i], (err, docs) =>{
             if (err) {
                 console.log(err);
@@ -17,7 +17,7 @@ for(let i = 0; i < data.length; i += 1){
             }
            data[i].ma_fio = docs.rows[0].pe_fio;
         }); 
-   }
+   }*/
     return res.send(data);
 };
 
@@ -40,7 +40,7 @@ exports.ArchAll = async (req, res) => {
         }
         data = docs.rows;
     });
-   for(let i = 0; i< data.length; i += 1){
+  /* for(let i = 0; i< data.length; i += 1){
         await Main.persFromIdArch(data[i], (err, docs) =>{
             if (err) {
                 console.log(err);
@@ -49,7 +49,7 @@ exports.ArchAll = async (req, res) => {
             data[i].ma_fio = docs.rows[0].pe_fio;
             data[i].ot_name = docs.rows[0].ot_name;
         }); 
-    }
+    }*/
     return res.send(data);
 };
 
@@ -150,6 +150,7 @@ exports.Prim2Up =function(req, res)
         res.send(docs.rows);
     })
 }
+
 exports.kontragents =function(req, res)
 {
     Main.kontragents(req.body.data ,function(err,docs){
@@ -170,6 +171,17 @@ exports.spr_skzi =function(req, res)
         res.send(docs.rows);
     })
 }
+
+exports.skzi =function(req, res)
+{
+    Main.skzi(req.body.data ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
 exports.spr_pc =function(req, res)
 {
     Main.spr_pc(req.body.data ,function(err,docs){
@@ -180,16 +192,7 @@ exports.spr_pc =function(req, res)
         res.send(docs.rows);
     })
 }
-exports.kontragents =function(req, res)
-{
-    Main.kontragents(req.body.data ,function(err,docs){
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        res.send(docs.rows);
-    })
-}
+
 exports.spr_inf_sys =function(req, res)
 {
     Main.spr_inf_sys(req.body.data ,function(err,docs){
@@ -204,6 +207,17 @@ exports.spr_inf_sys =function(req, res)
 exports.spr_otdel =function(req, res)
 {
     Main.spr_otdel(req.body.data ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+
+exports.spr_ktr =function(req, res)
+{
+    Main.spr_ktr(req.body.data ,function(err,docs){
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -361,6 +375,18 @@ exports.DeleteMain_tab= (req, res) => {
     });
     return 0;
 }
+
+exports.DeleteKTR= (req, res) => {
+    Main.DeleteKTR(req, (err, docs) =>{
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('DELETE COMPLITE')
+    });
+    return 0;
+}
+
 exports.InsertFrArcToMain= (req, res) => {
     Main.InsertFrArcToMain(req, (err, docs) =>{
         if (err) {
@@ -382,42 +408,40 @@ exports.DeleteArch_tbl= (req, res) => {
     return 0;
 }
 
-
-exports.kontrs = async (req, res) => {
-    let data = {};
-
-  await Main.InsertKontr(req,(err, docs) =>{
+exports.InsertKTR =function(req, res)
+{
+    Main.InsertKTR(req ,function(err,docs){
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
-        data.spr_kontragents = docs.rows;
-    });
-
-    await Main.InsertSKZI(req,(err, docs) =>{
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        data.spr_skzi = docs.rows;
-    });
-    await Main.InsertKTR(req,(err, docs) =>{
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        data.ktr = docs.rows;
-    });
-
-    await Main.InsertSystem(req,(err, docs) =>{
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        data.sys = docs.rows;
-    });
-    return res.send(data);
+        return res.send('INSERT COMPLITE')
+    })
 }
+
+exports.InsertSKZI =function(req, res)
+{
+    Main.InsertSKZI(req ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('INSERT COMPLITE')
+    })
+}
+
+exports.kontrs = function (req, res) {
+    
+ Main.InsertKontr(req, function(err, docs) {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('INSERT COMPLITE')
+    });
+    
+}
+
 exports.UpdateRow =function(req, res)
 {
     Main.UpdateRow(req.body.data ,function(err,docs){

@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import './main_page.css'
-import Form_work from './form_work'
-import axio from 'axios';
-import Form_add from './form_add'
-import Form_arch from './form_arch'
+
 
 export default class Main_page_cont extends Component {
     constructor() {
@@ -74,7 +71,7 @@ export default class Main_page_cont extends Component {
     render(){
         let id = this.props.row
         return (
-            <tr className='Hover'>
+            <tr className='Hover'>{console.log(this.props)}
             <td onClick={this.onClick} className='Table_text'>{id.io_id}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_name}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_ver}</td>
@@ -88,12 +85,12 @@ export default class Main_page_cont extends Component {
             <td onClick={this.onClick} className={(this.props.orgn===true)?'hide':'Table_text'} >{id.org_name}</td>
             <td onClick={this.onClick} className={(this.props.syst===true)?'hide':'Table_text'} >{id.inf_name}</td>
             <td onClick={this.onClick} className={(this.props.contr===true)?'hide':'Table_text'} >{id.kg_dgvr}</td>
-            <td></td>
+            <td className='Table_text' onClick={this.onClick}>{id.io_date1}</td>
             <td onClick={this.onClick} className={(this.props.prim_on===true)?'hide':'Table_text'}> {id.io_prim1} </td> 
             <td onClick={this.onClick}className={(this.props.prim_tw===true)?'hide':'Table_text'}>{id.io_prim2}
             </td>                                                            
             <td>
-            <button className='Changer' onClick={this.onCliks} >*</button>
+            <button className='Changer Table_text' onClick={this.onCliks} >*</button>
             </td>
             
             

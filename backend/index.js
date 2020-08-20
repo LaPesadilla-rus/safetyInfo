@@ -53,19 +53,24 @@ app.get('/main/data', mainController.data); // данные для ввода в
 app.get('/main/ArchAll',mainController.ArchAll)//архивная таблица
 app.get('/main/kontragents',mainController.kontragents)//Справочник контрагентов
 app.get('/main/spr_skzi',mainController.spr_skzi)// Справочник наименования скзи
+app.get('/main/skzi',mainController.skzi)// Справочник наименования скзи
 app.get('/main/spr_pc',mainController.spr_pc)//Справочник компов
 app.get('/main/spr_inf_sys',mainController.spr_inf_sys)//Справочник систем
 app.get('/main/spr_org',mainController.spr_org)//Справочник организаций
+app.get('/main/spr_ktr',mainController.spr_ktr)//Справочник наименования контрагента
 app.get('/main/spr_otdel',mainController.spr_otdel)//Справочник организаций
 
 
-app.post('/main/filterAll', skladController.filterAll);
-app.post('/main/insertNaim', mainController.insertNaim);
+app.post('/main/filterAll', mainController.filterAll);
+app.post('/main/insertNaim',mainController .insertNaim);
 app.post('/main/insertPC', mainController.insertPC);
 app.post('/main/insertFrom', mainController.insertFrom);
 app.post('/main/insertSyst', mainController.insertSyst);
 app.post('/main/insertOtd', mainController.insertOtd);
-//app.post('/main/kontr', mainController.kontr);
+app.post('/main/InsertKTR', mainController.InsertKTR);
+app.post('/main/InsertSKZI', mainController.InsertSKZI);
+app.post('/main/kontrs', mainController.kontrs);
+
 
 app.post('/main/DeleteNaim',mainController.DeleteNaim)
 app.post('/main/DeleteOrg',mainController.DeleteOrg)
@@ -73,9 +78,10 @@ app.post('/main/DeletePC',mainController.DeletePC)
 app.post('/main/DeleteSys',mainController.DeleteSys)
 app.post('/main/DeleteKontr',mainController.DeleteKontr)
 app.post('/main/DeleteOtd',mainController.DeleteOtd)
+app.post('/main/DeleteKTR',mainController.DeleteKTR)
+
 
 app.post('/main/insert', mainController.insert);
-app.post('/main/kontrs', mainController.kontrs);
 app.post('/main/InsertArch', mainController.InsertArch);// Перенос в архив
 app.post('/main/DeleteMain_tab', mainController.DeleteMain_tab);// Удаление строки из общей таблицы для переноса в архив
 app.post('/main/InsertFrArcToMain', mainController.InsertFrArcToMain);// Перенос в основную таблицу

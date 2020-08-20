@@ -37,16 +37,22 @@ export default class FormchangePrim1 extends Component {
         axio.post('/main/Prim1Up', {data}).then(res=>{
             this.setState({
                 data: res.data
-            });
+            });this.props.onReboot()
         });
         axio.post('/main/Prim2Up', {data1}).then(res=>{
             this.setState({
                 data1: res.data
             });
+            this.onClose();
+            this.props.onReboot()
         });
        
     }
 
+
+    onClose=()=>{
+        this.props.show_formPrim()
+    }
      
      
    
@@ -59,7 +65,7 @@ export default class FormchangePrim1 extends Component {
          <div>
     <textarea className='textar' onChange={this.ChangePrimss} value={this.state.prim2_ch}></textarea> </div>
          <button className='ButSet' onClick={this.SendSB}>1</button>
-         <button className='ButSet'  onClick={this.props.show_formPrim}>x</button>
+         <button className='ButSet'  onClick={this.onClose}>x</button>
             </div>
             </div>
         )}

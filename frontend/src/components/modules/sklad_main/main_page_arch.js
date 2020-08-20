@@ -23,7 +23,6 @@ export default class Main_page_arch extends Component {
             changePrim2:false,
             txt:'',
             text:'',
-            newRow:false,
             act_arr:[]
         }
     }

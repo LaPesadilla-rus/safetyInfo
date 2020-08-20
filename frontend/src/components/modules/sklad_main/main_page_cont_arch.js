@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './main_page.css'
-import BackToMain from './BackToMain';
 import axio from 'axios';
 
 export default class Main_page_cont_arch extends Component {
@@ -21,7 +20,7 @@ export default class Main_page_cont_arch extends Component {
     render(){let id= this.props.row
         return (
 
-            <tr >
+            <tr className='Hover' >
                 <td className='Table_text'>{id.a_id}</td>
                 <td className='Table_text'>{id.skzi_name}</td>
                 <td className='Table_text'>{id.skzi_ver}</td>

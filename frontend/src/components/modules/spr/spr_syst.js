@@ -16,13 +16,12 @@ export default class Spr_naim extends Component {
     }
     componentDidMount(){
         axio.get('/main/spr_inf_sys').then(res=>{
+            console.log(res.data)
                 this.setState({
                     arr: res.data
                 });
             });
-            console.log(this.props)
        }
-
 
        onReboot = () =>{
         axio.get('/main/spr_inf_sys').then(res=>{
