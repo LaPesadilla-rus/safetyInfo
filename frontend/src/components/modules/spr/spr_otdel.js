@@ -64,19 +64,30 @@ export default class Spr_otdel extends Component {
 
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st'>
+            <div className='Ps_st forOtd'>
                 <p className='label_posit'>Компьютеры</p>
                 <button onClick={this.ADDNAIM} className='But'>Добавить</button>
-                <table className='txt'>
-                    <tr className='TheHead'>
+                <table className='Table Table_tabl'>
+                    <thead>
+                    <tr className='TheHead THeHeadBack'>
                     <th>Наименование отдела</th>     
                     <th></th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr>
-                    {this.state.arr.map(id=> <tr key={id.otdel_id} row={id}><td><textarea onChange={this.onChange}>{id.otdel_name}</textarea></td> 
+                    {this.state.arr.map(id=> <tr key={id.otdel_id} row={id}>
+                    <td className='TheHead TheBodyBack'>
+                        <textarea onChange={this.onChange}>{id.otdel_name}</textarea>
+                    </td> 
+                    <td className='TheHead TheBodyBack'>
                     <button className='CloseBut' onClick={this.DeleteRow} value={id.otdel_id}>x</button>
-                    <button className='But' onClick={this.ChangeOtd} value={id.otdel_id}  >у</button></tr>)} 
+                    </td>
+                    <td className='TheHead TheBodyBack'>  
+                        <button className='But' onClick={this.ChangeOtd} value={id.otdel_id}  >у</button>
+                        </td></tr>)} 
                     </tr>
+                    </tbody>
                 </table>
             <div>
                 <button className='But' onClick={this.props.spr_otd}>Отмена</button>

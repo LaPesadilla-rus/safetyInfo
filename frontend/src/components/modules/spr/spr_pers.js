@@ -26,26 +26,31 @@ export default class Spr_pers extends Component {
     addNew=()=>{
         this.setState({adds:!this.state.adds})
     }
-    
+    OnClose=()=>{
+        this.props.spr_pers()
+    }
 
     render(){
         return(<div className='Ps_from'>
-           <div className='Ps_st'>
-               <p>Сотрудники и отделения</p>
+           <div className='Ps_st forPers'>
+               <p className='label_posit'>Сотрудники и отделения</p>
                <div>
-                   <button onClick={this.addNew}>+</button>
-                   <table>
+                   <button className='But' onClick={this.addNew}>Добавить</button>
+                   <table className='Table Table_tabl'>
                        <thead>
-                           <tr>
+                           <tr className='TheHead THeHeadBack'>
                                <th>№</th>
                                <th>ФИО</th>
                                <th>Отдел</th>
+                               <th></th>
+                               <th></th>
                                </tr>
                        </thead>
                        <tbody>
                        {this.state.arr.map(id=> <Spr_pers_nap key={id.chain_id} row={id} />)}
                        </tbody>
                    </table>
+                   <button className='But' onClick={this.OnClose} >Отмена</button>
                </div>{this.state.adds && <Spr_add_pers adds={this.addNew}/>}
            </div>
                

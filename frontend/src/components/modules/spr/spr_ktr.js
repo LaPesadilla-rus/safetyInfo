@@ -9,7 +9,6 @@ export default class Spr_ktr extends Component {
             arr:[],
             name_ktr:'',
             addKtr:false,
-    
         }
     }
 
@@ -29,6 +28,7 @@ export default class Spr_ktr extends Component {
                 });
             });
        }
+
        DeleteRow=(e)=>{
         const data={
             name_ktr: e.target.value
@@ -38,20 +38,21 @@ export default class Spr_ktr extends Component {
                 alert('Удалено');
                 this.onReboot();
             }
-        }); }
+        }); 
+    }
    
        ADDKTR=()=>{
         this.setState({addKtr:!this.state.addKtr})
        }
+
        ChangePC=(e)=>{
         const data1 ={
             name_ktr:this.state.pc_name,
             pc: e.target.value
         }
-        
-         axio.post('/main/UpdatePC', {data1}).then(res => {
-           
-        });this.onReboot()
+         axio.post('/main/UpdatePC', {data1}).then(res => { 
+        });
+        this.onReboot()
         }
     
         onClose=()=>{
@@ -60,12 +61,12 @@ export default class Spr_ktr extends Component {
 
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st'>
+            <div className='Ps_st forContr'>
                 <p className='label_posit'>Наименование контрагента</p>
                 <button onClick={this.ADDKTR} className='But'>Добавить</button>
-                <table>
+                <table className='Table Table_tabl'>
                     <thead>
-                        <tr>
+                        <tr className='TheHead THeHeadBack'>
                             <th>№</th>
                             <th>Наименование</th>
                             <th></th>
@@ -74,10 +75,10 @@ export default class Spr_ktr extends Component {
                     </thead>
                     <tbody>
                             {this.state.arr.map(id=><tr key={id.kt_id} row={id}>
-                            <td> {id.kt_id}</td>
-                             <td>{id.kt_name}</td>
-                            <td><button  className='Edit_pc' >y</button></td>
-                            <td><button onClick={this.DeleteRow} value={id.kt_id} className='CloseBut' >x</button> </td>
+                            <td className='TheHead TheBodyBack'> {id.kt_id}</td>
+                             <td className='TheHead TheBodyBack'>{id.kt_name}</td>
+                            <td className='TheHead TheBodyBack'><button  className='But' >y</button></td>
+                            <td className='TheHead TheBodyBack'><button onClick={this.DeleteRow} value={id.kt_id} className='CloseBut' >x</button> </td>
                         </tr>)}
                     </tbody>
                 </table>    

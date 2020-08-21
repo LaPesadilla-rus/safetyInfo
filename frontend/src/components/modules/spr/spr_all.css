@@ -19,12 +19,12 @@ left: 40%;
 
 
 .Ps_st{
-    margin-top: 10px;
+    margin-top: 70px;
     align-items: center;
-    position: relative;
+    position: flex;
     background-color: rgb(136, 110, 90);
     border-radius: 15px;
-    min-width: 250px;
+    min-width: 15%;
    min-height: 100px;
     left: 35%;
     resize:none;
@@ -50,9 +50,11 @@ left: 40%;
 }
 .But{
     position: relative;
-    left:35%;
-    border-radius: 15px;
+    left:40%;
+    border-radius: 10px;
     margin-bottom: 10px;
+    margin-top: 10px;
+    height: 25px;
 }
 .txt{
     color: black;
@@ -82,24 +84,51 @@ left: 40%;
     height: 10px;
     margin-bottom: 10px;
 }
-.Ps_stz{
-    margin-top: 10px;
-    align-items: center;
-    position: relative;
-    background-color: rgb(136, 110, 90);
-    border-radius: 15px;
-    max-width:1150px;
-    min-width: 250px;
-    min-height: 100px;
-    left: 25%;
-    border-style: solid;
-    border-color:rgb(110, 88, 71); ;
-}
 .Table_tabl{
     margin-left: 10px;
     border-collapse: collapse;
 }
 .forNaim{
-    width: 345px;
-    resize:none;
+    width: 23%;
+    margin-left: 650px;
+}
+.forPc{
+    width: 520px;
+    margin-left: 600px;
+    
+}
+.forKontr{
+    width: 1330px;
+    margin-left: 150px;
+    
+}
+.forFrom{
+    width: 300px;
+    margin-left: 700px;
+    
+}
+.forSyst{
+    width: 330px;
+    margin-left: 700px;
+    
+}
+.forOtd{
+    width: 350px;
+    margin-left: 700px;
+    
+}
+.forSKZI{
+    width: 720px;
+    margin-left: 570px;
+    
+}
+.forPers{
+    width: 650px;
+    margin-left: 570px;
+    
+}
+.forContr{
+    width: 330px;
+    margin-left: 700px;
+    
 }

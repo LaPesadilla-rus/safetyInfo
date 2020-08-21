@@ -62,7 +62,7 @@ export default class Spr_from extends Component {
 
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st'>
+            <div className='Ps_st forFrom'>
                 <p className='label_posit'>Организации</p>
                 <button onClick={this.Show_form} className='But'>Добавить</button>
                 <table className='txt'>

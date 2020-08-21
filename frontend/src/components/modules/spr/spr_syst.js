@@ -61,16 +61,27 @@ export default class Spr_naim extends Component {
        }
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st'>
+            <div className='Ps_st forSyst'>
                 <p className='label_posit'>Наименование СКЗИ</p>
                 <button onClick={this.AddIns} className='But'>Добавить</button>
-                <table className='txt'>
-                    <tr>
+                <table className='Table Table_tabl'>
+                    <thead>
+                        <tr className='TheHead THeHeadBack'>
+                        <th>Наименование</th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {this.state.arr.map(id=> <tr key={id.ins_id} row={id}>
-                    <td><textarea onChange={this.onChange}>{id.ins_name}</textarea></td> 
+                    <td className='TheHead TheBodyBack'><textarea onChange={this.onChange}>{id.ins_name}</textarea></td> 
+                    <td className='TheHead TheBodyBack'>
                      <button onClick={this.DeleteRow} value={id.ins_id}>x</button>
-                    <button className='But' onClick={this.ChangeNaim} value={id.ins_id} >у</button></tr>)}
-                    </tr>
+                     </td>
+                     <td className='TheHead TheBodyBack'>
+                    <button className='But' onClick={this.ChangeNaim} value={id.ins_id} >у</button></td>
+                    </tr>)}
+                    </tbody>
                 </table>
             <div>
                 <button className='But' onClick={this.props.spr_syst}>Отмена</button>

@@ -84,7 +84,7 @@ export default class Spr_naim extends Component {
                 {this.state.arr.map(id=> <tr key={id.ss_id} row={id}>
             <td className='TheHead TheBodyBack' ><textarea onChange={this.onChange}>{id.ss_name}</textarea></td>  
             <td className='TheHead TheBodyBack'><button className='CloseBut' onClick={this.DeleteRow} value={id.ss_id}>x</button></td> 
-            <td className='TheHead TheBodyBack'> <button className='But' onClick={this.ChangeNaim} value={id.ss_id}  >у</button></td> </tr>)}
+            <td className='TheHead TheBodyBack'> <button className='CloseBut' onClick={this.ChangeNaim} value={id.ss_id}  >у</button></td> </tr>)}
                     </tbody>
                
                     </table>

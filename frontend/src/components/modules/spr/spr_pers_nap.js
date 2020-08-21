@@ -44,12 +44,13 @@ export default class Spr_pers_nap extends Component {
     render(){
         return (
             <tr> {console.log(this.props)}
-            <td>{this.state.num}</td>
-         <td>  <select className='SelectPole'  value={this.state.pe_fio} >
+            <td className='TheHead TheBodyBack'>{this.state.num}</td>
+             <td className='TheHead TheBodyBack'>  
+                 <select className='SelectPole'  value={this.state.pe_fio} >
                 <option placeholder='----' value='-1'></option>
                {this.state.pers.map( id => <option key={id.pe_id} value={id.pe_id}>{id.pe_fio}</option>)}
                  </select></td> 
-                 <td>  <select className='SelectPole'  value={this.state.otdel} >
+                 <td className='TheHead TheBodyBack'>  <select className='SelectPole'  value={this.state.otdel} >
                 <option placeholder='----' value='-1'></option>
                {this.state.otdels.map( id => <option key={id.otdel_id} value={id.otdel_id}>{id.otdel_name}</option>)}
                  </select>   </td>   

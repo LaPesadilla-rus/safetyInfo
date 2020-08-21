@@ -106,7 +106,7 @@ export default class Spr_naim extends Component {
      
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_stz'>{console.log(this.props)}
+            <div className='Ps_st forKontr'>{console.log(this.props)}
                 <p className='label_posit'>Наименование компьютеров</p>
                 <button onClick={this.AddKontragent} className='But'>Добавить</button>
                 <table  className='Table Table_tabl'  >

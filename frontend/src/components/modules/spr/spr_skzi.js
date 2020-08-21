@@ -66,10 +66,10 @@ export default class Spr_skzi extends Component {
         }
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st'>
-                <p>СКЗИ</p>
+            <div className='Ps_st forSKZI'>
+                <p className='label_posit'>СКЗИ</p>
                 <div>
-                <button onClick={this.AddSKZI}>+</button>
+                <button className='But' onClick={this.AddSKZI}>Добавить</button>
                 </div>
                <table className='Table Table_tabl'>
                    <thead>
