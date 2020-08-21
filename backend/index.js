@@ -59,9 +59,11 @@ app.get('/main/spr_inf_sys',mainController.spr_inf_sys)//Справочник с
 app.get('/main/spr_org',mainController.spr_org)//Справочник организаций
 app.get('/main/spr_ktr',mainController.spr_ktr)//Справочник наименования контрагента
 app.get('/main/spr_otdel',mainController.spr_otdel)//Справочник организаций
+app.get('/main/spr_pers',mainController.spr_pers)//Справочник организаций
 
 
 app.post('/main/filterAll', mainController.filterAll);
+app.post('/main/filterAllArch', mainController.filterAllArch);
 app.post('/main/insertNaim',mainController .insertNaim);
 app.post('/main/insertPC', mainController.insertPC);
 app.post('/main/insertFrom', mainController.insertFrom);
@@ -69,6 +71,7 @@ app.post('/main/insertSyst', mainController.insertSyst);
 app.post('/main/insertOtd', mainController.insertOtd);
 app.post('/main/InsertKTR', mainController.InsertKTR);
 app.post('/main/InsertSKZI', mainController.InsertSKZI);
+app.post('/main/insertChain_pers', mainController.insertChain_pers);
 app.post('/main/kontrs', mainController.kontrs);
 
 

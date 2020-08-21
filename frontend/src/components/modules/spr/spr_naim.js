@@ -12,8 +12,7 @@ export default class Spr_naim extends Component {
             ss_id:'',
             show_formEdit:false,
             ed_ar:[],
-            ss_name:''
-            
+            ss_name:'' 
         }
     }
     componentDidMount(){
@@ -59,7 +58,9 @@ export default class Spr_naim extends Component {
             ss_id: e.target.value
         }
          axio.post('/main/UpdateNaim', {data1}).then(res => {
-           
+            if (res.data === 'UPDATE COMPLITE') {
+                alert('Изменено');
+            }
         });this.onReboot()
         }
    
@@ -67,16 +68,25 @@ export default class Spr_naim extends Component {
 
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st'>
+            <div className='Ps_st forNaim'>
                 <p className='label_posit'>Наименование СКЗИ</p>
                 <div>
                 <button className='But' onClick={this.ADDNAIM}>Добавить</button></div>
-                <table className='txt'>
-                <tr >
-                {this.state.arr.map(id=> <tr key={id.ss_id} row={id}><td ><textarea onChange={this.onChange}>{id.ss_name}</textarea></td>  
-             <button className='CloseBut' onClick={this.DeleteRow} value={id.ss_id}>x</button>
-             <button className='But' onClick={this.ChangeNaim} value={id.ss_id}  >у</button></tr>)}
-                    </tr>
+                <table className='Table Table_tabl'  >
+                    <thead>
+                        <tr className='TheHead THeHeadBack'>
+                            <th>Наименование</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                {this.state.arr.map(id=> <tr key={id.ss_id} row={id}>
+            <td className='TheHead TheBodyBack' ><textarea onChange={this.onChange}>{id.ss_name}</textarea></td>  
+            <td className='TheHead TheBodyBack'><button className='CloseBut' onClick={this.DeleteRow} value={id.ss_id}>x</button></td> 
+            <td className='TheHead TheBodyBack'> <button className='But' onClick={this.ChangeNaim} value={id.ss_id}  >у</button></td> </tr>)}
+                    </tbody>
+               
                     </table>
             <div>
                 <button className='But'   onClick={this.props.spr_naim}>Отмена</button>

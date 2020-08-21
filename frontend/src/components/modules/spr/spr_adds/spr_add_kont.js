@@ -12,14 +12,13 @@ export default class Spr_add_kont extends Component {
         val_id:'',
         namePO:[],
         versPO:[],
-        systa:[],
-
+        systa:[]
         }
     }
 
     componentDidMount(){
       axio.get('/main/data').then(res=>{
-      console.log(res.data)
+      //console.log(res.data)
       this.setState({
                  arr: res.data,
                  namePO:res.data.spr_skzi,
@@ -30,7 +29,6 @@ export default class Spr_add_kont extends Component {
          });
   }
 
-    
       Name_dgvr=(e)=>{
         this.setState({val_dgvr: e.target.value});  
       }
@@ -51,8 +49,6 @@ export default class Spr_add_kont extends Component {
         val_count:this.state.val_count,
         val_syst:this.state.val_syst,
         val_name: this.state.val_name,
-       
-        
     }
     axio.post('/main/kontrs', {data}).then(res => {
         if (res.data === 'INSERT COMPLITE') {
@@ -87,10 +83,3 @@ export default class Spr_add_kont extends Component {
         )}
 }
 
-/*
-
- <select className='SelectPole' onChange={this.Name_srok} value={this.state.val_srok}>
-              <option placeholder='----' value='-1'></option>
-              {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_srok}</option>)}
-               </select> 
-*/

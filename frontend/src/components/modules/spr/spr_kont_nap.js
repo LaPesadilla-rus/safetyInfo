@@ -89,7 +89,7 @@ export default class Spr_kont_nap extends Component {
             <select className='SelectPole' onChange={this.ChSyst} value={this.state.syst} >
                 <option placeholder='----' value='-1'></option>
                {this.state.systa.map( id => <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
-                 </select>{this.state.syst}
+                 </select>
             </td> 
             <td className='TheHead TheBodyBack'>
             <select className='SelectPole' onChange={this.ChVer} value={this.state.skzi_ver} >

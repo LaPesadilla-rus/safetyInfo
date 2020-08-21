@@ -11,7 +11,7 @@
 }
 
 .header_pos {
-    width: 1745px;
+    width: 100%;
     height: 75px;
     float: left;
     
@@ -42,6 +42,14 @@
     border-top-right-radius: 5px ;
     border-bottom-right-radius: 5px ;
     font-weight: 700;
-   
+}
 
+.Exit{
+    width: 90px;
+    height: 30px;
+    border: 2px inset rgb(51, 53, 51);
+    border-radius: 10px;
+    background-color: rgb(73, 72, 72);
+    font-size: 12pt;
+    font-weight: 600;
 }

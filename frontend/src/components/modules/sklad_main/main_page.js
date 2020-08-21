@@ -14,6 +14,7 @@ export default class Main_page extends Component {
         this.arr=[];
         this.ar_tw=[];
         this.state = {
+            data:[],
             arr:[],
             arss:[],
             dates:[],
@@ -75,7 +76,7 @@ export default class Main_page extends Component {
 
     componentDidMount (){
         axio.get('/main/all').then(res=>{
-            console.log(res.data)
+          //      console.log(res.data)
             this.setState({
                 arr: res.data,
                 arss:res.data,
@@ -90,7 +91,7 @@ ChangePrim=(e)=>{
     
 this.setState({show_formPrim:!this.state.show_formPrim,actArr:e })
 }
-/*
+
 primFilter=()=>{
     let data={}
 if  ( this.state.fio!== ''){
@@ -104,21 +105,29 @@ if (this.state.pc!==''){
 }   
     axio.post('/main/filterAll', {data}).then(res=>{
         this.setState({
-            data: res.data
+            arr: res.data
+    });
+});
+    
+}
+
+Sbros=()=>{
+    let data={}
+    this.state.fio='';
+    this.state.system='';
+    this.state.pc='';
+    data.fio=this.state.fio;
+    data.system=this.state.system;
+    data.pc=this.state.pc;
+    axio.post('/main/filterAll', {data}).then(res=>{
+        this.setState({
+            arr: res.data
     });
 });
 }
 
-AddRow =(arr)=>{
-        this.setState({
-            newRow: !this.state.newRow,
-            arrt:arr
-        })
-    }
 
 
-
-*/
 ChangeRows=(arr)=>{
     this.setState({changeRow: !this.state.changeRow })
     this.arr=arr;
@@ -190,7 +199,7 @@ Archrows=(arr)=>{
            </div>
            <button onClick={this.primFilter}  className='FindAndReset'>Применить</button>
            <button onClick={this.AddRow} className='FindAndReset'>Добавить</button>
-           <button className='FindAndReset'>Сбросить</button>
+           <button onClick={this.Sbros} className='FindAndReset'>Сбросить</button>
            </div> 
         <div className='Table_pol'>
                 <div>

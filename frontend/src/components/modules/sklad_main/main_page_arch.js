@@ -21,6 +21,9 @@ export default class Main_page_arch extends Component {
             arch:false,
             changePrim1:false,
             changePrim2:false,
+            fioa:'',
+            systema:'',
+            pca:'',
             txt:'',
             text:'',
             act_arr:[]
@@ -58,6 +61,43 @@ export default class Main_page_arch extends Component {
         });
     }
     
+
+    
+primFilter=()=>{
+    let data={}
+if  ( this.state.fioa!== ''){
+    data.fio=this.state.fioa;
+}
+if (this.state.systema!==''){
+    data.system=this.state.systema;
+}
+if (this.state.pca!==''){
+    data.pc=this.state.pca
+}   
+    axio.post('/main/filterAllArch', {data}).then(res=>{
+        this.setState({
+            arr_arch: res.data
+    });
+});
+    
+}
+
+Sbros=()=>{
+    let data={}
+    this.state.fioa='';
+    this.state.systema='';
+    this.state.pca='';
+    data.fio=this.state.fioa;
+    data.system=this.state.systema
+    data.pc=this.state.pca;
+   
+         axio.post('/main/filterAllArch', {data}).then(res=>{
+        this.setState({
+            arr_arch: res.data
+                     });
+                    });
+                }
+
     AddRow =(arr)=>{
         this.setState({
             newRow: !this.state.newRow,
@@ -77,55 +117,56 @@ export default class Main_page_arch extends Component {
                 <tbody>
              <tr>
                  <td>ФИО:</td>
-                 <td><textarea /*onChange={(e) => {this.setState({ fio: e.target.value})}} value={this.state.fio}*/ className='txt'></textarea> </td>
+                 <td><textarea onChange={(e) => {this.setState({ fioa: e.target.value})}} value={this.state.fioa} className='txt'></textarea> </td>
              </tr>
              <tr>
                  <td> Система:</td>
-                 <td><textarea /*onChange={(e) => {this.setState({ systemf: e.target.value})}} value={this.state.systemf}*/  className='txt'></textarea> </td>
+                 <td><textarea onChange={(e) => {this.setState({ systema: e.target.value})}} value={this.state.systema} className='txt'></textarea> </td>
              </tr>  
              <tr>
                  <td> ПК:</td>
-                 <td><textarea /*onChange={(e) => {this.setState({ pcf: e.target.value})}} value={this.state.pcf}*/  className='txt'></textarea> </td>
+                 <td><textarea onChange={(e) => {this.setState({ pca: e.target.value})}} value={this.state.pca} className='txt'></textarea> </td>
              </tr>
              </tbody>     
         </table>   
-        </div><div>
+        </div>
+        <div>
             <table>
             <thead></thead>
                 <tbody>
-             <tr>
-             <td><input className='chk' type='checkbox' checked={this.state.frget} onChange={this.HideColFrom}></input></td>
-             <td>От кого получено</td>
-             </tr>
-             <tr>
-             <td><input className='chk' type='checkbox'checked={this.state.srok} onChange={this.HideColSrok}/></td>
-             <td>Срок лицензии</td>
-             </tr>
-             <tr>
-             <td><input className='chk' type='checkbox'checked={this.state.orgn} onChange={this.HideColOrg}/></td>
-             <td>Организация</td>
-             </tr> 
-             <tr>
-             <td><input className='chk' type='checkbox'checked={this.state.syst} onChange={this.HideColSyst}/></td>
-             <td>Система</td>
-             </tr> 
-             <tr>
-             <td><input className='chk' type='checkbox'checked={this.state.contr} onChange={this.HideColCont}/></td>
-             <td>Контракт</td>
-             </tr>
-             <tr>
-             <td><input className='chk' type='checkbox'checked={this.state.prim_on} onChange={this.HideColPrim_on}/></td>
-             <td>Примечание1</td>
-             </tr>
-             <tr>
-             <td><input className='chk' type='checkbox'checked={this.state.prim_tw} onChange={this.HideColPrim_tw}/></td>
-             <td>Примечание2</td>
-             </tr>
+                 <tr>
+                    <td><input className='chk' type='checkbox' checked={this.state.frget} onChange={this.HideColFrom}></input></td>
+                    <td>От кого получено</td>
+                </tr>
+                <tr>
+                    <td><input className='chk' type='checkbox'checked={this.state.srok} onChange={this.HideColSrok}/></td>
+                    <td>Срок лицензии</td>
+                </tr>
+                <tr>
+                    <td><input className='chk' type='checkbox'checked={this.state.orgn} onChange={this.HideColOrg}/></td>
+                    <td>Организация</td>
+                </tr> 
+                <tr>
+                    <td><input className='chk' type='checkbox'checked={this.state.syst} onChange={this.HideColSyst}/></td>
+                    <td>Система</td>
+                </tr> 
+                 <tr>
+                     <td><input className='chk' type='checkbox'checked={this.state.contr} onChange={this.HideColCont}/></td>
+                    <td>Контракт</td>
+                </tr>
+                <tr>
+                    <td><input className='chk' type='checkbox'checked={this.state.prim_on} onChange={this.HideColPrim_on}/></td>
+                    <td>Примечание1</td>
+                </tr>
+                <tr>
+                    <td><input className='chk' type='checkbox'checked={this.state.prim_tw} onChange={this.HideColPrim_tw}/></td>
+                    <td>Примечание2</td>
+                </tr>
              </tbody>   
         </table>             
         </div>
-        <button  className='FindAndReset'>Применить</button>
-        <button className='FindAndReset'>Сбросить</button>
+            <button onClick={this.primFilter}  className='FindAndReset'>Применить</button>
+            <button onClick={this.Sbros} className='FindAndReset'>Сбросить</button>
         </div> 
      <div className='Table_pol'>
              <div>
@@ -152,29 +193,11 @@ export default class Main_page_arch extends Component {
                      </tr>
                      </thead>
                  <tbody>
-                 {/*this.state.arr_arch.map(id => <tr key={id.a_id} row={id}>
-                         <td className='Table_text'>{id.a_id}</td>
-                         <td className='Table_text'>{id.skzi_name}</td>
-                         <td className='Table_text'>{id.skzi_ver}</td>
-                         <td className='Table_text'>{id.skzi_ser}</td>
-                         <td className={(this.state.frget===true)?'hide':'Table_text'} onClick={this.HideColFrom}>{id.ktr_name}</td>
-                         <td className={(this.state.srok===true)?'hide':'Table_text'} onClick={this.HideColSrok}>{id.sk_srok}</td>
-                         <td className='Table_text'>{id.ma_fio}</td>
-                         <td className='Table_text'>{id.otdel}</td>
-                         <td className='Table_text'>{id.pc_name}</td>
-                         <td className='Table_text'>{id.pc_inv_num}</td>
-                         <td className={(this.state.orgn===true)?'hide':'Table_text'} onClick={this.HideColOrg}>{id.org_name}</td>
-                         <td className={(this.state.syst===true)?'hide':'Table_text'} onClick={this.HideColSyst}>{id.inf_name}</td>
-                         <td className={(this.state.contr===true)?'hide':'Table_text'} onClick={this.HideColCont}>{id.kg_dgvr}</td>
-                         <td className='Table_text' >{id.ad}</td>
-                         <td className={(this.state.prim_on===true)?'hide':'Table_text'}>{(this.state.changePrim1) ? 
-                         <textarea  onChange={(e) => {this.setState({ txt: e.target.value})}} value={this.state.txt}/> : id.a_prim1}</td>
-                         <td className={(this.state.prim_tw===true)?'hide':'Table_text'}>{(this.state.changePrim2) ? 
-                         <textarea  onChange={(e) => {this.setState({ text: e.target.value})}}  value={this.state.text}/>  : id.a_prim2}</td> 
-                         <td><button onClick={this.AddRow} value={id.a_id}  className='Changer'>▲</button></td>                                                           
-                         
-                         </tr>
-                         )*/} {this.state.arr_arch.map(id=> <Main_page_cont_arch key={id.io_id} row={id} newRow={this.AddRow}/>)}
+                 {this.state.arr_arch.map(id=> <Main_page_cont_arch key={id.io_id} row={id} newRow={this.AddRow} 
+                                                                    frget={this.state.frget} srok={this.state.srok} 
+                                                                    orgn={this.state.orgn} syst={this.state.syst}
+                                                                    contr={this.state.contr} prim_on={this.state.prim_on}
+                                                                    prim_tw={this.state.prim_tw}/>)}
                  </tbody>
              </table>{this.state.newRow && <BackToMain  row={this.state.act_arr} newRow={this.AddRow}/>}
              </div>

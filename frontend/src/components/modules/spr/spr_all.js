@@ -70,17 +70,17 @@ export default class Spr_all extends Component {
               <div>
                   <table className='BlockARch'>
                       <tr>
-              <button className='ButArch' onClick={this.OpenSprNaim}>Наименование ПО и СКЗИ</button>
-              <button className='ButArch' onClick={this.OpenSprPC}>Компьютеры</button>
-              <button className='ButArch' onClick={this.OpenSprOrg}>Организации</button>
-              <button className='ButArch' onClick={this.OpenSprFrom}>От кого</button>
-              <button className='ButArch' onClick={this.OpenSprSyst}>Система</button>
+              <button className='ButSPR ' onClick={this.OpenSprNaim}>Наименование ПО и СКЗИ</button>
+              <button className='ButSPR' onClick={this.OpenSprPC}>Компьютеры</button>
+              <button className='ButSPR' onClick={this.OpenSprOrg}>Организации</button>
+              <button className='ButSPR' onClick={this.OpenSprFrom}>От кого</button>
+              <button className='ButSPR' onClick={this.OpenSprSyst}>Система</button>
               </tr>
               <tr>
-              <button className='ButArch' onClick={this.OpenSprOtd}>Отделы</button>
-              <button className='ButArch' onClick={this.OpenSprSKZI}>СКЗИ</button>
-              <button className='ButArch' onClick={this.OpenSprPers}>Сотрудники</button>
-              <button className='ButArch' onClick={this.OpenSprKtr}>Наименование контрагента</button>
+              <button className='ButSPR ButSPR_down ' onClick={this.OpenSprOtd}>Отделы</button>
+              <button className='ButSPR ButSPR_down' onClick={this.OpenSprSKZI}>СКЗИ</button>
+              <button className='ButSPR ButSPR_down' onClick={this.OpenSprPers}>Сотрудники</button>
+              <button className='ButSPR ButSPR_down' onClick={this.OpenSprKtr}>Наименование контрагента</button>
               </tr>
               </table>
               </div>

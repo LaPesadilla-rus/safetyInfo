@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './main_page.css'
 
 
-export default class Main_page_cont extends Component {
+export default class Main_page_cont extends Component 
+{
     constructor() {
         super();
         this.state = {
@@ -21,57 +22,24 @@ export default class Main_page_cont extends Component {
             prim_on:false,
             prim_tw:false,
             show_formPrim:false,      
-              }
-    }
-/*
-   
-    ToChangePrim1=()=>{
-        let Chan_perem =this.state.changePrim1;
-        if (Chan_perem && this.state.txt !==this.props.row.io_prim1)
-        {
-            let data=
-            {io_id:this.props.row.io_id,
-                txt:this.state.txt
-            }
-            axio.post('/main/Prim1Up', {data}).then(res=>{
-                this.setState({
-                    data: res.data
-                });
-            });
-        }
-        this.setState({ changePrim1: true, txt:this.props.row.io_prim1});
-    }
+                      }
+                     }
+    onClick=()=>{
+         this.props.changeRow(this.props.row)
+                }
 
-    ToChangePrim2=()=>{
-        let Chan_perems =this.state.changePrim2;
-        if (Chan_perems && this.state.text !==this.props.row.io_prim2)
-        {
-            let data=
-            {io_id:this.props.row.io_id,
-                text:this.state.text
-            }
-            axio.post('/main/Prim2Up', {data}).then(res=>{
-                this.setState({
-                    data: res.data
-                });
-            });
-        }
-        this.setState({ changePrim2: true, txt:this.props.row.io_prim2});
-    }
-*/ onClick=()=>{
-    this.props.changeRow(this.props.row)
-}
     onCliks=()=>{
         this.props.ChangePrim(this.props.row)
-    }
+                }
+
     ChangePrim=()=>{
         this.setState({show_formPrim:!this.state.show_formPrim})
-        }
-       
-    render(){
+                    }
+   
+     render(){
         let id = this.props.row
         return (
-            <tr className='Hover'>{console.log(this.props)}
+            <tr className='Hover'>
             <td onClick={this.onClick} className='Table_text'>{id.io_id}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_name}</td>
             <td onClick={this.onClick} className='Table_text'>{id.skzi_ver}</td>
@@ -89,14 +57,12 @@ export default class Main_page_cont extends Component {
             <td onClick={this.onClick} className={(this.props.prim_on===true)?'hide':'Table_text'}> {id.io_prim1} </td> 
             <td onClick={this.onClick}className={(this.props.prim_tw===true)?'hide':'Table_text'}>{id.io_prim2}
             </td>                                                            
-            <td>
-            <button className='Changer Table_text' onClick={this.onCliks} >*</button>
+            <td className='Table_text'>
+            <button className='Changer ' onClick={this.onCliks} >*</button>
             </td>
-            
-            
             </tr>
             );
-    }   
+        }   
 }
 
  

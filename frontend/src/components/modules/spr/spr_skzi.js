@@ -71,9 +71,10 @@ export default class Spr_skzi extends Component {
                 <div>
                 <button onClick={this.AddSKZI}>+</button>
                 </div>
-               <table>
+               <table className='Table Table_tabl'>
                    <thead>
-                       <tr>
+                       <tr className='TheHead THeHeadBack'>
+                       <th>Система</th>  
                         <th>Версия</th>
                         <th>Серийный номер</th>
                         <th>Срок действия</th>

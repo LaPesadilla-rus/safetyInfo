@@ -2,10 +2,10 @@
 .Table_pol{
     display: flex;
     flex-direction: column;
-    width: 98%;
-    margin-right: 10px;
     margin-top: 20px;
     margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
     z-index:15;
     
 }
@@ -36,9 +36,7 @@
     display: grid;
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 650px;
-    margin-right: 200px;
-    align-items: center;
+    margin-left: 37%;
     grid-template-rows: 1fr ;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
@@ -53,12 +51,16 @@
 .lab_one{
     grid-area: lab_one;
     text-align: center;
+    font-size: 14pt;
+    font-weight: 700;
     
 }
 
 .lab_sec{
     grid-area: lab_sec;
     text-align: center;
+    font-size: 14pt;
+    font-weight: 700;
 }
 .txt{
     grid-area: txt;
@@ -67,6 +69,7 @@
     margin-bottom: 5px;
     resize: none;
     text-align: left;
+    font-size: 10pt;
 
 }
 
@@ -83,7 +86,7 @@
     text-align: center;
 }
 .FindAndReset{
-    width: 150px;
+    width: 120px;
     height: 25px;
     margin-left: 60px;
     margin-top:10px;

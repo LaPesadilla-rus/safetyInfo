@@ -9,15 +9,6 @@ exports.all = async (req, res) => {
         }
         data = docs.rows;
     });
-/*for(let i = 0; i < data.length; i += 1){
-        await Main.persFromId(data[i], (err, docs) =>{
-            if (err) {
-                console.log(err);
-                return res.sendStatus(500);
-            }
-           data[i].ma_fio = docs.rows[0].pe_fio;
-        }); 
-   }*/
     return res.send(data);
 };
 
@@ -31,6 +22,17 @@ exports.filterAll = function(req, res) {
     })
 };
 
+exports.filterAllArch = function(req, res) {
+    Main.filterAllArch(req.body.data, function(err, docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+};
+
+
 exports.ArchAll = async (req, res) => {
     let data = [];
     await Main.ArchAll((err, docs) =>{
@@ -40,16 +42,6 @@ exports.ArchAll = async (req, res) => {
         }
         data = docs.rows;
     });
-  /* for(let i = 0; i< data.length; i += 1){
-        await Main.persFromIdArch(data[i], (err, docs) =>{
-            if (err) {
-                console.log(err);
-                return res.sendStatus(500);
-            }
-            data[i].ma_fio = docs.rows[0].pe_fio;
-            data[i].ot_name = docs.rows[0].ot_name;
-        }); 
-    }*/
     return res.send(data);
 };
 
@@ -87,7 +79,6 @@ exports.data = async (req, res) => {
         data.spr_skzi = docs.rows;
     });
 
-
     await Main.kontragents(req,(err, docs) =>{
         if (err) {
             console.log(err);
@@ -115,6 +106,14 @@ exports.data = async (req, res) => {
             return res.sendStatus(500);
         }
         data.personal = docs.rows;
+    });
+
+    await Main.spr_pers(req,(err, docs) =>{
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        data.chain = docs.rows;
     });
     return res.send(data);
 }
@@ -419,9 +418,32 @@ exports.InsertKTR =function(req, res)
     })
 }
 
+
+exports.spr_pers =function(req, res)
+{
+    Main.spr_pers(req.body.data ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(docs.rows);
+    })
+}
+
 exports.InsertSKZI =function(req, res)
 {
     Main.InsertSKZI(req ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('INSERT COMPLITE')
+    })
+}
+
+exports.insertChain_pers =function(req, res)
+{
+    Main.insertChain_pers(req ,function(err,docs){
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -459,7 +481,7 @@ exports.UpdateNaim =function(req, res)
             console.log(err);
             return res.sendStatus(500);
         }
-        res.send(docs.rows);
+        return res.send('UPDATE COMPLITE')
     })
 }
 exports.UpdateOtd =function(req, res)

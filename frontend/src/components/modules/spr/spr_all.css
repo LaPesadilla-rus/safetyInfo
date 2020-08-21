@@ -2,33 +2,37 @@
 background-color: rgb(142, 152, 153);
 position: relative;
 width: 100%; 
-height: 150px;
+min-height: 150px;
 margin-top: 10px;
 border-radius: 15px;
-
 }
-.ButArch{  
+.ButSPR{  
 border-radius: 15px;
-height: 90px;
+height: 80px;
 position: relative;
-left: 25%;
-
+left: 40%;
 }
+.ButSPR_down
+{  
+    left: 44%;
+    }
+
+
 .Ps_st{
     margin-top: 10px;
     align-items: center;
     position: relative;
     background-color: rgb(136, 110, 90);
     border-radius: 15px;
-    max-width: 420px;
     min-width: 250px;
-    min-height: 100px;
+   min-height: 100px;
     left: 35%;
+    resize:none;
     border-style: solid;
     border-color:rgb(110, 88, 71); ;
 }
 .Ps_from{
-    position: absolute;
+    position: fixed;
     background-color: rgba(56, 107, 131, 0.596);
     width: 100%;
     height: 100%;
@@ -55,9 +59,6 @@ left: 25%;
     position: relative;
     text-align: left;
     margin-left: 10px;
-    
-
-
 }
 .CloseBut{
     margin-left: 15px;
@@ -67,10 +68,7 @@ left: 25%;
     border: 2px solid rgb(24, 1, 1);
     padding: .1em 1em;
     color: rgb(1, 1, 37);
-    
-
-
-
+    resize:none;
 }
 .THeHeadBack{
     background-color: rgb(207, 182, 127);
@@ -83,7 +81,6 @@ left: 25%;
     width: 30px;
     height: 10px;
     margin-bottom: 10px;
-    
 }
 .Ps_stz{
     margin-top: 10px;
@@ -101,6 +98,8 @@ left: 25%;
 .Table_tabl{
     margin-left: 10px;
     border-collapse: collapse;
-   
-
+}
+.forNaim{
+    width: 345px;
+    resize:none;
 }

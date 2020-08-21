@@ -53,7 +53,7 @@ exports.all =  async (cb) => {
 
 exports.ArchAll =  async (cb) => {
     await pool.query(`SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
-    pp.pe_fio as ma_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
+    pp.pe_fio ,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
     kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
     og.og_name as org_name, to_char(ar.a_date1, 'YYYY-MM-DD') as ad,ar.*
     
@@ -115,7 +115,7 @@ exports.persFromIdArch =  async (data,cb) => {
 };
 
 exports.filterAll = function (data, cb) {
-    console.log(data)
+    //console.log(sql)
     let sql = `SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
     pp.pe_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
     kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
@@ -157,7 +157,7 @@ exports.filterAll = function (data, cb) {
     a = 0;
     if (data.fio){
         if ( a > 0){
-            where += ` AND ma_fio LIKE '%`+data.fio+`%'`;
+            where += ` AND pe_fio LIKE '%`+data.fio+`%'`;
         }else{
             where += ` pe_fio LIKE '%`+data.fio+`%'`;
         }
@@ -185,13 +185,93 @@ exports.filterAll = function (data, cb) {
         sql += where;
     }
     sql += ` order by io_id desc`;
-    //console.log(sql)
+    console.log(sql)
     pool.query(sql
     , (err,res)=>{
         cb(err, res); 
         //console.log(res.rows)
     });
 };
+
+exports.filterAllArch = function (data, cb) {
+    //console.log(sql)
+    let sql = `SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
+    pp.pe_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
+    kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
+    og.og_name as org_name, to_char(a.a_date1, 'YYYY-MM-DD') as a,a.*
+    
+    FROM arch_safe a
+                     
+     inner join spr_pc pc
+     on pc.pc_id = a.a_pc_id
+                            
+      inner join spr_org og
+      on og.og_id = a.a_org_id
+                            
+      inner join kontragents kg
+      on kg.kg_id = a.a_ktr_id
+                            
+      inner join spr_ktr kt
+      on kt.kt_id = kg.kg_name_id
+                            
+      inner join skzi sk
+      on sk.sk_id = kg.kg_skzi_id
+                            
+      inner join spr_skzi ss
+      on ss.ss_id = sk.sk_name_id
+                            
+      inner join spr_inf_sys ins
+      on ins.ins_id = sk_inf_id 
+                            
+      inner join chain_pers cp
+      on cp.chain_id=a.a_pers_id
+                            
+      inner join spr_otdel ot
+      on ot.otdel_id = cp.chain_otdel_id
+                            
+      inner join remote_personal pp 
+      on pp.pe_id=cp.chain_pers_id
+    `;
+    let where = ``,
+    a = 0;
+    if (data.fio){
+        if ( a > 0){
+            where += ` AND pe_fio LIKE '%`+data.fio+`%'`;
+        }else{
+            where += ` pe_fio LIKE '%`+data.fio+`%'`;
+        }
+        a++;
+    }
+    if (data.system){
+        if (a > 0){
+            where += ` AND ins.ins_name LIKE '%`+data.system+`%'`
+        }else{
+            where += ` ins.ins_name LIKE '%`+data.system+`%'`
+        }
+        a++;
+    }
+    if (data.pc){
+        if (a > 0){
+            where += ` AND pc.pc_name LIKE '%`+data.pc+`%'`
+        }else{
+            where += ` pc.pc_name LIKE '%`+data.pc+`%'`
+        }
+        a++;
+    }
+
+    if (a > 0){
+        where = ` WHERE ` + where;
+        sql += where;
+    }
+    sql += ` order by a_id desc`;
+    console.log(sql)
+    pool.query(sql
+    , (err,res)=>{
+        cb(err, res); 
+        //console.log(res.rows)
+    });
+};
+
 
 exports.kontragents =  async (req,cb) => {
     await pool.query(`SELECT kg.*,sk.sk_ver as skzi_ver,sk.sk_srok as srok, sk.sk_serial as skzi_ser, ss_name as skzi_name, ins.ins_name, kt.kt_name, sk.sk_id,
@@ -270,8 +350,14 @@ exports.spr_pc =  async (req,cb) => {
         })
 };
 
+exports.spr_pers =  async (req,cb) => {
+    await pool.query(`SELECT * FROM chain_pers`).then( res => {
+            return cb('',res);
+        })
+};
+
 exports.personal =  async (req,cb) => {
-    await pool_bahos.query(`SELECT pe.*
+    await pool_bahos.query(`SELECT pe_id,pe_fio 
                             FROM personal pe
     `).then( res => {
             return cb('',res);
@@ -309,6 +395,23 @@ exports.insertNaim= function(req,cb) {
         }
     }); 
 }
+
+
+exports.insertChain_pers= function(req,cb) {
+    let data = req.body.data;
+    var sql = `INSERT INTO public.chain_pers (chain_otdel_id,chain_pers_id)
+    VALUES ( `+data.otdel+`,`+data.pe_fio+`)`;
+    console.log(sql)
+    pool.query(sql
+    , (err,res)=>{
+        if (err !== undefined) {
+            console.log("Postgres INSERT error:", err);
+        }else{
+            cb(err,'INSERT COMPLITE');
+        }
+    }); 
+}
+
 
 exports.insertPC= function(req,cb) {
     let data = req.body.data;
