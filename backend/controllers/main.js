@@ -115,6 +115,15 @@ exports.data = async (req, res) => {
         }
         data.chain = docs.rows;
     });
+
+    await Main.personals(req,(err, docs) =>{
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        data.personals = docs.rows;
+    });
+
     return res.send(data);
 }
 
@@ -344,6 +353,17 @@ exports.DeleteOtd= (req, res) => {
     return 0;
 }
 
+exports.DeletePers= function(req, res) {
+    Main.DeletePers(req, function(err, docs) {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('DELETE COMPLITE')
+    });
+    return 0;
+}
+
 exports.DeleteKontr= (req, res) => {
     Main.DeleteKontr(req, (err, docs) =>{
         if (err) {
@@ -534,8 +554,40 @@ exports.UpdateInv_num =function(req, res)
         res.send(docs.rows);
     })
 }
+
+exports.UpdatePers =function(req, res)
+{
+    Main.UpdatePers(req.body.datas ,function(err,docs){
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send('UPDATED');
+    })
+}
+
 exports.UpdateKTR= (req, res) => {
     Main.UpdateKTR(req, (err, docs) =>{
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('UPDATE COMPLITE')
+    });
+    return 0;
+}
+exports.UpdateKontr= function(req, res) {
+    Main.UpdateKontr(req.body.data, function(err, docs) {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('UPDATE COMPLITE')
+    });
+    return 0;
+}
+exports.UpdateSKZI= function(req, res) {
+    Main.UpdateSKZI(req.body.data, function(err, docs) {
         if (err) {
             console.log(err);
             return res.sendStatus(500);

@@ -10,11 +10,12 @@
     
     .Ps_sts{
         margin-top: 100px;
-        align-items: center;
+        
         position: fixed;
         background-color: rgb(136, 110, 90);
         border-radius: 15px;
-        width: 15%;
+        
+        width: auto;
         min-height: 130px;
         left: 50%;
         border-style: solid;
@@ -32,18 +33,14 @@
         left:0;
         right:0 ;
     }
-    .label_posits{
-        padding-top: 5px;
-        color: rgb(36, 3, 3);
-        font-weight: 650;
-        position: relative;
-        margin-left:15px;
-    }
+   
     .Buts{
         position: relative;
         left:35%;
         border-radius: 15px;
+        margin-top:10px;
         margin-bottom: 10px;
+        
     }
     .txt{
         color: black;
@@ -59,6 +56,19 @@
     }
     .txtar{
         position: relative;
-        left:20%
+        left:9%;
+        resize:none;
 
+    }
+    .label-posits{
+        color: rgb(70, 32, 4);
+        font-size: 14pt;
+        font-weight: 600;
+        text-align: center;
+    }
+    .SelectPole{
+        margin-right: 5px;
+    }
+    .forKont{
+        width: 210px;
     }

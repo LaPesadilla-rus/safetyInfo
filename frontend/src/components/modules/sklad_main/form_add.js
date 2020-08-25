@@ -37,23 +37,20 @@ export default class Form_add extends Component {
 
         } }
     
-        
-
         componentDidMount(){
             axio.get('/main/data').then(res=>{
-         //   console.log(res.data)
+            console.log(res.data)
             this.setState({
                        arr: res.data,
                        namePO:res.data.spr_skzi,
                        versPO:res.data.skzi,
                        kontag:res.data.contr,
-                       otd_name:res.data.spr_otdel,
+                       otd_name:res.data.personal,
                        compName:res.data.spr_pc,
                        systems:res.data.spr_org,
                        contrackName:res.data.contr,
                        pers: res.data.personal,
                        systa:res.data.spr_syst
-
                    });
                });
         }
@@ -129,19 +126,21 @@ export default class Form_add extends Component {
 
     render(){
         return (
+            <div className='Ps_from'>
         <div className='modal_add'>
             <div className="modal_pos_add">
-                <div>Добавление данных
+                <div>
+                    <p className='label'>Добавление данных</p>
                     <div>
                 <div className='NaimPole'>Наименование ПО и СКЗИ<select className='SelectPole' onChange={this.Choosess} value={this.state.val_ser}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.namePO.map( id => <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
                     </select></div>
-                <div className='NaimPole'>Версия ПО и СКЗИ<select className='SelectPole' onChange={this.ChooseVers} value={this.state.val_ver}>
+                <div className='NaimPole'>Версия ПО и СКЗИ<select className='SelectPole' onChange={this.ChooseVers} value={this.state.val_cont}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_ver}</option>)}
                     </select></div>
-                    <div className='NaimPole'>Серийный номер<select className='SelectPole' onChange={this.ChooseSer} value={this.state.val_seria}>
+                    <div className='NaimPole'>Серийный номер<select className='SelectPole' onChange={this.ChooseSer} value={this.state.val_cont}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_serial}</option>)}
                     </select></div>
@@ -150,7 +149,7 @@ export default class Form_add extends Component {
                     {this.state.kontag.map( id => <option key={id.kt_id} value={id.kt_id}>{id.kt_name}</option>)}
                     </select></div>
                 <div className='NaimPole'>Срок действия лицензии
-                  <select className='SelectPole' onChange={this.ChooseSrok} value={this.state.val_srok}>
+                  <select className='SelectPole' onChange={this.ChooseSrok} value={this.state.val_cont}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_srok}</option>)}
                     </select></div>
@@ -166,7 +165,7 @@ export default class Form_add extends Component {
                     <option placeholder='----' value='-1'></option>
                     {this.state.compName.map( id => <option key={id.pc_id} value={id.pc_id}>{id.pc_name}</option>)}
                     </select></div>
-                <div className='NaimPole'>Инвентарный номер<select className='SelectPole' onChange={this.ChooseInv} value={this.state.inv_num}>
+                <div className='NaimPole'>Инвентарный номер<select className='SelectPole' onChange={this.ChooseInv} value={this.state.val_pcName}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.compName.map( id => <option key={id.pc_id} value={id.pc_id}>{id.pc_inv_num}</option>)}
                     </select></div>
@@ -189,6 +188,7 @@ export default class Form_add extends Component {
                  </div>
                 </div>
                
+        </div>
         </div>
         </div>
     );

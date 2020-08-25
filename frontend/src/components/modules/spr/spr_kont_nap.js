@@ -22,6 +22,7 @@ export default class Spr_kont_nap extends Component {
             namePO:[],
              versPO:[],
             systa:[], 
+            
               }
     }
 
@@ -34,10 +35,13 @@ export default class Spr_kont_nap extends Component {
                     syst:this.props.row.kt_id,
                     skzi_ver:this.props.row.kg_id,
                     skzi_ser:this.props.row.kg_id,
+                    kg_dgvr:this.props.row.kg_dgvr,
+                    kg_kol:this.props.row.kg_kol,
                     srok:this.props.row.kg_id,
                     namePO:res.data.spr_skzi,
                     versPO:res.data.skzi,
-                    systa:res.data.spr_syst
+                    systa:res.data.spr_syst,
+                    id:this.props.row.kg_id,
                 });
             });
             axio.get('/main/kontragents').then(res=>{
@@ -75,11 +79,30 @@ export default class Spr_kont_nap extends Component {
         this.setState({syst: e.target.value})
        }
 
+    SendSB =(e)=> {
+        const data={
+            kt_name:this.state.kt_name,
+            syst:this.state.syst,
+            skzi_ver:this.state.skzi_ver,
+            srok:this.state.srok,
+            kg_dgvr:this.state.kg_dgvr,
+            kg_kol:this.state.kg_kol,
+            id: this.state.id
+        }
+       
+        axio.post('/main/UpdateKontr', {data}).then(res=>{
+            this.setState({
+                data: res.data
+            });
+        });
+    }
+
+
     render(){
         let id = this.props.row
         return (
             <tr>
-            <td className='TheHead TheBodyBack'>
+            <td className='TheHead TheBodyBack'>{console.log(this.props.row)}
             <select className='SelectPole' onChange={this.ChKt_name} value={this.state.kt_name} >
                 <option placeholder='----' value='-1'></option>
                {this.state.arrs.map( id => <option key={id.kg_id} value={id.kg_id}>{id.skzi_name}</option>)}
@@ -106,9 +129,9 @@ export default class Spr_kont_nap extends Component {
                 <option placeholder='----' value='-1'></option>
                 {this.state.arrs.map( id => <option key={id.kg_id} value={id.kg_id}>{id.srok}</option>)}
                  </select></td> 
-        <td className='TheHead TheBodyBack'><textarea>{id.kg_dgvr}</textarea></td> 
-            <td className='TheHead TheBodyBack'><textarea>{id.kg_kol}</textarea></td> 
-            <td className='TheHead TheBodyBack'><button >y</button></td>
+        <td className='TheHead TheBodyBack'><textarea onChange={this.Chdgvr}>{id.kg_dgvr}</textarea></td> 
+            <td className='TheHead TheBodyBack'><textarea onChange={this.Chkol} >{id.kg_kol}</textarea></td> 
+            <td onClick={this.SendSB} className='TheHead TheBodyBack'><button >y</button></td>
             <td className='TheHead TheBodyBack'><button >x</button></td>
                 </tr>)} 
             

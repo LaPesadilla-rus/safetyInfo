@@ -22,24 +22,46 @@ export default class Spr_pers_nap extends Component {
             console.log(res.data)
                 this.setState({
                     arr:res.data,
+                    id:this.props.row.chain_id,
                     pe_fio:this.props.row.chain_pers_id,
                     otdel:this.props.row.chain_otdel_id,
                     otdels:res.data.spr_otdel,
-                    pers:res.data.personal,
+                    pers:res.data.personals,
                     num:this.props.row.chain_id
 
                 });
             });
     }    
-    ChVer=(e)=>{
-     this.setState({skzi_ver: e.target.value})
+
+    ChangeFIO=(e)=>{
+        this.setState({pe_fio:e.target.value})
     }
-    ChSer=(e)=>{
-     this.setState({skzi_ser: e.target.value})
+
+    ChangeOtdel=(e)=>{
+        this.setState({otdel:e.target.otdel})
     }
-    ChSrok=(e)=>{
-     this.setState({srok: e.target.value})
-    }
+
+    DeleteRow=(e)=>{
+        const data={
+            id: this.state.id
+        }
+        axio.post('/main/DeletePers', {data}).then(res => {
+            if (res.data === 'DELETE COMPLITE') {
+                alert('Удалено');
+            }
+        })};
+
+        UpdateRow=()=>{
+            const datas={
+                id: this.state.id,
+                pe_fio: this.state.pe_fio,
+                otdel:this.state.otdel,
+            }
+            axio.post('/main/UpdatePers', {datas}).then(res => {
+                if (res.data === 'UPDATED') {
+                    alert('Изменения приняты');
+                }
+            })};
 
     render(){
         return (
@@ -54,9 +76,9 @@ export default class Spr_pers_nap extends Component {
                 <option placeholder='----' value='-1'></option>
                {this.state.otdels.map( id => <option key={id.otdel_id} value={id.otdel_id}>{id.otdel_name}</option>)}
                  </select>   </td>   
-            <td className='TheHead TheBodyBack'><button >y</button></td>
-            <td className='TheHead TheBodyBack'><button >x</button></td>
+            <td onClick={this.UpdateRow} className='TheHead TheBodyBack'><button >y</button></td>
+            <td onClick={this.DeleteRow} className='TheHead TheBodyBack'><button >x</button></td>
         </tr>)} 
             
-         
-}
+        }        
+

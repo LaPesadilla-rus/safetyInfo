@@ -15,17 +15,11 @@
     bottom: 250px;
     left:800px;
     right: 800px;
-   
-    
-    
 }
 .modal_pos {
-    position: fixed;
-    display: block;
+    position: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    
 }
 .modal_arch{
     position:fixed;
@@ -34,6 +28,8 @@
     bottom: 400px;
     left:750px;
     right: 750px;
+    width: 150px;
+    height: 200px;
     background-color: rgb(207, 207, 207);
     border-radius: 10px;
     color: black;
@@ -57,13 +53,6 @@
     position: fixed;
     top:70px;
     left:750px;
-    border: 1px solid #707270;
-    box-shadow: 0 0 10px rgb(80, 80, 80);
-    background-color: rgb(207, 207, 207);
-    border-radius: 10px;
-    z-index:10000;
-    
-
 }
 .modal_pos_add{
     display: block;
@@ -72,6 +61,12 @@
     font-size: 10pt;
     padding-bottom: 10px;
     padding-top: 10px;
+    background-color: rgb(207, 207, 207);
+    border: 1px solid #707270;
+    box-shadow: 0 0 10px rgb(80, 80, 80);
+    border-radius: 10px;
+    margin-right: 5px;
+
 } 
 .ButChoose{
     display:block;
@@ -91,7 +86,7 @@ padding-top: 10px;
 }
 .ButtonCh{
     position:relative;
-    margin-top:10px;
+    margin-top:30px;
     margin-left: 5px;
     width: 100px;
     height: 30px;
@@ -101,6 +96,7 @@ padding-top: 10px;
     text-align: left;
     margin-top: 10px;
     margin-left: 10px;
+    color:rgb(48, 6, 6);
 }
 .AreaTxt{
     width: 120px;
@@ -163,4 +159,36 @@ padding-top: 10px;
 .Hover:hover{
     background-color: rgb(18, 4, 146);
     cursor:pointer;
+}
+.Ps_from{
+    position: fixed;
+    background-color: rgba(56, 107, 131, 0.596);
+    width: 100%;
+    height: 100%;
+    z-index:10000;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0 ;
+}
+.label{
+    color: rgb(65, 28, 21);
+    text-align: center;
+    font-weight: 600;
+    font-size: 14pt;
+}
+.ButNaim{
+    margin-left:5px;
+    margin-top: 15px;
+    position: relative;
+    left:27%;
+    
+}
+.grBut{
+    background-color: rgb(47, 82, 13);
+    border-color: rgb(17, 32, 1);
+}
+.rBut{
+    background-color: rgb(82, 23, 8);
+    border-color: rgb(59, 8, 1);
 }

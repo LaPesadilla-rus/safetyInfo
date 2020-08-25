@@ -289,7 +289,9 @@ exports.kontragents =  async (req,cb) => {
                         on ss.ss_id = sk.sk_name_id
                         
                         inner join spr_inf_sys ins
-                        on ins.ins_id = sk_inf_id `).then( res => {
+                        on ins.ins_id = sk_inf_id 
+                        
+                        where kg.kg_kol>0 `).then( res => {
             return cb('',res);
         }).catch( err => {
            // return cb(err,'')
@@ -357,7 +359,23 @@ exports.spr_pers =  async (req,cb) => {
 };
 
 exports.personal =  async (req,cb) => {
-    await pool_bahos.query(`SELECT pe_id,pe_fio 
+    await pool.query(`SELECT pe_id,pe_fio,otdel_name 
+                            FROM remote_personal pe
+                             
+                            Inner join chain_pers cp
+                            on pe.pe_id=cp.chain_pers_id
+
+                            inner join spr_otdel otd
+                            on cp.chain_otdel_id=otd.otdel_id
+    `).then( res => {
+            return cb('',res);
+        }).catch( err => {
+            return cb(err,'')
+        })
+};
+
+exports.personals =  async (req,cb) => {
+    await pool_bahos.query(`SELECT pe_id,pe_fio
                             FROM personal pe
     `).then( res => {
             return cb('',res);
@@ -562,7 +580,7 @@ exports.DeleteSys= function(req,cb) {
 exports.DeleteOtd= function(req,cb) {
     let data = req.body.data;
     var sql = `DELETE FROM public.spr_otdel where otdel_id=`+data.otd+``;
-    console.log(sql)
+    //console.log(sql)
     pool.query(sql
     , (err,res)=>{
         if (err !== undefined) {
@@ -572,6 +590,21 @@ exports.DeleteOtd= function(req,cb) {
         }
     }); 
 }
+
+exports.DeletePers= function(req,cb) {
+    let data = req.body.data;
+    var sql = `DELETE FROM public.chain_pers where chain_id=`+data.id+``;
+    console.log(sql)
+    pool.query(sql
+    , (err,res)=>{
+        if (err !== undefined) {
+            console.log("Postgres DELETE error:", err);
+        }else{
+            cb(err,'DELETE COMPLITE');
+        }
+    }); 
+}
+
 
 exports.DeleteKontr =  async (req,cb) => {
     let data = req.body.data;
@@ -751,16 +784,16 @@ exports.UpdateInv_num =function (data2, cb) {
             cb(err, res)
         });
 };
-exports.UpdateKontr =function (data2, cb) {
-    var sql = `UPDATE public.kontragents SET kg_dgvr='`+data1.kg_dgvr+`',kg_kol='`+data1.kg_kol+`' where kg_id=`+data1.kg_id+``;
+exports.UpdateKontr =function (data, cb) {
+    var sql = `UPDATE public.skzi SET sk_inf_id='`+data.kt_name+`', sk_ver='`+data.skzi_ver+`',sk_serial='`+data.skzi_ser+`', sk_srok='`+data.srok+`' where sk_id=`+data.id+``;
     console.log(sql); 
     pool.query(sql,
         (err,res) => {
             cb(err, res)
         });
 };
-exports.UpdateSKZI =function (data2, cb) {
-    var sql = `UPDATE public.skzi SET sk_ver='`+data1.sk_ver+`',sk_serial='`+data1.sk_serial+`',sk_srok='`+data1.sk_srok+`' where sk_id=`+data1.sk_id+``;
+exports.UpdateSKZI =function (data, cb) {
+    var sql = `UPDATE public.skzi SET  sk_ver='`+data.skzi_ver+`',sk_serial='`+data.skzi_ser+`',sk_srok='`+data.srok+`' where sk_id=`+data.id+``;
     console.log(sql); 
     pool.query(sql,
         (err,res) => {
@@ -777,8 +810,19 @@ exports.UpdateKTR =function (data2, cb) {
         });
 };
 
+exports.UpdatePers =function (datas, cb) {
+    var sql = `UPDATE public.chain_pers  SET chain_otdel_id='`+datas.otdel+`,
+    chain_pers_id='`+datas.pe_fio+`
+    ' where kt_id=`+datas.id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
 
-/*
+/*`INSERT INTO public.chain_pers (chain_otdel_id,chain_pers_id)
+    VALUES ( `+data.otdel+`,`+data.pe_fio+`)`;
 
 exports.personal =  async (req,cb) => {
     await pool_bahos.query(`SELECT pe.*, ot.ot_name 
@@ -829,4 +873,15 @@ SELECT ss.ss_name as skzi_name, ins.ins_name as inf_name,
                         on ot.otdel_id = ar.a_id 
             
         `
+
+
+
+        exports.UpdateKontr =function (data2, cb) {
+    var sql = `UPDATE public.kontragents SET kg_dgvr='`+data1.kg_dgvr+`',kg_kol='`+data1.kg_kol+`' where kg_id=`+data1.kg_id+``;
+    console.log(sql); 
+    pool.query(sql,
+        (err,res) => {
+            cb(err, res)
+        });
+};
 */ 

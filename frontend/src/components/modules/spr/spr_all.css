@@ -16,8 +16,6 @@ left: 40%;
 {  
     left: 44%;
     }
-
-
 .Ps_st{
     margin-top: 70px;
     align-items: center;
@@ -25,8 +23,9 @@ left: 40%;
     background-color: rgb(136, 110, 90);
     border-radius: 15px;
     min-width: 15%;
-   min-height: 100px;
-    left: 35%;
+    min-height: 100px;
+    margin-left:auto;
+    margin-right:auto;
     resize:none;
     border-style: solid;
     border-color:rgb(110, 88, 71); ;
@@ -80,9 +79,10 @@ left: 40%;
 }
 .Edit_pc{
     position: relative;
-    width: 30px;
-    height: 10px;
+    width: 80px;
+    height: 20px;
     margin-bottom: 10px;
+    left:30%;
 }
 .Table_tabl{
     margin-left: 10px;
@@ -90,45 +90,34 @@ left: 40%;
 }
 .forNaim{
     width: 23%;
-    margin-left: 650px;
 }
 .forPc{
-    width: 520px;
-    margin-left: 600px;
-    
+    width: 525px;
 }
 .forKontr{
     width: 1330px;
-    margin-left: 150px;
-    
 }
 .forFrom{
     width: 300px;
-    margin-left: 700px;
-    
 }
 .forSyst{
     width: 330px;
-    margin-left: 700px;
-    
 }
 .forOtd{
     width: 350px;
-    margin-left: 700px;
-    
 }
 .forSKZI{
     width: 720px;
-    margin-left: 570px;
-    
 }
 .forPers{
     width: 650px;
-    margin-left: 570px;
-    
 }
 .forContr{
     width: 330px;
-    margin-left: 700px;
-    
+}
+.textarea{
+    resize:none
+}
+.textarea{
+    margin-top:10px;
 }

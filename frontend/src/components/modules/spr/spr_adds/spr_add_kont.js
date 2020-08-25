@@ -60,7 +60,7 @@ export default class Spr_add_kont extends Component {
    
     render(){
         return(<div className='Ps_froms'>
-            <div className='Ps_sts'>
+            <div className='Ps_sts forKont'>
             <p className='label-posits'>Контрагент</p>
             <select className='SelectPole' onChange={this.ChooseName} value={this.state.val_name}>
               <option placeholder='----' value='-1'></option>

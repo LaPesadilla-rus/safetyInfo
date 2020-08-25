@@ -17,11 +17,11 @@ export default class Spr_add_pers extends Component {
 
     componentDidMount(){
       axio.get('/main/data').then(res=>{
-      //console.log(res.data)
+      console.log(res.data)
       this.setState({
         arr:res.data,
         otdels:res.data.spr_otdel,
-        pers:res.data.personal,
+        pers:res.data.personals,
              });
          });
   }
@@ -31,6 +31,11 @@ export default class Spr_add_pers extends Component {
         this.setState({pe_fio: e.target.value});  
       }
      
+      onClose=()=>{
+        this.props.adds()
+      }
+
+
       otdels=(e)=>{
         this.setState({otdel: e.target.value});  
       }
@@ -62,7 +67,7 @@ export default class Spr_add_pers extends Component {
                {this.state.otdels.map( id => <option key={id.otdel_id} value={id.otdel_id}>{id.otdel_name}</option>)}
                  </select>   
             <div><button onClick={this.SendDB}  className='Buts' > Добавить</button>
-             <button className='Buts' >x</button>
+             <button onClick={this.onClose} className='Buts' >x</button>
             </div>
             </div>
             </div>

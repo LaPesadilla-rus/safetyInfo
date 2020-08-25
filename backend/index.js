@@ -82,7 +82,8 @@ app.post('/main/DeleteSys',mainController.DeleteSys)
 app.post('/main/DeleteKontr',mainController.DeleteKontr)
 app.post('/main/DeleteOtd',mainController.DeleteOtd)
 app.post('/main/DeleteKTR',mainController.DeleteKTR)
-
+app.post('/main/DeletePers',mainController.DeletePers)
+app.post('/main/UpdatePers',mainController.UpdatePers)
 
 app.post('/main/insert', mainController.insert);
 app.post('/main/InsertArch', mainController.InsertArch);// Перенос в архив
@@ -99,6 +100,8 @@ app.post('/main/UpdateFrom',mainController.UpdateFrom)
 app.post('/main/UpdatePC',mainController.UpdatePC) 
 app.post('/main/UpdateInv_num',mainController.UpdateInv_num) 
 app.post('/main/UpdateKTR',mainController.UpdateKTR) 
+app.post('/main/UpdateKontr',mainController.UpdateKontr) 
+app.post('/main/UpdateSKZI',mainController.UpdateSKZI) 
 //---------------------------------------- SPR
 /*app.get('/sklad/all', skladController.all);
 app.get('/sklad/new/type', skladController.type);

@@ -26,6 +26,7 @@ export default class Spr_all extends Component {
             spr_ktr:false,
             arr_kontr:[],
             actArr:[],
+            actArrs:[],
             changeOrg:false,
         }
     }
@@ -40,8 +41,8 @@ export default class Spr_all extends Component {
     OpenSprOrg=(e)=>{
         this.setState({spr_org:!this.state.spr_org,actArr:e})
     }
-    OpenSprPC=()=>{
-        this.setState({spr_pc:!this.state.spr_pc})
+    OpenSprPC=(e)=>{
+        this.setState({spr_pc:!this.state.spr_pc,actArrs:e})
     }
     OpenSprNaim=()=>{
         this.setState({spr_naim:!this.state.spr_naim})
@@ -85,7 +86,7 @@ export default class Spr_all extends Component {
               </table>
               </div>
              {this.state.spr_org &&  <Spr_kontr row={this.state.actArr}  spr_org={this.OpenSprOrg} /> }
-            {this.state.spr_pc &&  <Spr_ps   spr_pc={this.OpenSprPC} />}
+            {this.state.spr_pc &&  <Spr_ps   spr_pc={this.OpenSprPC} row={this.state.actArrs} />}
             {this.state.spr_naim && <Spr_naim   spr_naim={this.OpenSprNaim} /> }
             {this.state.spr_from && <Spr_from  spr_from={this.OpenSprFrom} />}
             {this.state.spr_syst &&<Spr_syst  spr_syst={this.OpenSprSyst} />}

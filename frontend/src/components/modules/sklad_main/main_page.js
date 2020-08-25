@@ -235,7 +235,6 @@ Archrows=(arr)=>{
                 </table>{this.state.newRow && <Form_add  onReboot={this.onReboot}newRow={this.AddRow}/>}
                 {this.state.changeRow && <Form_change onReboot={this.onReboot} row={this.state.actArr} arr={this.arr} changeRow={this.ChangeRows}/>}
                 {this.state.show_formPrim &&  <FormchangePrim1 show_formPrim={this.ChangePrim} onReboot={this.onReboot} row={this.state.actArr}/>}
-                
                 </div> 
         </div>
         </div>
@@ -243,11 +242,7 @@ Archrows=(arr)=>{
     
     }   
 }
-
- 
-
 /*
-
 {this.state.transfer && <Form_arch transfer={this.TransferData} row={this.state.actArr} arr={this.arr}  changeRow={this.ChangeRows} />}
 */
 

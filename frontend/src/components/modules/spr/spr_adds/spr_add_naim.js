@@ -29,7 +29,7 @@ export default class Spr_add_naim extends Component {
     render(){
         return(<div className='Ps_froms'>
             <div className='Ps_sts'>
-                <p className='label-posits'>Наименование скзи</p>
+                <p className='label_posits'>Наименование скзи</p>
               <textarea  className='txtar' onChange={this.handleChange}>{this.state.val_naim}</textarea>  
             <div><button className='Buts' onClick={this.SendDB}> Добавить</button>
              <button className='Buts' onClick={this.props.addNaim}>x</button>

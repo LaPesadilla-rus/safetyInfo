@@ -36,7 +36,6 @@ export default class Form_change extends Component {
             arty:[],
             changeRow:false,
             users:'',
-            
         } 
     }
 
@@ -52,7 +51,7 @@ export default class Form_change extends Component {
             namePO:res.data.spr_skzi,
             versPO:res.data.skzi,
             kontag:res.data.contr,
-            otd_name:res.data.spr_otdel,
+            otd_name:res.data.personal,
             compName:res.data.spr_pc,
             systems:res.data.spr_org,
             contrackName:res.data.contr,
@@ -82,7 +81,6 @@ export default class Form_change extends Component {
            io_id:'',
         });
         });
-        
     }
 
     ChangeName=(e)=>{
@@ -120,7 +118,6 @@ export default class Form_change extends Component {
     }
 
     ToArch=()=>{
-       
         const data={
             io_id:this.props.arr.io_id,
             id_pers:this.props.arr.io_pers_id,
@@ -130,7 +127,6 @@ export default class Form_change extends Component {
             io_prim1:this.props.arr.io_prim1,
             io_prim2:this.props.arr.io_prim2,
             io_usr1:this.props.arr.io_usr1,
-
         }
 
         axio.post('/main/InsertArch', {data}).then(res => {
@@ -149,9 +145,7 @@ export default class Form_change extends Component {
                alert('Ошибка');
             }
         });
-
     }
-
       
     onSubmit=()=>{
         const data={
@@ -175,33 +169,32 @@ export default class Form_change extends Component {
             });this.props.onReboot();
             this.onClose();
         });
-
        }
 
        onClose=()=>{
         this.props.changeRow()
     }
      
-   
     render(){
         return (
+            <div className='Ps_from'>
         <div className='modal_add'>
             <div className="modal_pos_add">
                 <div className='Zap'>
                     <label className='Names'>Изменение полей</label>
                     <div>
               <div className='NaimPole'>Наименование ПО и СКЗИ
-              <select className='SelectPole' onChange={this.ChangeName} value={this.state.skzi_naim}>
+              <select className='SelectPole' onChange={this.ChangeName} value={this.state.syst}>
                 {this.state.namePO.map( id => 
                 <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
                 </select></div>
                 <div className='NaimPole'>Версия ПО и СКЗИ
-                <select className='SelectPole' onChange={this.ChangeSer} value={this.state.vers}>
+                <select className='SelectPole' onChange={this.ChangeSer} value={this.state.syst}>
                 {this.state.versPO.map( id => 
                 <option key={this.nextUniqueId()} value={id.sk_id}>{id.sk_ver}</option>)}
                 </select></div>
                 <div className='NaimPole'>Серийный номер
-                <select className='SelectPole' onChange={this.ChangeSeria} value={this.state.serial}>
+                <select className='SelectPole' onChange={this.ChangeSeria} value={this.state.syst}>
                 {this.state.versPO.map( id => 
                 <option key={this.nextUniqueId()} value={id.sk_id}>{id.sk_serial}</option>)}
                 </select></div>
@@ -211,7 +204,7 @@ export default class Form_change extends Component {
                 <option key={id.kt_id} value={id.kt_id}>{id.kt_name}</option>)}
                 </select></div>
                 <div className='NaimPole'>Срок действия лицензии
-                <select className='SelectPole' onChange={this.ChangeSrok} value={this.state.srok}>
+                <select className='SelectPole' onChange={this.ChangeSrok} value={this.state.syst}>
                 {this.state.versPO.map( id => 
                 <option key={this.nextUniqueId()} value={id.sk_id}>{id.sk_srok}</option>)}
                 </select></div>
@@ -231,7 +224,7 @@ export default class Form_change extends Component {
                 <option key={id.pc_id} value={id.pc_id}>{id.pc_name}</option>)}
                 </select></div>
                 <div className='NaimPole'>Инвентарный номер
-                <select className='SelectPole' onChange={this.ChooseInv} value={this.state.inv_num}>
+                <select className='SelectPole' onChange={this.ChooseInv} value={this.state.pc}>
                 {this.state.compName.map( id => 
                 <option key={id.pc_id} value={id.pc_id}>{id.pc_inv_num}</option>)}
                 </select></div>
@@ -241,7 +234,7 @@ export default class Form_change extends Component {
                 <option key={id.og_id} value={id.og_id}>{id.og_name}</option>)}
                 </select></div>
                 <div className='NaimPole'>Система
-                <select className='SelectPole' onChange={this.ChangeOrg} value={this.state.org}>
+                <select className='SelectPole' onChange={this.ChangeOrg} value={this.state.syst}>
                 {this.state.systa.map( id => 
                 <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
                 </select></div>
@@ -257,7 +250,7 @@ export default class Form_change extends Component {
                 <button onClick={this.ToArch} className='ButNaim_ch'>Перенести в архив</button>
                  </div>
                 </div>
-               
+        </div>
         </div>
         </div>
     );

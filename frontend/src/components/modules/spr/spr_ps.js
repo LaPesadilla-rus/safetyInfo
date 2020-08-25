@@ -26,6 +26,7 @@ export default class Spr_ps extends Component {
 
     componentDidMount(){
         axio.get('/main/spr_pc').then(res=>{
+            console.log(res.data)
                 this.setState({
                     arr: res.data
                 });
@@ -76,7 +77,7 @@ export default class Spr_ps extends Component {
     render(){
         return(<div className='Ps_from'>
             <div className='Ps_st forPc'>
-                <p className='label_posit'>Компьютеры</p>
+                <p className='label_posit'>Компьютеры</p>{console.log(this.props)}
                 <button onClick={this.ADDNAIM} className='But'>Добавить</button>
                      <table className='Table Table_tabl'>
                          <thead>
@@ -89,12 +90,12 @@ export default class Spr_ps extends Component {
                         <tbody>
                              {this.state.arr.map(id=> <tr key={id.pc_id} row={id}>
                                 <td className='TheHead TheBodyBack'>
-                                    <textarea onChange={this.PCChange}>{id.pc_name}</textarea>
-                                    <button className='Edit_pc' onClick={this.ChangePC} value={id.pc_id}></button>
+                                    <textarea className='textarea' onChange={this.PCChange}>{id.pc_name}</textarea>
+                                    <button className='Edit_pc' onClick={this.ChangePC} value={id.pc_id}>Отправить</button>
                                 </td>      
                                 <td className='TheHead TheBodyBack'>
-                                    <textarea onChange={this.InvNumChange}>{id.pc_inv_num}</textarea>
-                                    <button className='Edit_pc' onClick={this.ChangeInv_num} value={id.pc_id}></button>
+                                    <textarea className='textarea'  onChange={this.InvNumChange}>{id.pc_inv_num}</textarea>
+                                    <button className='Edit_pc' onClick={this.ChangeInv_num} value={id.pc_id}>Отправить</button>
                                 </td> 
                                 <td className='TheHead TheBodyBack'>
                                     <button className='CloseBut' onClick={this.DeleteRow} value={id.pc_id}>x</button>

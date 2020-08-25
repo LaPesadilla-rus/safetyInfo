@@ -59,17 +59,16 @@ onSubmit=(e)=>{
 
 }
     render(){
-        return (
+        return (<div className='Ps_from'>
         <div className='modal_arch'>
-            <div className="modal_pos_arch">{console.log(this.props)}
-            <div>Перенос данных в основную таблицу</div>
+            <div className="modal_pos_arch">
             <label className='label_txt'>Перенести данную запись в основную таблицу?</label>
             <div>
-               <button className='ButtonCh' onClick={this.onSubmit}>Перенести</button>
-               <button className='ButtonCh' onClick={this.props.newRow}>Отмена</button>
+               <button className='ButtonCh grBut' onClick={this.onSubmit}>Перенести</button>
+               <button className='ButtonCh rBut' onClick={this.props.newRow}>Отмена</button>
                  </div>
             </div></div>
-        )
+            </div>        )
     }
 }
 
