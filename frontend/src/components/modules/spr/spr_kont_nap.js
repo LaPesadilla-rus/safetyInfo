@@ -97,12 +97,24 @@ export default class Spr_kont_nap extends Component {
         });
     }
 
+    DeleteRow=(e)=>{
+        const data={
+            kt_name: e.target.value
+        }
+        axio.post('/main/DeleteKontr', {data}).then(res => {
+            if (res.data === 'Delete COMPLITE') {
+                alert('Удалено');
+            }
+        });
+        
+       }
+    
 
     render(){
         let id = this.props.row
         return (
             <tr>
-            <td className='TheHead TheBodyBack'>{console.log(this.props.row)}
+            <td className='TheHead TheBodyBack'>
             <select className='SelectPole' onChange={this.ChKt_name} value={this.state.kt_name} >
                 <option placeholder='----' value='-1'></option>
                {this.state.arrs.map( id => <option key={id.kg_id} value={id.kg_id}>{id.skzi_name}</option>)}
@@ -131,8 +143,8 @@ export default class Spr_kont_nap extends Component {
                  </select></td> 
         <td className='TheHead TheBodyBack'><textarea onChange={this.Chdgvr}>{id.kg_dgvr}</textarea></td> 
             <td className='TheHead TheBodyBack'><textarea onChange={this.Chkol} >{id.kg_kol}</textarea></td> 
-            <td onClick={this.SendSB} className='TheHead TheBodyBack'><button >y</button></td>
-            <td className='TheHead TheBodyBack'><button >x</button></td>
+            <td className='TheHead TheBodyBack'><button onClick={this.SendSB}  >y</button></td>
+            <td className='TheHead TheBodyBack'><button onClick={this.DeleteRow} >x</button></td>
                 </tr>)} 
             
     }   

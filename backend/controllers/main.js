@@ -364,8 +364,8 @@ exports.DeletePers= function(req, res) {
     return 0;
 }
 
-exports.DeleteKontr= (req, res) => {
-    Main.DeleteKontr(req, (err, docs) =>{
+exports.DeleteKontr= function(req, res)  {
+    Main.DeleteKontr(req, function(err, docs) {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -374,6 +374,18 @@ exports.DeleteKontr= (req, res) => {
     });
     return 0;
 }
+
+exports.DeleteSKZI= function(req, res)  {
+    Main.DeleteSKZI(req, function(err, docs) {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        return res.send('Delete COMPLITE')
+    });
+    return 0;
+}
+
 exports.InsertArch= (req, res) => {
     Main.InsertArch(req, (err, docs) =>{
         if (err) {

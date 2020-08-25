@@ -61,6 +61,19 @@ export default class Spr_skzi_nap extends Component {
         });
     }
 
+    DeleteRow=(e)=>{
+        const data={
+            id: e.target.value
+        }
+        axio.post('/main/DeleteSKZI', {data}).then(res => {
+            if (res.data === 'Delete COMPLITE') {
+                alert('Удалено');
+            }
+        });
+        
+       }
+    
+
     render(){
         return (
             <tr>{console.log(this.props)}
@@ -86,7 +99,8 @@ export default class Spr_skzi_nap extends Component {
                 {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_srok}</option>)}
                  </select></td> 
                  <td onClick={this.SendSB} className='TheHead TheBodyBack'><button >y</button></td>
-            <td className='TheHead TheBodyBack'><button >x</button></td>
+            <td className='TheHead TheBodyBack'>
+                <button onClick={this.DeleteRow} >x</button></td>
                 </tr>)} 
             
     }   

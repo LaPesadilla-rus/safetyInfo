@@ -83,6 +83,7 @@ app.post('/main/DeleteKontr',mainController.DeleteKontr)
 app.post('/main/DeleteOtd',mainController.DeleteOtd)
 app.post('/main/DeleteKTR',mainController.DeleteKTR)
 app.post('/main/DeletePers',mainController.DeletePers)
+app.post('/main/DeleteSKZI',mainController.DeleteSKZI)
 app.post('/main/UpdatePers',mainController.UpdatePers)
 
 app.post('/main/insert', mainController.insert);
