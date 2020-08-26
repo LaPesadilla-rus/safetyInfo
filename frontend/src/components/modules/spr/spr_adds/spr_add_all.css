@@ -16,7 +16,7 @@
         border-radius: 15px;
         
         width: auto;
-        min-height: 130px;
+        height: auto;
         left: 50%;
         border-style: solid;
         border-color:rgb(110, 88, 71); ;
@@ -71,4 +71,10 @@
     }
     .forKont{
         width: 210px;
+    }
+    .froms{
+        width: 250px;
+    }
+    .systemsss{
+        width: 220px;
     }

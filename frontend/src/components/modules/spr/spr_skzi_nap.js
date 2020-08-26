@@ -20,7 +20,7 @@ export default class Spr_skzi_nap extends Component {
 
     componentDidMount(){
         axio.get('/main/data').then(res=>{
-            console.log(res.data)
+          // console.log(res.data)
                 this.setState({
                     arr:res.data,
                     kt_name:this.props.row.sk_name_id,
@@ -57,19 +57,36 @@ export default class Spr_skzi_nap extends Component {
         axio.post('/main/UpdateSKZI', {data}).then(res=>{
             this.setState({
                 data: res.data
-            });
+            });this.onReboot();
         });
     }
 
+    onReboot = () =>{
+        axio.get('/main/data').then(res=>{
+         // console.log(res.data)
+              this.setState({
+                arr:res.data,
+                kt_name:this.props.row.sk_name_id,
+                skzi_ver:this.props.row.sk_id,
+                skzi_ser:this.props.row.sk_id,
+                srok:this.props.row.sk_id,
+                id:this.props.row.sk_id,
+                versPO:res.data.skzi,
+                nameSKZI:res.data.spr_syst,
+              });
+          });
+        }
+
+
     DeleteRow=(e)=>{
         const data={
-            id: e.target.value
+            id: this.state.id
         }
         axio.post('/main/DeleteSKZI', {data}).then(res => {
             if (res.data === 'Delete COMPLITE') {
                 alert('Удалено');
             }
-        });
+        });this.onReboot();
         
        }
     

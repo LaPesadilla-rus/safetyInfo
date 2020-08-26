@@ -29,7 +29,7 @@ export default class Spr_naim extends Component {
     }
     componentDidMount(){
         axio.get('/main/kontragents').then(res=>{
-            console.log(res.data)
+      //      console.log(res.data)
                 this.setState({
                     arr: res.data
                 });
@@ -106,13 +106,13 @@ export default class Spr_naim extends Component {
      
     render(){
         return(<div className='Ps_from'>
-            <div className='Ps_st forKontr'>{console.log(this.props)}
+            <div className='Ps_st forKontr'>
                 <p className='label_posit'>Наименование компьютеров</p>
                 <button onClick={this.AddKontragent} className='But'>Добавить</button>
                 <table  className='Table Table_tabl'  >
                     <thead>
                         <tr className='TheHead THeHeadBack'>
-                            <th >Контрагент</th>    
+                            <th >Наименование СКЗИ</th>    
                             <th >Система</th>   
                             <th >Версия СКЗИ</th>   
                             <th > Серийный номер</th>  
@@ -140,7 +140,7 @@ export default class Spr_naim extends Component {
                 </table>
             <div>
                 <button className='But' onClick={this.props.spr_org}>Отмена</button>
-            </div>{this.state.addKont && <Spr_add_kont addKont={this.AddKontragent}/>}
+            </div>{this.state.addKont && <Spr_add_kont addKont={this.AddKontragent} onreboot={this.onReboot}/>}
             
             </div>
             </div>

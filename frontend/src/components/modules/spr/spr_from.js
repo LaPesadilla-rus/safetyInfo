@@ -68,8 +68,8 @@ export default class Spr_from extends Component {
                 <table className='txt'>
                 <tr>
                 {this.state.arr.map(id=> <tr key={id.og_id} row={id}>
-                    <td><textarea onChange={this.onChange}>{id.og_name}</textarea></td> 
-                    <button onClick={this.DeleteRow} value={id.og_id}>x</button>
+                    <td><textarea className='textarea' onChange={this.onChange}>{id.og_name}</textarea></td> 
+                    <button className='But' onClick={this.DeleteRow} value={id.og_id}>x</button>
                     <button className='But' onClick={this.ChangeFrom} value={id.og_id}  >у</button>
                     </tr>)}
                 </tr>

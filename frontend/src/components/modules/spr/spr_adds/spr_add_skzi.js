@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import '../spr_all.css'
+import './spr_add_all.css'
 import axio from 'axios';
 export default class Spr_add_skzi extends Component {
     constructor() {
@@ -16,7 +16,7 @@ export default class Spr_add_skzi extends Component {
     }
     componentDidMount(){
         axio.get('/main/data').then(res=>{
-            console.log(res.data)
+          //  console.log(res.data)
                 this.setState({
                     arr:res.data,
                     SPRSKZI:res.data.spr_skzi,
@@ -72,12 +72,15 @@ export default class Spr_add_skzi extends Component {
               <option placeholder='----' value='-1'></option>
               {this.state.INSSYST.map( id => <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
                </select> 
-               <textarea onChange={this.CreateVers}>{this.state.ver}</textarea>
-               <textarea onChange={this.ChooseSer}>{this.state.ser}</textarea>
-               <textarea onChange={this.ChooseSrok}>{this.state.srok}</textarea>
+               <p>Версия </p>
+               <textarea className='txtar' onChange={this.CreateVers}>{this.state.ver}</textarea>
+               <p>Серия </p>
+               <textarea className='txtar' onChange={this.ChooseSer}>{this.state.ser}</textarea>
+               <p>Срок </p>
+               <textarea  className='txtar' onChange={this.ChooseSrok}>{this.state.srok}</textarea>
                </div>
-               <button onClick={this.SendDB}>+</button>
-           <button onClick={this.onClose}>x</button>
+               <button  className='Buts' onClick={this.SendDB}>+</button>
+           <button   className='Buts'onClick={this.onClose}>x</button>
            </div>
            
             </div>

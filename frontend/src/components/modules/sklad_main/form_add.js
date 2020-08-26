@@ -33,7 +33,10 @@ export default class Form_add extends Component {
             pers:[],
             inv_num:'',
             syst:'',
-            systa:[]
+            systa:[],
+            new_arr:[],
+            new_ardr:[],
+            new_arsdr:[]
 
         } }
     
@@ -54,18 +57,16 @@ export default class Form_add extends Component {
                    });
                });
         }
-        Choosess=(e)=>{
+    /*    Choosess=(e)=>{
             this.setState({val_ser:e.target.value})
-        }
+        }*/
         ChooseVers=(e)=>{
             this.setState({val_ver:e.target.value})
         }
         ChooseSer=(e)=>{
             this.setState({val_seria:e.target.value})
         }
-        ChooseKontr=(e)=>{
-            this.setState({val_kont:e.target.value})
-        }
+    
         ChooseFilial=(e)=>{
             this.setState({val_fil:e.target.value})
         }
@@ -75,9 +76,7 @@ export default class Form_add extends Component {
         ChooseSyst=(e)=>{
             this.setState({val_sys:e.target.value})
         }
-        ChooseContr=(e)=>{
-            this.setState({val_cont:e.target.value})
-        }
+     
         ChooseSrok=(e)=>{
             this.setState({val_srok:e.target.value})
         }
@@ -90,6 +89,83 @@ export default class Form_add extends Component {
         ChooseSystema=(e)=>{
             this.setState({syst:e.target.value})
         }
+
+        ChooseKontr = (e) => {
+            this.setState({ val_kont: e.target.value});
+            let arr = [];
+            let val= e.target.value;
+            this.state.contrackName.map(id => {
+                if (parseInt(val)=== id.kt_id){
+                    arr.push(id); }
+                })
+                if (arr.length === 0) {
+                    this.setState({
+                        val_cont: '',
+                    })
+                }
+                this.setState({
+                    new_arr: arr
+                })
+        }
+        
+        ChooseContr = (e) => {
+            this.setState({ val_cont: e.target.value});
+            let arr = [];
+            let val= e.target.value;
+            this.state.new_arr.map(id => {
+                if (parseInt(val)=== id.kg_id){
+                    arr.push(id); }
+                })
+                if (arr.length === 0) {
+                    this.setState({
+                        val_ser: '',
+                    })
+                }//console.log(arr)
+                this.setState({
+                    new_ardr: arr
+                })
+        }
+
+
+        Choosess = (e) => {
+            this.setState({ val_ser: e.target.value});
+            let arr = [];
+            let val= e.target.value;
+            this.state.new_ardr.map(id => {
+                if (parseInt(val)=== id.sk_id){
+                    arr.push(id); }
+                })
+                if (arr.length === 0) {
+                    this.setState({
+                        val_ver: '',
+                    })
+                }console.log(arr)
+                this.setState({
+                    new_arsdr: arr
+                })
+        }
+        /*
+            ChooseKontr = (e) => {
+            this.setState({ val_kont: e.target.value});
+            let arr = [];
+            let val= e.target.value;
+            this.state.kontag.map(id => {
+             //   console.log(id)
+                if (parseInt(val)=== id.kg_name_id){
+                    arr.push(id); }
+                })
+                if (arr.length === 0) {
+                    this.setState({
+                        val_ser: '',
+                    })
+                }console.log(arr)
+                this.setState({
+                    new_arr: arr
+                })
+        }
+        */ 
+
+
         onSubmit=()=>{
             
             let data={
@@ -134,13 +210,13 @@ export default class Form_add extends Component {
                     <div>
                 <div className='NaimPole'>Наименование ПО и СКЗИ<select className='SelectPole' onChange={this.Choosess} value={this.state.val_ser}>
                     <option placeholder='----' value='-1'></option>
-                    {this.state.namePO.map( id => <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
+                    {this.state.new_ardr.map( id => <option key={id.sk_id} value={id.sk_id}>{id.skzi_name}</option>)}
                     </select></div>
-                <div className='NaimPole'>Версия ПО и СКЗИ<select className='SelectPole' onChange={this.ChooseVers} value={this.state.val_cont}>
+                <div className='NaimPole'>Версия ПО и СКЗИ<select className='SelectPole' onChange={this.ChooseVers} value={this.state.val_ver}>
                     <option placeholder='----' value='-1'></option>
-                    {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_ver}</option>)}
+                    {this.state.new_arsdr.map( id => <option key={id.sk_id} value={id.sk_id}>{id.skzi_ver}</option>)}
                     </select></div>
-                    <div className='NaimPole'>Серийный номер<select className='SelectPole' onChange={this.ChooseSer} value={this.state.val_cont}>
+                    <div className='NaimPole'>Серийный номер<select className='SelectPole' onChange={this.ChooseSer} value={this.state.val_ver}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_serial}</option>)}
                     </select></div>
@@ -149,7 +225,7 @@ export default class Form_add extends Component {
                     {this.state.kontag.map( id => <option key={id.kt_id} value={id.kt_id}>{id.kt_name}</option>)}
                     </select></div>
                 <div className='NaimPole'>Срок действия лицензии
-                  <select className='SelectPole' onChange={this.ChooseSrok} value={this.state.val_cont}>
+                  <select className='SelectPole' onChange={this.ChooseSrok} value={this.state.val_ver}>
                     <option placeholder='----' value='-1'></option>
                     {this.state.versPO.map( id => <option key={id.sk_id} value={id.sk_id}>{id.sk_srok}</option>)}
                     </select></div>
@@ -175,7 +251,7 @@ export default class Form_add extends Component {
                     </select></div>
                 <div className='NaimPole'>Контракт<select className='SelectPole' onChange={this.ChooseContr} value={this.state.val_cont}>
                     <option placeholder='----' value='-1'></option>
-                    {this.state.contrackName.map( id => <option key={id.kg_id} value={id.kg_id}>{id.kg_dgvr}</option>)}
+                    {this.state.new_arr.map( id => <option key={id.kg_id} value={id.kg_id}>{id.kg_dgvr}</option>)}
                     </select></div>
                 <div className='NaimPole'>Система<select className='SelectPole' onChange={this.ChooseSystema} value={this.state.syst}>
                 <option placeholder='----' value='-1'></option>

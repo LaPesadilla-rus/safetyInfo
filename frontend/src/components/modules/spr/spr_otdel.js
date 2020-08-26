@@ -78,7 +78,7 @@ export default class Spr_otdel extends Component {
                     <tr>
                     {this.state.arr.map(id=> <tr key={id.otdel_id} row={id}>
                     <td className='TheHead TheBodyBack'>
-                        <textarea onChange={this.onChange}>{id.otdel_name}</textarea>
+                        <textarea  className='textarea' onChange={this.onChange}>{id.otdel_name}</textarea>
                     </td> 
                     <td className='TheHead TheBodyBack'>
                     <button className='CloseBut' onClick={this.DeleteRow} value={id.otdel_id}>x</button>

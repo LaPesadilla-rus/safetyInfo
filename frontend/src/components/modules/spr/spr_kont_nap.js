@@ -99,7 +99,7 @@ export default class Spr_kont_nap extends Component {
 
     DeleteRow=(e)=>{
         const data={
-            kt_name: e.target.value
+            id:this.state.id
         }
         axio.post('/main/DeleteKontr', {data}).then(res => {
             if (res.data === 'Delete COMPLITE') {
@@ -117,7 +117,7 @@ export default class Spr_kont_nap extends Component {
             <td className='TheHead TheBodyBack'>
             <select className='SelectPole' onChange={this.ChKt_name} value={this.state.kt_name} >
                 <option placeholder='----' value='-1'></option>
-               {this.state.arrs.map( id => <option key={id.kg_id} value={id.kg_id}>{id.skzi_name}</option>)}
+               {this.state.arrs.map( id => <option key={id.kg_id} value={id.kg_id}>{id.kt_name}</option>)}
                  </select>
             </td> 
             <td className='TheHead TheBodyBack'>

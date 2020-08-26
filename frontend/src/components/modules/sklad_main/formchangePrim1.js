@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axio from 'axios';
-import './main_page.css'
+import './form_work.css'
 
 export default class FormchangePrim1 extends Component {
     constructor() {
@@ -58,7 +58,7 @@ export default class FormchangePrim1 extends Component {
    
     render(){ 
         return(<div className='Ps_from' >
-            <div className='Ps_st'>
+            <div className='Ps_st Primch'>
             <label className='textar'>Редакция примечаний</label>
             <div >
     <textarea className='textar' onChange={this.ChangePrims}value={this.state.prim1_ch}></textarea></div>

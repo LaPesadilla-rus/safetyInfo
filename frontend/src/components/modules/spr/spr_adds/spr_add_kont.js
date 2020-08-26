@@ -54,10 +54,16 @@ export default class Spr_add_kont extends Component {
         if (res.data === 'INSERT COMPLITE') {
             alert('Сохранено');
         
-        }
+        }this.props.onreboot();
+        this.onClose();
+        
     });
    }
    
+   onClose=()=>{
+    this.props.addKont()
+}
+
     render(){
         return(<div className='Ps_froms'>
             <div className='Ps_sts forKont'>
@@ -76,7 +82,7 @@ export default class Spr_add_kont extends Component {
               <p className='label-posits'>Количество</p>
               <textarea  className='txtar' onChange={this.Name_count}></textarea>  
             <div><button  className='Buts' onClick={this.SendDB}> Добавить</button>
-             <button className='Buts' onClick={this.props.addKont}>x</button>
+             <button className='Buts' onClick={this.onClose}>x</button>
             </div>
             </div>
             </div>

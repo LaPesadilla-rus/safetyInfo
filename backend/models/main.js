@@ -610,7 +610,7 @@ exports.DeleteKontr =  async (req,cb) => {
     let data = req.body.data;
     await pool.query(`DELETE 
                         FROM public.kontragents kg
-                        WHERE kg_id=`+data.kt_name+``).then( res => {
+                        WHERE kg_id=`+data.id+``).then( res => {
             return cb('',res);
         }).catch( err => {
            // return cb(err,'')

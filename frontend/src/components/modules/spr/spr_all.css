@@ -20,13 +20,13 @@ left: 40%;
     margin-top: 70px;
     align-items: center;
     position: flex;
+    justify-content: center;
     background-color: rgb(136, 110, 90);
     border-radius: 15px;
-    min-width: 15%;
+    min-width: 17%;
     min-height: 100px;
     margin-left:auto;
     margin-right:auto;
-    resize:none;
     border-style: solid;
     border-color:rgb(110, 88, 71); ;
 }
@@ -98,7 +98,7 @@ left: 40%;
     width: 1330px;
 }
 .forFrom{
-    width: 300px;
+    width:410px;
 }
 .forSyst{
     width: 330px;
@@ -120,4 +120,7 @@ left: 40%;
 }
 .textarea{
     margin-top:10px;
+}
+.textarea{
+    resize:none;
 }

@@ -39,7 +39,7 @@ export default class Spr_add_syst extends Component {
    
     render(){
         return(<div className='Ps_froms'>
-            <div className='Ps_sts'>
+            <div className='Ps_sts systemsss'>
             <p className='label-posits'>Название </p>
               <textarea className='txtar' onChange={this.Name_ins}>{this.state.val_ins}</textarea>   
             <div><button className='Buts' onClick={this.SendDB}> Добавить</button>

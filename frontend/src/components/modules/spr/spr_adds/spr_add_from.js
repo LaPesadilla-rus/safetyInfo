@@ -33,7 +33,7 @@ export default class Spr_add_from extends Component {
    
     render(){
         return(<div className='Ps_froms'>
-            <div className='Ps_sts'>
+            <div className='Ps_sts froms'>
                 <p className='label-posits'>Организация</p>
               <textarea className='txtar' onChange={this.Name_org}>{this.state.val_org}</textarea>  
               <p className='label-posits'>Реквизиты</p>
