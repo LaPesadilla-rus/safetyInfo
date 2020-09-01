@@ -40,7 +40,7 @@ export default class Spr_kont_nap extends Component {
                     srok:this.props.row.kg_id,
                     namePO:res.data.spr_skzi,
                     versPO:res.data.skzi,
-                    systa:res.data.spr_syst,
+                    systa:res.data.spr_skzi,
                     id:this.props.row.kg_id,
                 });
             });
@@ -109,11 +109,13 @@ export default class Spr_kont_nap extends Component {
         
        }
     
+     
+
 
     render(){
         let id = this.props.row
         return (
-            <tr>
+            <tr>{console.log(this.props.row)}
             <td className='TheHead TheBodyBack'>
             <select className='SelectPole' onChange={this.ChKt_name} value={this.state.kt_name} >
                 <option placeholder='----' value='-1'></option>
@@ -123,7 +125,7 @@ export default class Spr_kont_nap extends Component {
             <td className='TheHead TheBodyBack'>
             <select className='SelectPole' onChange={this.ChSyst} value={this.state.syst} >
                 <option placeholder='----' value='-1'></option>
-               {this.state.systa.map( id => <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
+               {this.state.systa.map( id => <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
                  </select>
             </td> 
             <td className='TheHead TheBodyBack'>

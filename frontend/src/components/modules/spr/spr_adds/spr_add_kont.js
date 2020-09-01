@@ -9,24 +9,37 @@ export default class Spr_add_kont extends Component {
         val_syst:'',
         val_dgvr:'',
         val_count:'',
+        val_ver:'',
+        val_ser:'',
         val_id:'',
         namePO:[],
         versPO:[],
-        systa:[]
+        systa:[],
+        kontrs:[],
+        new_arr:[],
+        new_arrs:[],
+        news_arrs:[],
+        arrt:[]
         }
     }
 
     componentDidMount(){
       axio.get('/main/data').then(res=>{
-      //console.log(res.data)
       this.setState({
-                 arr: res.data,
+                 arrt: res.data.contr,
                  namePO:res.data.spr_skzi,
                  versPO:res.data.skzi,
                  systa:res.data.spr_syst
 
              });
          });
+         axio.get('/main/kontragents').then(res=>{
+          console.log(res.data)
+              this.setState({
+                kontrs:res.data,
+                  
+              });
+          });
   }
 
       Name_dgvr=(e)=>{
@@ -39,9 +52,16 @@ export default class Spr_add_kont extends Component {
       ChooseName=(e)=>{
         this.setState({val_name:e.target.value})
     }
-    ChooseSyst=(e)=>{
+   /* ChooseSyst=(e)=>{
       this.setState({val_syst:e.target.value})
   }
+
+  ChooseVer=(e)=>{
+    this.setState({val_ver:e.target.value})
+}*/
+ChooseSer=(e)=>{
+  this.setState({val_ser:e.target.value})
+}
    SendDB=event=>{
     event.preventDefault();
     const data={
@@ -60,6 +80,61 @@ export default class Spr_add_kont extends Component {
     });
    }
    
+   ChooseName = (e) => {
+    this.setState({ val_name: e.target.value});
+    let arr = [];
+    let val= e.target.value;
+    this.state.kontrs.map(id => {
+        if (parseInt(val)=== id.kg_id){
+            arr.push(id); }
+        })
+        if (arr.length === 0) {
+            this.setState({
+              val_syst: '',
+            })
+        }//console.log(arr)
+        this.setState({
+            new_arr: arr
+        })
+}
+
+ChooseSyst = (e) => {
+  this.setState({ val_syst: e.target.value});
+  let arr = [];
+  let val= e.target.value;
+  this.state.new_arr.map(id => {
+      if (parseInt(val)=== id.sk_id){
+          arr.push(id); }
+      })
+      if (arr.length === 0) {
+          this.setState({
+            val_ver: '',
+          })
+      }console.log(arr)
+      this.setState({
+        new_arrs: arr
+      })
+}
+
+
+ChooseVer = (e) => {
+  this.setState({ val_ver: e.target.value});
+  let arr = [];
+  let val= e.target.value;
+  this.state.new_arrs.map(id => {
+      if (parseInt(val)=== id.sk_id){
+          arr.push(id); }
+      })
+      if (arr.length === 0) {
+          this.setState({
+            val_ser: '',
+          })
+      }console.log(arr)
+      this.setState({
+        news_arrs: arr
+      })
+}
+
    onClose=()=>{
     this.props.addKont()
 }
@@ -70,12 +145,22 @@ export default class Spr_add_kont extends Component {
             <p className='label-posits'>Контрагент</p>
             <select className='SelectPole' onChange={this.ChooseName} value={this.state.val_name}>
               <option placeholder='----' value='-1'></option>
-              {this.state.namePO.map( id => <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
+              {this.state.kontrs.map( id => <option key={id.kg_id} value={id.kg_id}>{id.kt_name}</option>)}
                </select> 
-               <p className='label-posits'>Система</p>
+               <p className='label-posits'>ПО и СКЗИ </p>
             <select className='SelectPole' onChange={this.ChooseSyst} value={this.state.val_syst}>
               <option placeholder='----' value='-1'></option>
-              {this.state.systa.map( id => <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
+              {this.state.new_arr.map( id => <option key={id.sk_id} value={id.sk_id}>{id.skzi_name}</option>)}
+               </select> 
+               <p className='label-posits'>Версия</p>
+            <select className='SelectPole' onChange={this.ChooseVer} value={this.state.val_ver}>
+              <option placeholder='----' value='-1'></option>
+              {this.state.new_arrs.map( id => <option key={id.sk_id} value={id.sk_id}>{id.skzi_ver}</option>)}
+               </select> 
+               <p className='label-posits'>Серия</p>
+            <select className='SelectPole' onChange={this.ChooseSer} value={this.state.val_ser}>
+              <option placeholder='----' value='-1'></option>
+              {this.state.news_arrs.map( id => <option key={id.sk_id} value={id.sk_id}>{id.skzi_ser}</option>)}
                </select> 
                <p className='label-posits'>Договор</p>
               <textarea  className='txtar' onChange={this.Name_dgvr}></textarea>  

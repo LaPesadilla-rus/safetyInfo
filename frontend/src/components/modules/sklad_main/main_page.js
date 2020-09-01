@@ -76,7 +76,7 @@ export default class Main_page extends Component {
 
     componentDidMount (){
         axio.get('/main/all').then(res=>{
-          //      console.log(res.data)
+             console.log(res.data)
             this.setState({
                 arr: res.data,
                 arss:res.data,

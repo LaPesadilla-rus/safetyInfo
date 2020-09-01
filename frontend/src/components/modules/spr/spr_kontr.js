@@ -112,8 +112,8 @@ export default class Spr_naim extends Component {
                 <table  className='Table Table_tabl'  >
                     <thead>
                         <tr className='TheHead THeHeadBack'>
-                            <th >Наименование СКЗИ</th>    
-                            <th >Система</th>   
+                            <th >Контрагент</th>    
+                            <th >ПО и СКЗИ</th>   
                             <th >Версия СКЗИ</th>   
                             <th > Серийный номер</th>  
                             <th >Срок</th> 

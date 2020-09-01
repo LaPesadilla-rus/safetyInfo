@@ -5,6 +5,7 @@ const defState = {
     isAuthorize: false,
     userName: 'default',
     role: 'default',
+    dolsn: 'default',
 };
 
 export const authReducer = (state = defState, action) => {
@@ -15,6 +16,7 @@ export const authReducer = (state = defState, action) => {
         case 'AUTH_CHANGE_STATUS':          return {...state, isAuthorize: action.payload};
         case 'AUTH_CHANGE_USER_NAME':          return {...state, userName: action.payload};
         case 'AUTH_CHANGE_USER_ROLE':          return {...state, role: action.payload};
+        case 'AUTH_CHANGE_USER_DOLSN':          return {...state, dolsn: action.payload};
         default: return state;
     }
 };

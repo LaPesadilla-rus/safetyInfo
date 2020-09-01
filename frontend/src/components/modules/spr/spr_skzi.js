@@ -74,7 +74,7 @@ export default class Spr_skzi extends Component {
                <table className='Table Table_tabl'>
                    <thead>
                        <tr className='TheHead THeHeadBack'>
-                       <th>Система</th>  
+                       <th>Контрагент</th>  
                         <th>Версия</th>
                         <th>Серийный номер</th>
                         <th>Срок действия</th>

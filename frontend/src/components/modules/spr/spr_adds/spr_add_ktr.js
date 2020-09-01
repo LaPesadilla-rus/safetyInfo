@@ -21,8 +21,7 @@ export default class Spr_add_ktr extends Component {
     axio.post('/main/InsertKTR', {data}).then(res => {
         if (res.data === 'INSERT COMPLITE') {
             alert('Сохранено');
-            this.props.onClose();
-            this.props.onReboot()
+            
         }
     });
    }

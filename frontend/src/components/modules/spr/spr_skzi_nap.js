@@ -29,7 +29,7 @@ export default class Spr_skzi_nap extends Component {
                     srok:this.props.row.sk_id,
                     id:this.props.row.sk_id,
                     versPO:res.data.skzi,
-                    nameSKZI:res.data.spr_syst,
+                    nameSKZI:res.data.spr_skzi,
                 });
             });
     }    
@@ -97,7 +97,7 @@ export default class Spr_skzi_nap extends Component {
             <td className='TheHead TheBodyBack'>
             <select className='SelectPole' onChange={this.ChName} value={this.state.kt_name} >
                 <option placeholder='----' value='-1'></option>
-                {this.state.nameSKZI.map( id => <option key={id.ins_id} value={id.ins_id}>{id.ins_name}</option>)}
+                {this.state.nameSKZI.map( id => <option key={id.ss_id} value={id.ss_id}>{id.ss_name}</option>)}
                  </select> 
             </td> 
             <td className='TheHead TheBodyBack'>

@@ -5,7 +5,7 @@ const pool_bahos = new Pool (conn.conn_bahos);
 
 exports.all =  async (cb) => {
     await pool.query(`SELECT ss.ss_name as skzi_name,ins.ins_name as inf_name, ins.ins_id,sk.sk_ver as skzi_ver,
-    pp.pe_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,
+    pp.pe_fio,sk.sk_serial as skzi_ser, kt.kt_name as ktr_name,kg.kg_dgvr, kg.kg_kol,sk.sk_srok,kg.kg_id,
     kg.kg_arch ,pc.pc_name,pc.pc_inv_num,ot.otdel_name as otdel,ot.otdel_id,
     og.og_name as org_name, to_char(io.io_date1, 'YYYY-MM-DD') as io,io.*
     
@@ -387,7 +387,7 @@ exports.personals =  async (req,cb) => {
 exports.insert = function(req,cb) {
     let data = req.body.data;
     var sql = `INSERT INTO public.info_safe (io_pers_id, io_pc_id, io_org_id, io_ktr_id, io_usr1)
-    VALUES ( `+data.val_ser+`,`+data.val_pcName+`,`+data.val_sys+`,`+data.val_kont+`,`+req.headers.us_id+`);`;//
+    VALUES ( `+data.val_name+`,`+data.val_pcName+`,`+data.val_sys+`,`+data.val_kont+`,`+req.headers.us_id+`);`;//
     console.log(sql); 
     pool.query(sql
     , (err,res)=>{
